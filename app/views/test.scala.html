@@ -1,0 +1,13 @@
+@(context:List[String])(implicit request: RequestHeader)
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+       TEST
+    @for(e <-context){
+        <hr>@e
+    }
+</body>
+</html>

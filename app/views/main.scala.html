@@ -1,0 +1,17 @@
+@(title: String)(mv:String,v:String)(implicit request: RequestHeader)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>@title</title>
+        @libs()
+    </head>
+    <body>
+        @menu(Menu.get(mv))
+        <script>
+        $(document).foundation();
+        //$(document).ready(function() { $("#e1").select2(); });
+        </script>
+    </body>
+</html>
