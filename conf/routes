@@ -4,6 +4,7 @@
 
 # Home page
 GET        /                    controllers.Application.index
+GET   /graph/*id                 controllers.Application.node(id)
 #GET        /:v                   controllers.Application.node(v:String)
 
 

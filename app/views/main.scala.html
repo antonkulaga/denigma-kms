@@ -1,14 +1,16 @@
-@(title: String)(mv:String,v:String)(implicit request: RequestHeader)
+@(menu:List[String])(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 
 <html>
     <head>
-        <title>@title</title>
+        <title>Denigma Knowledge Management System</title>
         @libs()
+        @app()
     </head>
     <body>
-        @menu(Menu.get(mv))
+        @header(menu)
+        @graphs.graph()
         <script>
         $(document).foundation();
         //$(document).ready(function() { $("#e1").select2(); });

@@ -1,3 +1,6 @@
 This is an experiment to make Knowledgemanagement system where everything is a graph
 
-git clone https://github.com/Nycto/Hasher.git /tmp/Hasher
+Not much has been done by now:
+
+1) Some unittests with neo4jgraph
+2) Sigma.js test code added

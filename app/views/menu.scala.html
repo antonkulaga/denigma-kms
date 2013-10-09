@@ -15,11 +15,3 @@
     </section>
     </nav>
 </div>
-
-@helper.javascriptRouter("jsRoutes")(
-    routes.javascript.Application.index
-)
-
-<script>
-    $.get('/giveme', {'arg': value}, function(data) {window.alert(data);})
-</script>
