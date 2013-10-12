@@ -8,8 +8,7 @@ import play.api.libs.json.Json
 import com.tinkerpop.blueprints.Graph
 import com.tinkerpop.blueprints.impls.orient.OrientGraph
 import scala.collection.JavaConversions._
-import models.SemanticGraph
-
+import models.graphs.SemanticGraph
 
 
 object Application extends Controller {

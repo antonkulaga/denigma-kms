@@ -1,17 +1,9 @@
-import com.thinkaurelius.titan.core.TitanException
-import com.typesafe.config.ConfigFactory
 import io.github.nremond.PBKDF2
-import models.SemanticGraph
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
 
 import play.api.test._
-import play.Play
-import com.tinkerpop.blueprints._
-import scala.collection.JavaConversions._
-import  io.github.nremond
-import com.github.t3hnar.bcrypt._
 import com.github.t3hnar.bcrypt._
 
 /**

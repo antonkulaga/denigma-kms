@@ -1,4 +1,4 @@
-import models.SemanticGraph
+import models.graphs.SemanticGraph
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
@@ -18,22 +18,6 @@ class GraphSpec extends Specification {
 
   "Graph" should {
 
-
-//    "Test " in new WithApplication{
-//
-//      Play.application().isTest must beTrue
-//      val conf = ConfigFactory.load()
-//      //conf.getString("orientdb.url") must contain ("local:./db/dev")
-//      //SemanticGraph.url must contain ("local:./db/test")
-//      conf.getString("graph.url") must contain ("/home/antonkulaga/tmp/db/dev")
-//
-//      SemanticGraph.clearLocalDb()
-//      SemanticGraph.url must contain ("/home/antonkulaga/tmp/db/test")
-//      //SemanticGraph.g.shutdown()
-//
-//
-//    }
-
     "Test add Node" in new WithApplication{
       Play.application().isTest must beTrue
       val sg = new SemanticGraph()
@@ -42,22 +26,17 @@ class GraphSpec extends Specification {
 
       //sg.url must contain ("plocal:./db/test")
       val g = sg.g
-      sg.initIndexes()
+      //sg.initIndexes()
       val names = sg.names
       val ids = sg.ids
       val types = sg.types
+      val v1 = sg.addNode("name"->"first")
 
-//        val v1 = g.addVertex(null)
-//        v1.setProperty("name","first")
-        val v1 = sg.addNode("name"->"first")
+      val v2 = sg.addNode("name"->"second")
 
-//        val v2 = g.addVertex(null)
-//        v2.setProperty("name","second")
-        val v2 = sg.addNode("name"->"second")
-
-        val e = v2.addEdge("son",v1)
-        e.setProperty("name","sonEdge")
-        g.commit()
+      val e = v2.addEdge("son",v1)
+      e.setProperty("name","sonEdge")
+      g.commit()
 
       g.query().has("name","some").vertices().iterator().hasNext must beFalse
       //ERROR: FALSE WITH SECOND
@@ -92,7 +71,7 @@ class GraphSpec extends Specification {
       sg.clearLocalDb()
       sg.url must contain ("/tmp/db/test")
       val g = sg.g
-      sg.initIndexes()
+      //sg.initIndexes()
       //try {
         sg.addNode("name"->"Alexa")
         sg.addNode("name"->"Alexey")
@@ -104,14 +83,6 @@ class GraphSpec extends Specification {
         sg.addNode("name"->"Anatoliy")
         sg.addNode("name"->"Anderson")
         g.commit()
-
-//      }
-//      catch
-//        {
-//
-//          case e:Exception =>print("graph database exception")
-//          case other => print("other")
-//        }
       g.query().has("name").vertices().toList.size must beEqualTo(9)
       g.query().has("name","Anton").vertices().toList.size must beEqualTo(1)
       g.query().has("name","Alexandr").vertices().toList.size must beEqualTo(1)
@@ -123,26 +94,7 @@ class GraphSpec extends Specification {
       //g.query().has("name","*lex*").vertices().toList.size must beEqualTo(5)
       sg.names.query("name","*to*").toList.size must beEqualTo(2)
       sg.names.query("name","*ton").toList.size must beEqualTo(1)
-
-      //g.query().has("name",Query.Compare.NOT_EQUAL,"Alexandr").vertices().toList.size must beEqualTo(8)
-//      g.query().has("name",Text.CONTAINS,"Alexandr").vertices().toList.size must beEqualTo(2)
-//      g.query().has("name",Text.CONTAINS,"Alexandra").vertices().toList.size must beEqualTo(1)
-//      g.query().has("name",Text.CONTAINS,"Alexandra").vertices().toList.size must beEqualTo(1)
-//      g.query().has("name",Text.CONTAINS,"lex").vertices().toList.size must beEqualTo(5)
-//      g.query().has("name",Text.CONTAINS,"to").vertices().toList.size must beEqualTo(2)
-//      g.query().has("name",Text.CONTAINS,"ton").vertices().toList.size must beEqualTo(1)
       g.shutdown()
-
-
-
-
     }
-
-
-
-
-
-
-
   }
 }
