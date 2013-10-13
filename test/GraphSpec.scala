@@ -14,15 +14,12 @@ import scala.collection.JavaConversions._
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class GraphSpec extends Specification {
+class GraphSpec extends SemanticSpec {
 
   "Graph" should {
 
     "Test add Node" in new WithApplication{
-      Play.application().isTest must beTrue
-      val sg = new SemanticGraph()
-      sg.url must contain ("/tmp/db/test")
-      sg.clearLocalDb()
+      val sg = prepareGraph
 
       //sg.url must contain ("plocal:./db/test")
       val g = sg.g
@@ -39,7 +36,7 @@ class GraphSpec extends Specification {
       g.commit()
 
       g.query().has("name","some").vertices().iterator().hasNext must beFalse
-      //ERROR: FALSE WITH SECOND
+
       g.query().has("name","second").vertices().iterator().hasNext must beTrue
       val iter = g.query().has("name","first").vertices().iterator()
       iter.hasNext() must beTrue
@@ -67,9 +64,7 @@ class GraphSpec extends Specification {
 
     "Test index search" in new WithApplication{
       Play.application().isTest must beTrue
-      val sg = new SemanticGraph()
-      sg.clearLocalDb()
-      sg.url must contain ("/tmp/db/test")
+      val sg = prepareGraph
       val g = sg.g
       //sg.initIndexes()
       //try {

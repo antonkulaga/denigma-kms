@@ -11,6 +11,10 @@ trait GraphConsts{
 
 trait DefIndexes[T<: IndexableGraph] extends GraphConsts{
 
+  val NAME = "name"
+  val USER = "user"
+
+
   var ids: Index[Vertex] = null
   var names: Index[Vertex] = null
   var users: Index[Vertex] = null
@@ -24,8 +28,8 @@ trait DefIndexes[T<: IndexableGraph] extends GraphConsts{
    */
   protected def initIndexes(graph:T) = {
     ids = index(ID,fulltext = false,graph)
-    names = index("name",fulltext = true,graph)
-    users = index("user",fulltext = true,graph)
+    names = index(NAME,fulltext = true,graph)
+    users = index(USER,fulltext = true,graph)
     types = index("type",fulltext = false,graph)
     roots = index(ROOT,fulltext = false,graph)
   }

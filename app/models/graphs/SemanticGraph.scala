@@ -6,6 +6,7 @@ import scala.{collection, Some}
 import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 import scala.collection.JavaConversions._
 import play.Logger
+import java.lang
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 
@@ -45,6 +46,14 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
   implicit class SemanticNode(v:Vertex)
   {
 
+   def inV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*)
+   def inE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.IN,labels:_*)
+   def inL(labels:String*): Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*).filter(v=>v.isLink(labels:_*))
+
+    def outV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*)
+    def outE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.OUT,labels:_*)
+    def outL(labels:String*): Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*).filter(v=>v.isLink(labels:_*))
+
     def setInd(ind:Index[Vertex],name:String,value:String): Vertex = {
 
     v.getProperty[String](name) match {
@@ -63,7 +72,7 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
   adds vertex as link
    */
   def addLink(label:String, params:(String,String)*): Vertex = {
-    val n=   addNode(params:_*).asLink(label)
+    val n=   addNode(params:_*).toLink(label)
     v.addEdge(label,n)
     n
   }
@@ -89,7 +98,7 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
   def getLinkNode(label:String): Option[Vertex] = v.getVertices(Direction.OUT, label).find(p => p.isLink(label))
 
 
-  def getSetLinkNode(label:String, params:(String,String)*): Vertex =  setParams(v.getLinkNode(label).getOrElse(addNode().asLink(label)))
+  def getSetLinkNode(label:String, params:(String,String)*): Vertex =  setParams(v.getLinkNode(label).getOrElse(addNode().toLink(label)))
 
 
 
@@ -99,7 +108,10 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
 
 
   /*check if it is link of label type*/
-  def isLink(label:String): Boolean = this.Link.getOrElse("")==label
+  def isLink(labels:String*): Boolean = this.asLink match {
+    case Some(l)=>labels.contains(l)
+    case None =>false
+  }
 
   def isLink: Boolean = v.getProperty[String](LINK) match
   {
@@ -108,12 +120,12 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
     case _=>true
   }
 
-  def asLink(label:String): Vertex = {
-    v.setProperty(LINK,label)
+  def toLink(labels:String*): Vertex = {
+    labels.foreach(v.setProperty(LINK,_))
     v
   }
 
-  def Link:Option[String] = v.getProperty[String](LINK) match {
+  def asLink:Option[String] = v.getProperty[String](LINK) match {
     case null=>None
     case str:String =>Some(str)
     case _ => Logger.error("Strange link inside") ; None

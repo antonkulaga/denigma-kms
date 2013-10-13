@@ -15,6 +15,7 @@ trait SemanticSpec extends Specification{
     val sg = new SemanticGraph()
     sg.url must contain ("/tmp/db/test")
     sg.clearLocalDb()
+    //sg.g.commit()
     val g = sg.g
     //sg.initIndexes()
     sg
