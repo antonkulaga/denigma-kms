@@ -2,17 +2,8 @@ package models.graphs
 
 import com.tinkerpop.blueprints.{IndexableGraph, Vertex, Index}
 
-trait GraphConsts{
-  val sys = "__"
-  val ID = sys+"id"
-  val TYPE = sys+"type"
-  val ROOT = "root"
-}
 
 trait DefIndexes[T<: IndexableGraph] extends GraphConsts{
-
-  val NAME = "name"
-  val USER = "user"
 
 
   var ids: Index[Vertex] = null
@@ -27,10 +18,10 @@ trait DefIndexes[T<: IndexableGraph] extends GraphConsts{
   will not work without it
    */
   protected def initIndexes(graph:T) = {
-    ids = index(ID,fulltext = false,graph)
-    names = index(NAME,fulltext = true,graph)
-    users = index(USER,fulltext = true,graph)
+    ids = index(GP.ID,fulltext = false,graph)
+    names = index(GP.NAME,fulltext = true,graph)
+    users = index(GP.USER,fulltext = true,graph)
     types = index("type",fulltext = false,graph)
-    roots = index(ROOT,fulltext = false,graph)
+    roots = index(GP.ROOT,fulltext = false,graph)
   }
 }

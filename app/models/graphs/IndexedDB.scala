@@ -42,7 +42,7 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
 
   var indexes: Map[String, Index[Vertex]] = Map.empty[String,Index[Vertex]]
 
-  def nodeById(id:String): Option[Vertex] = ids.get(ID,id).take(1) match
+  def nodeById(id:String): Option[Vertex] = ids.get(GP.ID,id).take(1) match
   {
     case null=>None
     case v:Vertex=>Some(v)

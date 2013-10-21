@@ -9,9 +9,12 @@ import com.tinkerpop.blueprints.Graph
 import com.tinkerpop.blueprints.impls.orient.OrientGraph
 import scala.collection.JavaConversions._
 import models.graphs.SemanticGraph
+import org.joda.time.DateTimeZone
 
 
 object Application extends Controller {
+
+  DateTimeZone.setDefault(DateTimeZone.UTC)
 
   def index = Action {
     implicit request =>

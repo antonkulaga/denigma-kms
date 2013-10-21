@@ -14,14 +14,8 @@ import java.lang
  * class for semantic Graph features
  */
 
-class SemanticGraph extends IndexedDB[Neo4jGraph] {
-  val CONTEXT = sys+"context"
-  val MUST =sys+"must"
-  val SHOULD = sys+"should"
-  val VERSION = sys+"version"
 
-  val PROPERTY = sys+"property"
-  val LINK = sys+"link"
+class SemanticGraph extends IndexedDB[Neo4jGraph] with GraphParams {
 
   protected def init() = {
     val graph = new Neo4jGraph(url)
@@ -56,15 +50,15 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
 
     def setInd(ind:Index[Vertex],name:String,value:String): Vertex = {
 
-    v.getProperty[String](name) match {
-      case null => //skip
-      case str:String =>ind.remove(name,value,v)
-    }
+      v.getProperty[String](name) match {
+        case null => //skip
+        case str:String =>ind.remove(name,value,v)
+      }
 
-    v.setProperty(name,value)
-    ind.put(name,value,v)
-    v
-  }
+      v.setProperty(name,value)
+      ind.put(name,value,v)
+      v
+    }
 
   def linkVertices(dir:Direction,labels:String): collection.Iterable[Vertex] = v.getVertices(dir,labels).filter(p=>p.isLink)   //TODO: rewrite
 
@@ -97,8 +91,14 @@ class SemanticGraph extends IndexedDB[Neo4jGraph] {
 
   def getLinkNode(label:String): Option[Vertex] = v.getVertices(Direction.OUT, label).find(p => p.isLink(label))
 
-
   def getSetLinkNode(label:String, params:(String,String)*): Vertex =  setParams(v.getLinkNode(label).getOrElse(addNode().toLink(label)))
+
+  def nodeTypes = v.getVertices(Direction.OUT, TYPE)
+
+  def nodeType(name:String) = nodeTypes.find(_.getProperty(TYPE)==name)
+
+  def isOfType(name:String) = nodeType(name) == None
+
 
 
 

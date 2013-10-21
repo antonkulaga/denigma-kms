@@ -21,6 +21,8 @@ object ApplicationBuild extends Build with LibVersions
   val appDependencies = Seq(
     ///Add your project dependencies here,
 
+    "com.github.nscala-time" % "nscala-time_2.10" % scalaTimeVersion,
+
     "com.tinkerpop.blueprints" % "blueprints-core" % blueprintsVersion,
 
     //"com.tinkerpop.blueprints" % "blueprints-orient-graph" % blueprintsVersion,
@@ -80,6 +82,8 @@ trait LibVersions {
   val bcryptVersion = "2.3"
 
   val pbkdf2Version = "0.2"
+
+  val scalaTimeVersion = "0.6.0"
 
 }
 

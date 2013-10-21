@@ -13,7 +13,7 @@ trait SemanticSpec extends Specification{
   def prepareGraph: SemanticGraph = {
     Play.application().isTest must beTrue
     val sg = new SemanticGraph()
-    sg.url must contain ("/tmp/db/test")
+    sg.url must contain ("/db/test")
     sg.clearLocalDb()
     //sg.g.commit()
     val g = sg.g

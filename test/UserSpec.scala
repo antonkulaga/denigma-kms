@@ -14,6 +14,6 @@ import scala.collection.JavaConversions._
  * For more information, consult the wiki.
  */
 @RunWith(classOf[JUnitRunner])
-class UserSpec {
+class UserSpec extends SemanticSpec {
 
 }
