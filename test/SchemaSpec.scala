@@ -26,6 +26,7 @@ class SchemaSpec extends SemanticSpec {
       val sg = prepareGraph
       val g = sg.g
 
+
       g.shutdown()
     }
 

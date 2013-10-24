@@ -29,42 +29,42 @@ object Menu {
 
   }
 
-  def getMenuRoot(menu:String = "denigma") = {
-
-    val g  = SG.g
-    val iter = g.getVertices("name","menu").iterator()
-    val v = if(iter.hasNext) iter.next() else {
-      val vv = g.addVertex(null,null)
-      //g.getIndex("name",classOf[Vertex]).put("menu",vv)
-      vv.setProperty("name","menu")
-      //vv.save()
-
-      vv
-    }
-    v
-
-  }
-
-  def clear = {
-    val g = SG.g
-
-  }
-
-  def get(mv:String): Menu = {
-
-    val g = SG.g
-
-
-    val v = getMenuRoot()
-    getMenu(v)
-  }
-
-
-  def getMenu(v:Vertex):Menu= {
-
-    val child:String = "child"
-    Menu(v.getProperty("name"),v.getVertices(Direction.OUT,child).map(e=>this.getMenu(e)).toList)
-  }
+//  def getMenuRoot(menu:String = "denigma") = {
+//
+//    val g  = SG.sg.g
+//    val iter = g.getVertices("name","menu").iterator()
+//    val v = if(iter.hasNext) iter.next() else {
+//      val vv = g.addVertex(null,null)
+//      //g.getIndex("name",classOf[Vertex]).put("menu",vv)
+//      vv.setProperty("name","menu")
+//      //vv.save()
+//
+//      vv
+//    }
+//    v
+//
+//  }
+//
+//  def clear = {
+//    val g = SG.g
+//
+//  }
+//
+//  def get(mv:String): Menu = {
+//
+//    val g = SG.g
+//
+//
+//    val v = getMenuRoot()
+//    getMenu(v)
+//  }
+//
+//
+//  def getMenu(v:Vertex):Menu= {
+//
+//    val child:String = "child"
+//    Menu(v.getProperty("name"),v.getVertices(Direction.OUT,child).map(e=>this.getMenu(e)).toList)
+//  }
 
 }
 

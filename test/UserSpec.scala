@@ -7,6 +7,7 @@ import play.api.test._
 import play.Play
 import com.tinkerpop.blueprints._
 import scala.collection.JavaConversions._
+import models.User
 
 /**
  * Add your spec here.
@@ -15,5 +16,12 @@ import scala.collection.JavaConversions._
  */
 @RunWith(classOf[JUnitRunner])
 class UserSpec extends SemanticSpec {
+  "Have user type" in new WithApplication{
+    Play.application().isTest must beTrue
+    val sg: SemanticGraph = prepareGraph
+    val g = sg.g
+    sg.addType(User)
 
+    g.shutdown()
+  }
 }

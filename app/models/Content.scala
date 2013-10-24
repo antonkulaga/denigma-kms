@@ -4,7 +4,7 @@ package models
 There I store all types connected to work with content
  */
 
-import models.graphs.{OutLinkOf, DateTimeOf, StringOf, NodeType}
+import models.graphs.constraints.{NodeType, OutLinkOf, StringOf, DateTimeOf}
 
 object Page extends NodeType("Page") with CreatedByUser
 {

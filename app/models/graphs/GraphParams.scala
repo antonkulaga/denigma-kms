@@ -15,6 +15,10 @@ trait GraphParams extends GraphConsts{
   val PROPERTY = sys+"property"
   val LINK = sys+"link"
 
+  val DEFAULT = sys+"default"
+
+  val CONSTRAINT = sys+"constraint"
+
 }
 
 object GP extends GraphParams{

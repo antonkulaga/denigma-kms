@@ -28,8 +28,9 @@ class HyperEdgeSpec extends SemanticSpec {
     val peopleStr="people"
 
     def prepareTest = {
-      val sg = prepareGraph
-      import sg._
+      val sg: SemanticGraph = prepareGraph
+      import SG._
+
       val root = sg.root(sg.ROOT,NAME->sg.ROOT,"other"->"otherval")
 
       root.addLink(learn,"name"->learn)
@@ -38,13 +39,13 @@ class HyperEdgeSpec extends SemanticSpec {
       val discoveries = sg.addNode(NAME->discStr)
       val d: Vertex = root.addGetLinkTo(discover,discoveries,"name"->discover)
       val dd: Vertex =root.addGetLinkTo(discover,discoveries)
-      g.commit()
+      sg.g.commit()
       sg
     }
 
     "add LinkNodes & in, out tests" in new WithApplication{
       val sg = prepareTest
-      import sg._
+      import SG._
       val rr = sg.root
       rr.getProperty[String]("other") must beEqualTo("otherval")
       rr.outE(learn).size must beEqualTo(1)
@@ -67,12 +68,12 @@ class HyperEdgeSpec extends SemanticSpec {
       l.inV(learn).size must beEqualTo(1)
       l.outL(learn).size must beEqualTo(0)
       l.inV(manage,learn).size must beEqualTo(1)
-      g.shutdown()
+      sg.g.shutdown()
     }
 
     "add hyperedges to nodes" in new WithApplication{
       val sg = prepareTest
-      import sg._
+      import SG._
       val rr = sg.root
       val pT = sg.names.get(sg.NAME,peopleStr).headOption.get
       pT.getProperty[String](sg.NAME) must beEqualTo(peopleStr)
@@ -90,7 +91,7 @@ class HyperEdgeSpec extends SemanticSpec {
 
       pT.inL(manage).size must beEqualTo(1)
       //mT.getVertices(Direction.IN)
-      g.shutdown()
+      sg.g.shutdown()
       //pT.getEdges(Direction.IN,manage).headOption.
     }
 

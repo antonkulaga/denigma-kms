@@ -1,16 +1,23 @@
-package models.graphs
+package models.graphs.constraints
 
 import scala.collection.JavaConversions._
 import play.Logger
 import com.tinkerpop.blueprints._
 import  scala.util.matching.Regex
-import SG.SemanticNode
 import com.tinkerpop.blueprints.Vertex
 import scala.collection.immutable._
 import com.github.t3hnar.bcrypt._
 import com.github.t3hnar.bcrypt
+import models.graphs.SG._
 
 
+
+trait Links
+{
+  var links = Map.empty[String,Link]
+  def have(link:Link): Links = {links+=(link.name->link); this }
+
+}
 
 class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", val minQ:Int=1, val maxQ:Int = Int.MaxValue)
 {
@@ -26,10 +33,10 @@ class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:St
 
 
   def linkVertices(v:Vertex) = {
-    vertices(v).filter(p=>p.isLink())
+    vertices(v).filter(p=>p.isLink)
   }
 
-  def isOfType(v:Vertex) = v.getEdges(dir, SG.TYPE).iterator().hasNext
+  def isOfType(v:Vertex) = v.getEdges(dir, TYPE).iterator().hasNext
 
 //  def isRightNode(v:Vertex)= ()
 //

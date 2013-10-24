@@ -3,10 +3,11 @@ package models
 
 import com.tinkerpop.blueprints.Direction
 import models.graphs._
-import models.graphs.StringOf
-import models.graphs.DateTimeOf
-import models.graphs.HashOf
-import models.graphs.OutLinkOf
+import models.graphs.constraints._
+import models.graphs.constraints.StringOf
+import models.graphs.constraints.DateTimeOf
+import models.graphs.constraints.HashOf
+import models.graphs.constraints.OutLinkOf
 
 
 object Created extends LinkType("Created")
