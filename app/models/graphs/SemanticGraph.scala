@@ -25,11 +25,17 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
     case Some(v) =>v
   }
 
-  def nodeType(str:String) = this.types.get(TYPE,str).headOption
+  def nodeType(str:String): Option[NodeType] = nodeTypeVertex(str) match {
+    case None=>None
+    case Some(v)=>NodeType.parse(v)
+  }
+
+  def nodeTypeVertex(str:String): Option[Vertex] = this.types.get(TYPE,str).headOption
 
   def addType(tp:NodeType,commit:Boolean = false) =   this.nodeType(tp.name) match {
       case None=>
         val t = this.addNode((TYPE->tp.name))
+        //tp.must.
         if(commit)g.commit()
 
       case Some(tp)=>

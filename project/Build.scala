@@ -41,9 +41,7 @@ object ApplicationBuild extends Build with LibVersions
     //    "com.thinkaurelius.titan" % "titan-es" % titanVersion,
     //    "com.thinkaurelius.titan" % "titan-lucene" % titanVersion,
   )
-  play.Project.playScalaSettings ++ SassPlugin.sassSettings ++ Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass"))
-  play.Project.playScalaSettings ++ SassPlugin.sassSettings ++ Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass", "-r", "zurb-foundation"))
-
+  //play.Project.playScalaSettings ++ SassPlugin.sassSettings
 
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here
@@ -58,7 +56,7 @@ object ApplicationBuild extends Build with LibVersions
 
     scalacOptions in Test += testOptions
 
-  ).settings( SassPlugin.sassSettings:_* )
+  ).settings( play.Project.playScalaSettings ++ SassPlugin.sassSettings ++ Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass","-r", "zurb-foundation", "-r","susy")):_* )
 }
 
 

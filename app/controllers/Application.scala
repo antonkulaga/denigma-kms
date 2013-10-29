@@ -24,7 +24,7 @@ object Application extends Controller {
 
   def node(id:String) = Action {
     implicit request =>
-      Ok(views.html.graphs.node(id)) //Ok(views.html.page("node","menu","0"))
+      Ok(views.html.graphs.vertex(id)) //Ok(views.html.page("node","menu","0"))
   }
 
 

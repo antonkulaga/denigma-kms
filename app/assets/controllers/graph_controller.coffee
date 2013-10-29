@@ -1,4 +1,3 @@
-
 class Denigma.GraphController extends Batman.Controller
   ###
     This controller contains basic grid events
@@ -6,6 +5,8 @@ class Denigma.GraphController extends Batman.Controller
 
   constructor: ->
     super
+
+  #@accessor("items",->Denigma.Node.get("all"))
 
   @g: null
   @cont: null
@@ -23,10 +24,31 @@ class Denigma.GraphController extends Batman.Controller
       minNodeSize: 1
       maxNodeSize: 5
 
+  genId : ->
+      ###
+      ##Generates GUI as id for a record
+      ###
+    "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace /[xy]/g, (c) ->
+      r = Math.random() * 16 | 0
+      v = (if c is "x" then r else (r & 0x3 | 0x8))
+      v.toString 16
+
   index: ->
     #@render(false)
     @init()
     @test()
+
+
+
+  add: ->
+    props =
+      key1:"value1"
+      key2:"value2"
+      key3:"value3"
+
+    n = new Denigma.Vertex(id:@genId(),name:"test_name2", description:"test_description2",properties:props)
+    n.save()
+
 
   test: ->
     hello = @g.addNode("hello",

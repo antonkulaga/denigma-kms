@@ -18,6 +18,12 @@ trait Properties extends PropertyCollector
   def have(value:DoubleOf): Properties  = this.doubles.add(value)
   def have(value:DateTimeOf): Properties   = this.dts.add(value)
   def have(value:BooleanOf): Properties  = this.bools.add(value)
+
+  def writeProperties(v:Vertex)= this.items.foreach
+  {
+    case (name,prop)=>
+
+  }
 //
 //  def write(v:Vertex)(implicit  sg:SemanticGraph) = {
 //

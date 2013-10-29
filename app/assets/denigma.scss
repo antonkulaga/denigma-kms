@@ -1,3 +1,6 @@
+@import "foundation";
+@import "susy";
+
 $denigma_red: rgb(204,0,0);
 $denigma_orange: rgb(246,178,107);
 $denigma_violet: rgb(166, 77, 121);
@@ -16,3 +19,9 @@ $denigma_violet_opac: rgba(166, 77, 121 ,0.2);
   height: 400px;
 }
 
+//Grid$total-columns: 12;
+//$column-width: 4em;
+//columns are 4em wide$gutter-width: 1em;
+//gutters$grid-padding: 1em;
+//1em padding on the grid container.magic-container
+//{ @include container; }

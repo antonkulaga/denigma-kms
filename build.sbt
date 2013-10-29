@@ -13,5 +13,3 @@ libraryDependencies ++= Seq(
   anorm,
   cache
 )
-
-play.Project.playScalaSettings

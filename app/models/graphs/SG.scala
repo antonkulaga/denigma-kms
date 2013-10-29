@@ -33,11 +33,13 @@ object SG extends GraphParams
     def ints(params:String*): Map[String, Int] = props[Int](params:_*)
 
 
-    protected def props[T](params:String*): Map[String, T] = params.map(p=>
+    def props[T](params:String*): Map[String, T] = params.map(p=>
       v.getProperty[T](p) match
       {
         case value:T=>p->value
       }).toMap
+
+    def props(params:(String,Any)*) = params.foreach{case (key,value)=>v.setProperty(key,value)}
 
     def p[T](label:String): Option[T] = v.getProperty[T](label) match {case null=>None; case value:T=>Some(value)}
     def str(name:String): Option[String] = p[String](name)

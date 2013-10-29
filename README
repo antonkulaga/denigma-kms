@@ -4,3 +4,10 @@ Not much has been done by now:
 
 1) Some unittests with neo4jgraph
 2) Sigma.js test code added
+3) Some batmanjs html added
+
+
+To set up the project you need to:
+1) Have scala 2.10.x, play 2.2.x and sbt 0.13 installed
+2) Install coffeescript
+3) Install Sass and Compassy (an Foundation and Susy on top of them)
