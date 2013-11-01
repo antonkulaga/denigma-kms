@@ -1,23 +1,25 @@
 @(id:String)(implicit request: RequestHeader)
 
-<div class="content">
-    Links in
-    <div class="side-nav">
+
+<section class="vertex">
+    <p style="background-color:purple">List of all vertexes<p>
+    <section class="v" data-foreach-vertex="Vertex.all">
+
+
+        <div class="vname" data-bind="vertex.name" style="background-color: azure;"></div>
+        <div class="vdescription" data-bind="vertex.description"></div>
+        <div class="props" data-foreach-prop="vertex.properties">
+            <b class="pname" data-bind="prop">something inside</b>
+            <b class="pvalue" data-bind-id="prop" data-bind="vertex.properties[prop]">something inside</b>
         </div>
-</div>
-<div class="content">
-<div class="row" data-foreach-vertex="Vertex.all">
-    <div class="small-2 columns" data-bind="vertex.name" style="background-color: azure;"></div>
-    <div class="small-10 columns" data-bind="vertex.description" style="background-color: navy;"></div>
-    <div class="row" data-foreach-prop="vertex.properties">
-        <b data-bind="prop">something inside</b>
-        <b data-bind-id="prop" data-bind="vertex.properties[prop]">something inside</b>
-    </div>
-</div>
-    <div class="content">
-        Links out
-        <div class="side-nav">
-        </div>
-    </div>
-<button data-event-click="controllers.graph.add">Add</button>
-</div>
+    </section>
+</section>
+<section class="incoming">
+          Incoming
+    <p style="background-color: green">some incoming nodes</p>
+</section>
+
+<section class = "outgoing">
+                  Outgoing
+              <p style="background-color: red" p>some outgoing nodes</p>
+</section>

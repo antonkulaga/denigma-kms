@@ -1,17 +1,7 @@
 @(content:List[String])(implicit request: RequestHeader)
 
-<div class="contain-to-grid sticky">
-    <nav class="top-bar">
-        <section class="top-bar-section">
-                <!-- Left Nav Section -->
-            <ul class="left">
-                <li class="divider"></li>
-                @for(item<-content){
-                    <li class="divider"></li>
-                    <li class="active"><a href="@item">@item</a></li>
-                    <li class="divider"></li>
-                }
-            </ul>
-        </section>
-    </nav>
-</div>
+<nav class="ui inverted menu">
+    @for(item<-content){
+        <a class="item" href="@item">@item</a>
+    }
+</nav>

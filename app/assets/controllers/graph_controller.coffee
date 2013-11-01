@@ -35,8 +35,8 @@ class Denigma.GraphController extends Batman.Controller
 
   index: ->
     #@render(false)
-    @init()
-    @test()
+    #@init()
+    #@test()
 
 
 

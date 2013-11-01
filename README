@@ -9,5 +9,6 @@ Not much has been done by now:
 
 To set up the project you need to:
 1) Have scala 2.10.x, play 2.2.x and sbt 0.13 installed
-2) Install coffeescript
-3) Install Sass and Compassy (an Foundation and Susy on top of them)
+2) Install Coffeescript
+3) Install Sass and Compass
+4). Install following Compass libs: semantic-ui-sass and singularitygs
