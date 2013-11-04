@@ -35,8 +35,9 @@ abstract class GraphDB[TG<: IndexableGraph]{
 
   //  lazy val url:String = if(Play.isTest) Play.current.configuration.getString("orientdb.test.url").get
   //    else Play.current.configuration.getString("orientdb.url").get
-  lazy val url:String = if(Play.isTest) Play.current.configuration.getString("graph.test.url").get
-  else Play.current.configuration.getString("grapht.url").get
+  lazy val url:String = if(Play.isTest)
+    Play.current.configuration.getString("graph.test.url").get
+    else Play.current.configuration.getString("grapht.url").get
 
 
   def cleanByKey[TV](key:String,value:TV): Unit =   this.nodes(key,value).foreach(v=>g.removeVertex(v))

@@ -22,54 +22,55 @@ object SG extends GraphParams
 {
 
   var sg:SemanticGraph = _
-  /*
-* class that add some new features to Vertex
-* */
-  implicit class SemanticNode(v:Vertex)
-  {
-
-    def strings(params:String*): Map[String, String] = props[String](params:_*)
-    def doubles(params:String*): Map[String, Double] = props[Double](params:_*)
-    def ints(params:String*): Map[String, Int] = props[Int](params:_*)
 
 
-    def props[T](params:String*): Map[String, T] = params.map(p=>
-      v.getProperty[T](p) match
-      {
-        case value:T=>p->value
-      }).toMap
+  trait IndexedNode{
+    val v:Vertex
 
-    def props(params:(String,Any)*) = params.foreach{case (key,value)=>v.setProperty(key,value)}
-
-    def p[T](label:String): Option[T] = v.getProperty[T](label) match {case null=>None; case value:T=>Some(value)}
-    def str(name:String): Option[String] = p[String](name)
-    def double(name:String): Option[Double] = p[Double](name)
-    def int(name:String): Option[Int] = p[Int](name)
-    def long(name:String): Option[Long] = p[Long](name)
-
-    def bool(name:String): Option[Boolean] = p[Boolean](name)
-
-
-
-    def inV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*)
-    def inE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.IN,labels:_*)
-    def inL(labels:String*): Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*).filter(v=>v.isLink(labels:_*))
-
-    def outV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*)
-    def outE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.OUT,labels:_*)
-    def outL(labels:String*): Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*).filter(v=>v.isLink(labels:_*))
-
-    def setInd(ind:Index[Vertex],name:String,value:String): Vertex = {
+    def setInd(ind: Index[Vertex], name: String, value: String): Vertex = {
 
       v.getProperty[String](name) match {
         case null => //skip
-        case str:String =>ind.remove(name,value,v)
+        case str: String => ind.remove(name, value, v)
       }
 
-      v.setProperty(name,value)
-      ind.put(name,value,v)
+      v.setProperty(name, value)
+      ind.put(name, value, v)
       v
     }
+
+
+    def setName(name: String): Vertex = setInd(sg.names, "name", name)
+
+    def setTypes(name: String): Vertex = setInd(sg.types, "type", name)
+
+    def setUsers(name: String): Vertex = setInd(sg.users, "user", name)
+
+    def nodeTypes = v.getVertices(Direction.OUT, TYPE)
+
+    def nodeType(name: String) = nodeTypes.find(_.getProperty(TYPE) == name)
+
+    def isOfType(name: String) = nodeType(name) == None
+
+    def isProperty: Boolean = v.getProperty(PROPERTY) != null
+
+
+  }
+
+  trait TypedNode {
+    val v:Vertex
+
+
+  }
+
+  /*
+* class that add some new features to Vertex
+* */
+  implicit class SemanticNode(val v:Vertex)  extends EasyNode with IndexedNode
+  {
+
+
+
 
     /*get vertices marked as links*/
     def linkVertices(dir:Direction,labels:String): collection.Iterable[Vertex] = v.getVertices(dir,labels).filter(p=>p.isLink)   //TODO: rewrite
@@ -79,6 +80,7 @@ object SG extends GraphParams
     def addConnected(label:String, params:(String,String)*): Vertex = {
       val n=   sg.addNode(params:_*)
       v.addEdge(label,n)
+      n.toLink(label)
       n
     }
     /* adds or gets connected node*/
@@ -112,32 +114,20 @@ object SG extends GraphParams
 
     def getSetLinkNode(label:String, params:(String,String)*): Vertex =  sg.setParams(v.getLinkNode(label).getOrElse(sg.addNode().toLink(label)))
 
-    def nodeTypes = v.getVertices(Direction.OUT, TYPE)
 
-    def nodeType(name:String) = nodeTypes.find(_.getProperty(TYPE)==name)
-
-    def isOfType(name:String) = nodeType(name) == None
-
-
-
-
-    def setName(name:String): Vertex = setInd(sg.names,"name",name)
-    def setTypes(name:String): Vertex = setInd(sg.types,"type",name)
-    def setUsers(name:String): Vertex = setInd(sg.users,"user",name)
+    def isLink: Boolean = v.getProperty[String](LINK) match {
+      case null => false
+      //case false=>false
+      case _ => true
+    }
 
 
     /*check if it is link of label type*/
-    def isLink(labels:String*): Boolean = this.asLink match {
-      case Some(l)=>labels.contains(l)
-      case None =>false
+    def isLink(labels: String*): Boolean = this.asLink match {
+      case Some(l) => labels.contains(l)
+      case None => false
     }
 
-    def isLink: Boolean = v.getProperty[String](LINK) match
-    {
-      case null=>false
-      //case false=>false
-      case _=>true
-    }
 
     def toLink(label:String): Vertex = {
       //labels.foreach(v.setProperty(LINK,_))
@@ -151,7 +141,11 @@ object SG extends GraphParams
       case _ => Logger.error("Strange link inside") ; None
     }
 
-    def isProperty: Boolean = v.getProperty(PROPERTY)!=null
 
+    def linkFilter(v: Vertex, labels: String*): (Vertex) => Boolean = av=>av.isLink(labels:_*)
+
+    def ~>(label:String,params:(String,String)*):LinkOutCreator = new LinkOutCreator(v,label,params:_*)
+
+    def <~(label:String,params:(String,String)*):LinkInCreator = new LinkInCreator(v,label,params:_*)
   }
 }

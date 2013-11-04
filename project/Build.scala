@@ -10,7 +10,7 @@ import net.litola.SassPlugin
  * this files is intended to build the main project
  * it contains links to all dependencies that are needed
  * */
-object ApplicationBuild extends Build with LibVersions
+object ApplicationBuild extends Build with LibVersions with Macro
 {
 
   val testOptions = "-Dconfig.file=conf/" + Option(System.getProperty("test.config")).getOrElse("application") + ".conf"
@@ -49,6 +49,8 @@ object ApplicationBuild extends Build with LibVersions
 
     scalaVersion:="2.10.3",
 
+    scalacOptions ++= Seq("-feature", "-language:_"),
+
     parallelExecution in Test := false,
 
     organization := "org.denigma",
@@ -57,7 +59,28 @@ object ApplicationBuild extends Build with LibVersions
 
     scalacOptions in Test += testOptions
 
-  ).settings( play.Project.playScalaSettings ++ SassPlugin.sassSettings ++ Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass","-r", "semantic-ui-sass", "-r","singularitygs")):_* )
+  ).settings( play.Project.playScalaSettings ++
+    SassPlugin.sassSettings ++
+    Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass","-r", "semantic-ui-sass", "-r","singularitygs")):_* )
+    .dependsOn(macroses)
+
+
+}
+
+trait Macro{
+
+
+
+  lazy val macroses = Project("macro", file("macro") ) settings(
+
+    libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-reflect" % _),
+
+    libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _)
+
+    //libraryDependencies += "org.scala-lang" % "scala-reflect" % scala
+
+
+  )
 }
 
 

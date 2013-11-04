@@ -49,15 +49,16 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
   }
 
 
-  def addNode(params:(String,String)*):Vertex=
-  {
+  def addNode(params:(String,String)*):Vertex = this.addNode(UUID.randomUUID().toString,params:_*)
+
+  def addNode(id:String,params: (String, String)*): Vertex = {
 
     val v = g.addVertex(null)
-    val id = UUID.randomUUID()
-    v.setProperty(ID,UUID.randomUUID().toString)
-    ids.put(ID,id,v)
-    setParams(v,params:_*)
+    v.setProperty(ID, id)
+    ids.put(ID, id, v)
+    setParams(v, params: _*)
   }
+
 
   def setParams(v:Vertex,params:(String,String)*): Vertex =   {
     params.foreach{

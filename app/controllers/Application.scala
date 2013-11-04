@@ -27,6 +27,10 @@ object Application extends Controller {
       Ok(views.html.graphs.vertex(id)) //Ok(views.html.page("node","menu","0"))
   }
 
+  def test = Action {
+    implicit request =>
+      Ok(views.html.test()) //Ok(views.html.page("node","menu","0"))
+  }
 
 
 }

@@ -1,4 +1,4 @@
-import models.graphs.SemanticGraph
+import models.graphs.{SG, SemanticGraph}
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
@@ -91,5 +91,8 @@ class GraphSpec extends SemanticSpec {
       sg.names.query("name","*ton").toList.size must beEqualTo(1)
       g.shutdown()
     }
+
+
+
   }
 }

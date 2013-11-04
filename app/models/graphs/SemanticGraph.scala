@@ -22,7 +22,7 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
     case None=> val v: Vertex = addNode(params:_*)
       roots.put(ROOT,label,v)
       v
-    case Some(v) =>v
+    case Some(v) =>setParams(v, params: _*)
   }
 
   def nodeType(str:String): Option[NodeType] = nodeTypeVertex(str) match {

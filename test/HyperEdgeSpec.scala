@@ -96,7 +96,7 @@ class HyperEdgeSpec extends SemanticSpec {
     }
 
 
-    "add hyperedges" in new WithApplication{
+    "have valid test root" in new WithApplication{
 
 
     }
