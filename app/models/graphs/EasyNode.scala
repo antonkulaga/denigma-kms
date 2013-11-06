@@ -33,6 +33,14 @@ trait EasyNode {
   def int(name:String): Option[Int] = p[Int](name)
   def long(name:String): Option[Long] = p[Long](name)
 
+  def toStr(name: String): Option[String] = v.getProperty[Any](name) match
+  {
+    case null=>None
+    case obj=>Some(obj.toString)
+  }
+
+  lazy val id = v.getProperty[String](GP.ID)
+
   def bool(name:String): Option[Boolean] = p[Boolean](name)
 
   def inV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*)

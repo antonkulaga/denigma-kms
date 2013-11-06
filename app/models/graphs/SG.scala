@@ -63,6 +63,8 @@ object SG extends GraphParams
 
   }
 
+
+
   /*
 * class that add some new features to Vertex
 * */
@@ -147,5 +149,7 @@ object SG extends GraphParams
     def ~>(label:String,params:(String,String)*):LinkOutCreator = new LinkOutCreator(v,label,params:_*)
 
     def <~(label:String,params:(String,String)*):LinkInCreator = new LinkInCreator(v,label,params:_*)
+
+
   }
 }

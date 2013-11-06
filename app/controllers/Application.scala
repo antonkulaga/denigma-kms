@@ -10,6 +10,8 @@ import com.tinkerpop.blueprints.impls.orient.OrientGraph
 import scala.collection.JavaConversions._
 import models.graphs.SemanticGraph
 import org.joda.time.DateTimeZone
+import scalax.collection.mutable.Graph
+import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
 
 object Application extends Controller {

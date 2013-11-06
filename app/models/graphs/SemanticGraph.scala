@@ -4,7 +4,12 @@ import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 import com.tinkerpop.blueprints.{Vertex, Graph}
 import models.graphs.constraints.NodeType
 import scala.collection.JavaConversions._
+import scala.collection.immutable.IndexedSeq
+import models.graphs.NodeViewModel
 
+//import scalax.collection.Graph // or
+import scalax.collection.mutable._
+import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
 class SemanticGraph extends IndexedDB[Neo4jGraph]  {
 
@@ -41,6 +46,18 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
       case Some(tp)=>
         if(commit)g.commit()
     }
+
+
+
+
+//  def graphById(id: String) = {
+//    val v = this.nodeById(id).get
+//    val nv: NodeViewModel = new NodeViewModel(id,v)
+//
+//    val graph = Graph[NodeViewModel,EdgeViewModel]()
+//
+//
+//  }
 
 
 

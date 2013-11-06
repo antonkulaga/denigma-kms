@@ -55,10 +55,13 @@ class TestGraphSpec extends SemanticSpec
        tk.str("description") shouldEqual Some("Test Kingdom is organization created to test everything")
 
 
+      sg.g.shutdown()
 
     }
 
-    "work with indexes an IN nodes and vertices" in {
+    "work with indexes an IN nodes and vertices" in new WithApplication {
+      val sg = prepareTest
+      val r = sg.root(tg.testNodeId)
       val ll = sg.names.get(GP.NAME, "Test Land").toList.headOption
       ll must not beNone
       val land = ll.get
@@ -72,24 +75,11 @@ class TestGraphSpec extends SemanticSpec
       //rm.str("name") shouldEqual rm2.str("name")
       //rm.str("occupation") shouldEqual rm2.str("occupation")
       inmate.str("occupation") shouldEqual Some("I am test loard of this Realm!")
-    }
 
-//    def createTestNodes(): Vertex = {
-//      val c = SG.sg
-//      import c._
-//
-//      val desc = "Thi is a root of TestGraph needed to test DenigmaKMS"
-//      val r = addNode(testNodeId, "name" -> "Test root", "description" -> desc)
-//
-//
-//
-//
-//      val user = r ~> CREATED_BY ~>("name" -> "Test Master", "occupation" -> "I am test loard of this Realm!")
-//      val land = user ~> LIVE_IN ~>("name" -> "Test Land", "description" -> "This is a land where all tests live")
-//      val testKingdom = user ~> WORKS_FOR ~>("name" -> "Test Kingdom", "description" -> "Test Kingdom is organization created to test everything")
-//      testKingdom ~> IS_LOCATED_IN ~> land
-//      r
-//    }
+
+
+      sg.g.shutdown()
+    }
 
 
   }

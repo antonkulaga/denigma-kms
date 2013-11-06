@@ -18,8 +18,6 @@ import scala.collection.JavaConversions._
 class HyperEdgeSpec extends SemanticSpec {
 
 
-
-
   "HyperEdge" should {
     val learn = "learn"
     val manage = "manage"

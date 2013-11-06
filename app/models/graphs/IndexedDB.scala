@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils
 import java.io.File
 import java.util.UUID
 import scala.collection.JavaConversions._
+import scala.None
 
 
 /*
@@ -42,11 +43,9 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
 
   var indexes: Map[String, Index[Vertex]] = Map.empty[String,Index[Vertex]]
 
-  def nodeById(id:String): Option[Vertex] = ids.get(GP.ID,id).take(1) match
-  {
-    case null=>None
-    case v:Vertex=>Some(v)
-  }
+  def nodeById(id:String): Option[Vertex] = ids.get(GP.ID,id).headOption
+
+  def nodeByName(name: String): Option[Vertex] = names.get(GP.NAME, name).headOption
 
 
   def addNode(params:(String,String)*):Vertex = this.addNode(UUID.randomUUID().toString,params:_*)

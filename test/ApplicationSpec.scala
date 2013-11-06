@@ -33,7 +33,7 @@ class ApplicationSpec extends SemanticSpec  {
       contentType(result) must beSome("text/html")
       charset(result) must beSome("utf-8")
       contentAsString(result) must contain("Hello World")
-
+      sg.g.shutdown()
     }
 
 //    "send 404 on a bad request" in new WithApplication{

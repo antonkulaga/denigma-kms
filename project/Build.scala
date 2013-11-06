@@ -33,7 +33,9 @@ object ApplicationBuild extends Build with LibVersions with Macro
 
     "com.github.t3hnar" % "scala-bcrypt_2.10" % bcryptVersion,
 
-    "org.apache.commons" % "commons-io" % "1.3.2"
+    "org.apache.commons" % "commons-io" % apacheCommonsVersion,
+
+     "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion
 
     //    "com.thinkaurelius.titan" % "titan-core" % titanVersion,
     //    "com.thinkaurelius.titan" % "titan-cassandra" % titanVersion,
@@ -95,7 +97,7 @@ trait LibVersions {
 
   //val scalaTest = "2.0.M8"
 
-  val scalaGraphVersion = "1.6.1"
+  val scalaGraphVersion = "1.7.0"
 
   val scala = "2.10.3"
 
@@ -106,6 +108,8 @@ trait LibVersions {
   val pbkdf2Version = "0.2"
 
   val scalaTimeVersion = "0.6.0"
+
+  val apacheCommonsVersion = "1.3.2"
 
 }
 
