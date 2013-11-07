@@ -15,7 +15,7 @@ class Denigma.Vertex extends Batman.Model
       if hash.toObject? then  hash.toObject() else hash
 
   @encode 'id','name','description', 'properties'
-  @persist Batman.LocalStorage
+  #@persist Batman.LocalStorage
 
   @storageKey: 'vertex'
-  #@persist Batman.RestStorage
+  @persist Batman.RestStorage

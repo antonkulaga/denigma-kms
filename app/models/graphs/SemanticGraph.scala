@@ -46,13 +46,11 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
       case Some(tp)=>
         if(commit)g.commit()
     }
-
-
-
-
+//
 //  def graphById(id: String) = {
 //    val v = this.nodeById(id).get
 //    val nv: NodeViewModel = new NodeViewModel(id,v)
+//
 //
 //    val graph = Graph[NodeViewModel,EdgeViewModel]()
 //

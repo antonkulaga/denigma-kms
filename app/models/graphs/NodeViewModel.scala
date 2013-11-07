@@ -3,6 +3,7 @@ package models.graphs
 import com.tinkerpop.blueprints.Element
 import scala.collection.JavaConversions._
 import scala.collection.JavaConverters._
+import play.api.libs.json.{Reads, Format}
 
 class NodeViewModel(id:String, v:Element) extends Container(id,v) {
 
@@ -30,4 +31,6 @@ class Container(val id:String,v:Element)
    }
 
 }
+
+
 

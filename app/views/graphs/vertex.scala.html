@@ -1,25 +1,25 @@
 @(id:String)(implicit request: RequestHeader)
 
 
-<section class="vertex">
-    <p style="background-color:purple">List of all vertexes<p>
+<section class="vertex ui purple segment">
+    <h4 class="ui top attached inverted purple header">Nodes</h4>
+    <p style="ui segment attached">current graph nodes</p>
     <section class="v" data-foreach-vertex="Vertex.all">
 
-
-        <div class="vname" data-bind="vertex.name" style="background-color: azure;"></div>
-        <div class="vdescription" data-bind="vertex.description"></div>
+        <div class="name" data-bind="vertex.name"></div>
+        <div class="description" data-bind="vertex.description"></div>
         <div class="props" data-foreach-prop="vertex.properties">
-            <b class="pname" data-bind="prop">something inside</b>
-            <b class="pvalue" data-bind-id="prop" data-bind="vertex.properties[prop]">something inside</b>
+            <b class="key" data-bind="prop">something inside</b>
+            <b class="value" data-bind-id="prop" data-bind="vertex.properties[prop]">something inside</b>
         </div>
     </section>
 </section>
-<section class="incoming">
-          Incoming
-    <p style="background-color: green">some incoming nodes</p>
+<section class="incoming ui teal segment">
+    <h4 class="ui top attached inverted teal header">Incoming</h4>
+    <p style="ui segment attached">some incoming nodes</p>
 </section>
 
-<section class = "outgoing">
-                  Outgoing
-              <p style="background-color: red" p>some outgoing nodes</p>
+<section class = "outgoing ui green segment">
+              <h4 class="ui top attached inverted green header">Outgoing</h4>
+              <p style="ui segment attached">some outgoing nodes</p>
 </section>

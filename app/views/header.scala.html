@@ -1,7 +1,23 @@
 @(content:List[String])(implicit request: RequestHeader)
 
-<nav class="ui inverted menu">
-    @for(item<-content){
-        <a class="item" href="@item">@item</a>
-    }
-</nav>
+<header class="ui tabular inverted menu">
+    <nav class="menu">
+        @for(item <- content) {
+            <a class="item" href="@item">@item</a>
+        }
+
+        <div class="right menu">
+            <div class="item">
+                <div class="ui icon input">
+                    <input type="text" placeholder="Search...">
+                    <i class="search icon"></i>
+                </div>
+            </div>
+            <div class="item">
+                <div class="ui teal button">Sign Up</div>
+            </div>
+        </div>
+    </nav>
+
+
+</header>
