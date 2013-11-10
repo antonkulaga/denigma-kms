@@ -20,7 +20,7 @@ import scala.Some
 abstract class GraphDB[TG<: IndexableGraph]{
 
   lazy val g: TG = init()
-  protected def init():TG
+  def init():TG
 
 
 
@@ -37,7 +37,7 @@ abstract class GraphDB[TG<: IndexableGraph]{
   //    else Play.current.configuration.getString("orientdb.url").get
   lazy val url:String = if(Play.isTest)
     Play.current.configuration.getString("graph.test.url").get
-    else Play.current.configuration.getString("grapht.url").get
+    else Play.current.configuration.getString("graph.url").get
 
 
   def cleanByKey[TV](key:String,value:TV): Unit =   this.nodes(key,value).foreach(v=>g.removeVertex(v))

@@ -20,11 +20,14 @@ object TestGraph {
     val c = SG.sg
     import c._
 
+    val g = sg.g
+
     roots.get(ROOT, testNodeId).headOption match {
       case None =>
         val v: Vertex = this.createTestNodes()
 
         roots.put(ROOT, testNodeId, v)
+        sg.g.commit()
         v
       case Some(v) => v
     }

@@ -10,6 +10,7 @@ import scala.collection.JavaConversions._
 import play.Logger
 import java.lang
 import models.graphs.constraints.NodeType
+import com.orientechnologies.orient.core.hook.ORecordHook.TYPE
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 
@@ -21,7 +22,13 @@ import models.graphs.constraints.NodeType
 object SG extends GraphParams
 {
 
-  var sg:SemanticGraph = _
+  var _sg:SemanticGraph = _
+
+  def sg = {
+    if(_sg==null) _sg = new SemanticGraph()
+    _sg
+  }
+  def sg_= (value:SemanticGraph) = _sg = value
 
 
   trait IndexedNode{

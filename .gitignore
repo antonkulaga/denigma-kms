@@ -14,5 +14,7 @@ dist
 /RUNNING_PID
 /.settings
 .sass-cache
-db/test/
+/db/test/
+/db/dev/
+/images
 

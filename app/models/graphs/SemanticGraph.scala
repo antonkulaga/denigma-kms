@@ -13,7 +13,7 @@ import scalax.collection.GraphPredef._, scalax.collection.GraphEdge._
 
 class SemanticGraph extends IndexedDB[Neo4jGraph]  {
 
-  protected def init() = {
+  def init() = {
     val graph = new Neo4jGraph(url)
     initIndexes(graph)
     SG.sg = this
