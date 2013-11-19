@@ -1,6 +1,6 @@
 name := "denigma-kms"
 
-version := "0.2"
+version := "0.21"
 
 resolvers ++= Seq(
     "typesafe repo" at "http://repo.typesafe.com/typesafe/releases/",

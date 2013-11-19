@@ -33,6 +33,16 @@ object TestGraph {
     }
   }
 
+
+  def root(): Vertex ={
+    val c = SG.sg
+    import c._
+
+    val g = sg.g
+
+    roots.get(ROOT, testNodeId).headOption.get
+  }
+
   def createTestNodes(): Vertex = {
     val c = SG.sg
     import c._

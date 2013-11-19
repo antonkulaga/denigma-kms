@@ -22,7 +22,7 @@ import com.orientechnologies.orient.core.hook.ORecordHook.TYPE
 object SG extends GraphParams
 {
 
-  var _sg:SemanticGraph = _
+  var _sg:SemanticGraph = null
 
   def sg = {
     if(_sg==null) _sg = new SemanticGraph()

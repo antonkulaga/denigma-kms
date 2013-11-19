@@ -1,0 +1,20 @@
+package models.graphs
+
+import play.api.{Logger, Plugin, Application}
+
+/**
+ * Neo4j plugin to stop server.
+ * @author : bsimard
+ */
+class GraphPlugin(app: play.api.Application) extends Plugin {
+
+  override def onStart{
+    Logger.debug("Starting HYPERGRAPH plugin")
+    val g = SG.sg.g
+  }
+
+  override def onStop(){
+    Logger.debug("Stopping HYPERGRAPH plugin")
+    SG.sg.g.shutdown()
+  }
+}

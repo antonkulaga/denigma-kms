@@ -35,7 +35,10 @@ object ApplicationBuild extends Build with LibVersions with Macro
 
     "org.apache.commons" % "commons-io" % apacheCommonsVersion,
 
-     "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion
+     "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion,
+
+      "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion
+
 
     //    "com.thinkaurelius.titan" % "titan-core" % titanVersion,
     //    "com.thinkaurelius.titan" % "titan-cassandra" % titanVersion,
@@ -56,6 +59,8 @@ object ApplicationBuild extends Build with LibVersions with Macro
     parallelExecution in Test := false,
 
     organization := "org.denigma",
+
+    coffeescriptOptions := Seq("native", "/usr/local/bin/coffee -p"),
 
     javaOptions in Test += testOptions,
 
@@ -90,10 +95,10 @@ trait LibVersions {
 
   val orientVersion = "1.5.1"
 
-  val titanVersion = "0.3.2"
+  //val titanVersion = "0.3.2"
 
-  val blueprintsVersion = "2.5.0-SNAPSHOT"
-  //"2.4.0"
+  val blueprintsVersion = "2.4.0"//"2.5.0-SNAPSHOT"
+
 
   //val scalaTest = "2.0.M8"
 
@@ -110,6 +115,8 @@ trait LibVersions {
   val scalaTimeVersion = "0.6.0"
 
   val apacheCommonsVersion = "1.3.2"
+
+  val scalaCheckVersion = "1.11.0"
 
 }
 

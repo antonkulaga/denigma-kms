@@ -34,12 +34,17 @@ object Application extends Controller {
       Ok(views.html.test()) //Ok(views.html.page("node","menu","0"))
   }
 
+  def hallo = Action {
+    implicit request =>
+      Ok(views.html.hallo()) //Ok(views.html.page("node","menu","0"))
+  }
+
   def vertex = Action {
     implicit request =>
 
       import SG._
       val tg = TestGraph
-      val r: Vertex = tg.init()
+      val r: Vertex = tg.root()//tg.init()
       val vm = new NodeViewModel(r.id, r)
       val nodes: IndexedSeq[JsObject] = (0 until 5).map(v =>
         Json.obj("id" -> v.toString,

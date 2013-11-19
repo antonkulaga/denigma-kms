@@ -1,0 +1,42 @@
+@()(implicit request: RequestHeader)
+<section class="incoming ui teal" data-view="EdgesView">
+    <h4 class="ui top attached inverted teal header">Incoming</h4>
+    <p style="ui segment attached centered">some incoming nodes</p>
+    <div class="ui accordion">
+        <section class="e" data-foreach-edge="Edge.all" data-view="EdgeView">
+
+            <div class="name active title" data-bind="edge.name"></div>
+
+            <div class="active content">
+                <section class="ui accordion">
+                    <header class="active title"> <i class="dropdown icon"></i>
+
+                        Properties
+
+                    </header>
+                    <div class="active content">
+                        <div class="props" data-foreach-prop="edge.properties">
+                            <b class="key" data-bind="prop">something inside</b>
+                            <b class="value"data-mercury="html" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor"  data-bind-id="prop" data-bind="edge.properties[prop]">something inside</b>
+                        </div>
+                    </div>
+
+                    <header class="active title"> <i class="dropdown icon"></i>
+
+                        Incoming vertices:
+
+                    </header>
+                    <div class="active content">
+
+                        <div class="props" data-foreach-vertex="edge.incoming">
+                            <div class="name" data-bind="vertex.name"></div>
+                            <div class="description" data-bind="vertex.description"></div>
+                        </div>
+                    </div>
+
+                </section>
+            </div>
+
+        </section>
+    </div>
+</section>

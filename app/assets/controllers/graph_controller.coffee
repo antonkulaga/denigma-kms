@@ -34,9 +34,31 @@ class Denigma.GraphController extends Batman.Controller
       v.toString 16
 
   index: ->
+    Mercury.configuration.interface =
+      enabled    : true                                     # initial visible state - trigger 'interface:show' to show
+      class      : 'FrameInterface'                          # interface class - used on Mercury.init()
+      toolbar    : 'Toolbar'                                 # toolbar class to use within the interface
+      statusbar  : 'Statusbar'                               # statusbar class to use within the interface
+      uploader   : 'Uploader'                                # uploader class to use within the interface
+      silent     : false                                     # set to true to disable asking about changes when leaving
+      shadowed   : true                                     # puts the interface into a shadow dom when it's available
+      maskable   : false                                     # uses a mask over the document for toolbar dialogs
+      style      : false                                     # interface style - 'small', 'flat' or 'small flat'
+      floating   : true                                     # floats to the focused region
+      floatWidth : false                                     # fixed width for floating interface (pixel value - eg. 520)
+      floatDrag  : true
+    Mercury.init()
+    #Mercury.hide()
     #@render(false)
     #@init()
     #@test()
+
+  showEditor:->
+    #Mercury.show()
+
+  hideEditor:->
+    #Mercury.hide()
+
 
 
 
