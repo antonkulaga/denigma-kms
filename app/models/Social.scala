@@ -10,6 +10,7 @@ import models.graphs.constraints.HashOf
 import models.graphs.constraints.OutLinkOf
 
 
+
 object Created extends LinkType("Created")
 {
   must have DateTimeOf("created")
@@ -17,10 +18,12 @@ object Created extends LinkType("Created")
 
 object User extends NodeType(GP.USER)
 {
-  must have StringOf("username") have HashOf("password")  have StringOf("email")
+  must have StringOf("username") have HashOf("password")  have StringOf("email","""\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,8}\b""")
   should have OutLinkOf("LiveIn",City.name)
   should have OutLinkOf(Role.name)
 }
+
+
 
 trait CreatedByUser extends NodeType{
   must have OutLinkOf(Created.name,Created.name,GP.USER)

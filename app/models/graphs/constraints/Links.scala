@@ -17,7 +17,7 @@ trait Links
   var links = Map.empty[String,Link]
   def have(link:Link): Links = {links+=(link.name->link); this }
 
-  def writeLinks(v:Vertex)  =  {this.links.foreach
+  def writeLinks(v:Vertex): Vertex =  {this.links.foreach
   {
 
     case (name,link)=>

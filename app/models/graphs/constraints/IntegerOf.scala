@@ -32,5 +32,10 @@ case class IntegerOf(propertyName:String,min:Int=Int.MinValue, max:Int=Int.MaxVa
     v.setProperty(CONSTRAINT,IntegerOf.constraint)
     v
   }
+
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:Integer=>this.validate(v)
+    case _=>false
+  }
 }
 

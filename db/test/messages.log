@@ -1,437 +1,440 @@
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- INITIALIZED diagnostics START ---
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: Neo4j Kernel properties:
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.strings.mapped_memory=541M
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.nodestore.db.mapped_memory=176M
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: store_dir=/home/antonkulaga/denigma/denigma-kms/db/test
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.arrays.mapped_memory=613M
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.mapped_memory=636M
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.relationshipstore.db.mapped_memory=779M
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: Diagnostics providers:
-2013-11-29 13:50:51.065+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.kernel.configuration.Config
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.kernel.info.DiagnosticsManager
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: SYSTEM_MEMORY
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: JAVA_MEMORY
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: OPERATING_SYSTEM
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: JAVA_VIRTUAL_MACHINE
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: CLASSPATH
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: LIBRARY_PATH
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: SYSTEM_PROPERTIES
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: LINUX_SCHEDULERS
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: NETWORK
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: NodeCache
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: RelationshipCache
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: System memory information:
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total Physical memory: 7.68 GB
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free Physical memory: 1.50 GB
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: Committed virtual memory: 5.34 GB
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total swap space: 7.88 GB
-2013-11-29 13:50:51.066+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free swap space: 7.88 GB
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: JVM memory information:
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free  memory: 83.18 MB
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total memory: 213.00 MB
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Max   memory: 1.71 GB
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen]
-2013-11-29 13:50:51.067+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Code Cache (Non-heap memory): committed=12.75 MB, used=12.64 MB, max=240.00 MB, threshold=0.00 B
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Metaspace (Non-heap memory): committed=38.13 MB, used=37.69 MB, max=-1.00 B, threshold=0.00 B
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Compressed Class Space (Non-heap memory): committed=6.38 MB, used=6.20 MB, max=1.00 GB, threshold=0.00 B
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Eden Space (Heap memory): committed=86.00 MB, used=70.05 MB, max=645.50 MB, threshold=?
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Survivor Space (Heap memory): committed=5.00 MB, used=0.00 B, max=5.00 MB, threshold=?
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Old Gen (Heap memory): committed=122.00 MB, used=59.76 MB, max=1.28 GB, threshold=0.00 B
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Operating system information:
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Operating System: Linux; version: 3.11.0-13-generic; arch: amd64; cpus: 4
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Max number of file descriptors: 4096
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Number of open file descriptors: 228
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Process id: 7021@YOUGA
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Byte order: LITTLE_ENDIAN
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Local timezone: Europe/Kiev
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: JVM information:
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Name: Java HotSpot(TM) 64-Bit Server VM
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Vendor: Oracle Corporation
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Version: 25.0-b59
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: JIT compiler: HotSpot 64-Bit Tiered Compilers
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Arguments: [-Didea.launcher.port=7534, -Didea.launcher.bin.path=/home/antonkulaga/idea-IU-132.1045/bin, -Dfile.encoding=UTF-8]
-2013-11-29 13:50:51.068+0000 INFO  [o.n.k.i.DiagnosticsManager]: Java classpath:
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.zookeeper/zookeeper/jars/zookeeper-3.3.2.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/tyrex/tyrex/1.0.1/jars/tyrex.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-kernel/jars/neo4j-kernel-1.9.2.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.32.0/jars/selenium-firefox-driver.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-jdbc_2.10/2.2.1/jars/play-jdbc_2.10.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/zipfs.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.javassist/javassist/3.18.0-GA/bundles/javassist.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-consistency-check/jars/neo4j-consistency-check-1.9.2.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.assembla.scala-incubator/graph-core_2.10/jars/graph-core_2.10-1.7.0.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpclient/4.0.1/jars/httpclient.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-beanutils-1.7.0.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-library.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xalan/serializer/2.7.1/jars/serializer.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.32.0/jars/selenium-android-driver.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/jul-to-slf4j/1.7.5/jars/jul-to-slf4j.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-codec/commons-codec/1.6/jars/commons-codec.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-concurrent_2.10/7.0.2/bundles/scalaz-concurrent_2.10.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-datatype-json-org-2.2.3.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-com/jars/neo4j-com-1.9.2.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpmime/4.2.3/jars/httpmime.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-iteratees_2.10/2.2.1/jars/play-iteratees_2.10.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-io/commons-io/jars/commons-io-1.3.2.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-logging/commons-logging/1.1.1/jars/commons-logging.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/snappy-0.3.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/blueprints-core-2.5.0-SNAPSHOT.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/log4j/log4j/bundles/log4j-1.2.16.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpcore/4.0.1/jars/httpcore.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/cglib/cglib-nodep/2.1_3/jars/cglib-nodep.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/sbt-link/2.2.1/jars/sbt-link.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-logging-1.1.1.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-cache_2.10/2.2.1/jars/play-cache_2.10.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.specs2/specs2_2.10/2.1.1/jars/specs2_2.10.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/target/scala-2.10/classes/
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.htmlunit/htmlunit-core-js/2.12/jars/htmlunit-core-js.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/.IntelliJIdea13/config/plugins/Scala/lib/scala-plugin-runners.jar
-2013-11-29 13:50:51.071+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/cldrdata.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-compiler.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/slf4j-api/1.7.5/jars/slf4j-api.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.java.dev.jna/platform/3.4.0/jars/platform.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunec.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scala-stm/scala-stm_2.10/0.7/jars/scala-stm_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-test_2.10/2.2.1/jars/play-test_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-configuration/commons-configuration/jars/commons-configuration-1.6.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/stax-api-1.0.1.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.novocode/junit-interface/0.10/jars/junit-interface.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.commons/commons-exec/1.1/jars/commons-exec.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-websocket/8.1.9.v20130131/jars/jetty-websocket.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/ch.qos.logback/logback-classic/1.0.13/jars/logback-classic.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunjce_provider.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-collections-3.2.1.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.18/jars/nekohtml.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-core/2.2.2/jars/jackson-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-annotations/2.2.2/jars/jackson-annotations.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-support/2.32.0/jars/selenium-support.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-annotations-2.2.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-backup/jars/neo4j-backup-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru/jars/concurrentlinkedhashmap-lru-1.3.1.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/json-20090211.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-core_2.10/7.0.2/bundles/scalaz-core_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.tinkerpop.blueprints/blueprints-neo4j-graph/jars/blueprints-neo4j-graph-2.4.0.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-java/2.32.0/jars/selenium-java.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/joda-time/joda-time/jars/joda-time-2.3.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-safari-driver/2.32.0/jars/selenium-safari-driver.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/target/scala-2.10/test-classes/
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xerces/xercesImpl/2.11.0/jars/xercesImpl.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scala-tools.testing/test-interface/0.5/jars/test-interface.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.w3c.css/sac/1.3/jars/sac.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/oauth.signpost/signpost-core/1.2.1.2/jars/signpost-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/dnsns.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.ning/async-http-client/1.7.18/jars/async-http-client.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.32.0/jars/selenium-ie-driver.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orientdb-core-1.6.0-SNAPSHOT.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/idea-IU-132.1045/lib/idea_rt.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.jsuereth/scala-arm_2.10/1.3/jars/scala-arm_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-configuration-1.6.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.java.dev.jna/jna/3.4.0/jars/jna.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/concurrent-1.3.4.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.github.scala-incubator.io/scala-io-file_2.10/0.4.2/jars/scala-io-file_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sf.ehcache/ehcache-core/2.6.6/jars/ehcache-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.google.code.findbugs/jsr305/2.0.1/jars/jsr305.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/io.netty/netty/3.7.0.Final/bundles/netty.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/stax/stax-api/jars/stax-api-1.0.1.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-lang/commons-lang/jars/commons-lang-2.4.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-cluster/jars/neo4j-cluster-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.github.scala-incubator.io/scala-io-core_2.10/0.4.2/jars/scala-io-core_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/macro/target/scala-2.10/classes/
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/io.github.nremond/pbkdf2-scala_2.10/jars/pbkdf2-scala_2.10-0.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-remote-driver/2.32.0/jars/selenium-remote-driver.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xalan/xalan/2.7.1/jars/xalan.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.netty/netty-http-pipelining/1.1.2/jars/netty-http-pipelining.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.github.t3hnar/scala-bcrypt_2.10/jars/scala-bcrypt_2.10-2.3.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-http/8.1.9.v20130131/jars/jetty-http.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-databind/2.2.2/jars/jackson-databind.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-lang-2.4.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orient-commons-1.6.0-SNAPSHOT.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.fasterxml.jackson.datatype/jackson-datatype-json-org/jars/jackson-datatype-json-org-2.1.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/junit/junit/4.11/jars/junit.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.htmlunit/htmlunit/2.12/jars/htmlunit.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-api/2.32.0/jars/selenium-api.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.akka/akka-slf4j_2.10/2.2.0/bundles/akka-slf4j_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-chrome-driver/2.32.0/jars/selenium-chrome-driver.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/concurrent/concurrent/jars/concurrent-1.3.4.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-ha/jars/neo4j-ha-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/oauth.signpost/signpost-commonshttp4/1.2.1.2/jars/signpost-commonshttp4.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.fluentlenium/fluentlenium-festassert/0.8.0/jars/fluentlenium-festassert.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.fluentlenium/fluentlenium-core/0.8.0/jars/fluentlenium-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-io/8.1.9.v20130131/jars/jetty-io.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.jolbox/bonecp/0.8.0.RELEASE/bundles/bonecp.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-databind-2.2.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-lucene-index/jars/neo4j-lucene-index-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-management/jars/neo4j-management-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.hamcrest/hamcrest-core/1.3/jars/hamcrest-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jettison-1.3.3.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/deploy.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-json_2.10/2.2.1/jars/play-json_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/blueprints-orient-graph-2.5.0-SNAPSHOT.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play_2.10/2.2.1/jars/play_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunpkcs11.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe/config/1.0.2/bundles/config.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.32.0/jars/selenium-htmlunit-driver.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/management-agent.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.mindrot/jbcrypt/jars/jbcrypt-0.3m.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/ch.qos.logback/logback-core/1.0.13/jars/logback-core.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-reflect.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xml-apis/xml-apis/1.4.01/jars/xml-apis.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.lucene/lucene-core/jars/lucene-core-3.6.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/plugin.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.cssparser/cssparser/0.9.9/jars/cssparser.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.codehaus.jettison/jettison/bundles/jettison-1.3.3.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-collections/commons-collections/3.2.1/jars/commons-collections.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-util/8.1.9.v20130131/jars/jetty-util.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/templates_2.10/2.2.1/jars/templates_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.joda/joda-convert/1.3.1/jars/joda-convert.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.github.nscala-time/nscala-time_2.10/jars/nscala-time_2.10-0.6.0.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-graph-matching/jars/neo4j-graph-matching-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.google.guava/guava/14.0.1/bundles/guava.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.easytesting/fest-assert/1.4/jars/fest-assert.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.json/json/20090211/jars/json.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.akka/akka-actor_2.10/2.2.0/jars/akka-actor_2.10.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-graph-algo/jars/neo4j-graph-algo-1.9.2.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-beanutils/commons-beanutils-core/jars/commons-beanutils-core-1.8.0.jar
-2013-11-29 13:50:51.072+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-beanutils/commons-beanutils/jars/commons-beanutils-1.7.0.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-cypher/jars/neo4j-cypher-1.9.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-functional_2.10/2.2.1/jars/play-functional_2.10.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-datacommons_2.10/2.2.1/jars/play-datacommons_2.10.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.commons/commons-lang3/3.1/jars/commons-lang3.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.webbitserver/webbit/0.4.14/jars/webbit.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-digester-1.8.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/java-8-oracle/jre/classes
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.tinkerpop.blueprints/blueprints-core/jars/blueprints-core-2.4.0.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/colt/colt/jars/colt-1.2.0.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-core-2.2.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-udc/jars/neo4j-udc-1.9.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/platform-3.5.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.32.0/jars/selenium-iphone-driver.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/nashorn.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.h2database/h2/1.3.172/jars/h2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/javax.transaction/jta/1.1/jars/jta.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jna-3.5.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/colt-1.2.0.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-codec/commons-codec/1.3/jars/commons-codec.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-digester/commons-digester/jars/commons-digester-1.8.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/javaws.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-beanutils-core-1.8.0.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-jmx/jars/neo4j-jmx-1.9.2.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/anorm_2.10/2.2.1/jars/anorm_2.10.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-exceptions/2.2.1/jars/play-exceptions.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpclient/4.2.1/jars/httpclient.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/localedata.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-io/commons-io/2.2/jars/commons-io.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-effect_2.10/7.0.2/bundles/scalaz-effect_2.10.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orientdb-nativeos-1.6.0-SNAPSHOT.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpcore/4.2.1/jars/httpcore.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/jcl-over-slf4j/1.7.5/jars/jcl-over-slf4j.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.geronimo.specs/geronimo-jta_1.1_spec/jars/geronimo-jta_1.1_spec-1.1.1.jar
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: Library path:
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /home/antonkulaga/idea-IU-132.1045/bin
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /home/antonkulaga/denigma/denigma-kms
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/java/packages/lib/amd64
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/lib64
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /lib64
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /lib
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/lib
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: System.properties:
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.boot.library.path = /usr/lib/jvm/java-8-oracle/jre/lib/amd64
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: path.separator = :
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: idea.launcher.port = 7534
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.encoding.pkg = sun.io
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.country = US
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.java.launcher = SUN_STANDARD
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.os.patch.level = unknown
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.dir = /home/antonkulaga/denigma/denigma-kms
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.jnu.encoding = UTF-8
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.nio.ch.bugLevel = 
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.management.compiler = HotSpot 64-Bit Tiered Compilers
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.home = /home/antonkulaga
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.timezone = Europe/Kiev
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.encoding = UTF-8
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: idea.launcher.bin.path = /home/antonkulaga/idea-IU-132.1045/bin
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.name = antonkulaga
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.java.command = com.intellij.rt.execution.application.AppMain org.jetbrains.plugins.scala.testingSupport.specs2.JavaSpecs2Runner -s SchemaSpec UserSpec ViewModelSpec ApplicationSpec TestGraphSpec HyperEdgeSpec GraphSpec SecuritySpec -showProgressMessages true -C org.jetbrains.plugins.scala.testingSupport.specs2.JavaSpecs2Notifier
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.arch.data.model = 64
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.language = en
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: awt.toolkit = sun.awt.X11.XToolkit
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.separator = /
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.io.unicode.encoding = UnicodeLittle
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.cpu.endian = little
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.desktop = gnome
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.cpu.isalist = 
-2013-11-29 13:50:51.073+0000 INFO  [o.n.k.i.DiagnosticsManager]: Linux scheduler information:
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: noop [deadline] cfq 
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: noop [deadline] cfq 
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.074+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
-2013-11-29 13:50:51.075+0000 INFO  [o.n.k.i.DiagnosticsManager]: Network information:
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]: Interface wlan0:
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: fe80:0:0:0:2216:d8ff:fe08:6784%wlan0
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 192.168.1.104
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]: Interface lo:
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 0:0:0:0:0:0:0:1%lo
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 127.0.0.1
-2013-11-29 13:50:51.076+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- INITIALIZED diagnostics END ---
-2013-11-29 13:50:51.084+0000 INFO  [o.n.k.i.n.s.StoreFactory]: Creating new db @ /home/antonkulaga/denigma/denigma-kms/db/test/neostore
-2013-11-29 13:50:51.113+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=1845486b mappedMem=184549376b (storeSize=0b)
-2013-11-29 13:50:51.118+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=1 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.264+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
-2013-11-29 13:50:51.264+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.269+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.278+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.291+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
-2013-11-29 13:50:51.291+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.291+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings] brickCount=0 brickSize=567168b mappedMem=567279616b (storeSize=128b)
-2013-11-29 13:50:51.291+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
-2013-11-29 13:50:51.291+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.292+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays] brickCount=0 brickSize=642688b mappedMem=642777088b (storeSize=128b)
-2013-11-29 13:50:51.292+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db] brickCount=0 brickSize=6668937b mappedMem=666894336b (storeSize=0b)
-2013-11-29 13:50:51.292+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db] brickCount=0 brickSize=8168391b mappedMem=816840704b (storeSize=0b)
-2013-11-29 13:50:51.292+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=184545b mappedMem=184549376b (storeSize=9b)
-2013-11-29 13:50:51.292+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.298+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.307+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.323+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.339+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.347+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.355+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.374+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.383+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.392+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.404+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore hit=0 miss=8 switches=0 ooe=0
-2013-11-29 13:50:51.414+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
-2013-11-29 13:50:51.415+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.415+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings] brickCount=0 brickSize=567168b mappedMem=567279616b (storeSize=128b)
-2013-11-29 13:50:51.416+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
-2013-11-29 13:50:51.416+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
-2013-11-29 13:50:51.417+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays] brickCount=0 brickSize=642688b mappedMem=642777088b (storeSize=128b)
-2013-11-29 13:50:51.417+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db] brickCount=0 brickSize=6668937b mappedMem=666894336b (storeSize=0b)
-2013-11-29 13:50:51.418+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db] brickCount=0 brickSize=8168391b mappedMem=816840704b (storeSize=0b)
-2013-11-29 13:50:51.418+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=184545b mappedMem=184549376b (storeSize=9b)
-2013-11-29 13:50:51.418+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=54b)
-2013-11-29 13:50:51.419+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Opened logical log [/home/antonkulaga/denigma/denigma-kms/db/test/nioneo_logical.log.1] version=0, lastTxId=1 (clean)
-2013-11-29 13:50:51.433+0000 INFO  [o.n.k.i.t.TxManager]: TM new log: tm_tx_log.1
-2013-11-29 13:50:51.440+0000 INFO  [o.n.b.BackupServer]: BackupServer communication server started and bound to /0.0.0.0:6363
-2013-11-29 13:50:51.441+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Opened logical log [/home/antonkulaga/denigma/denigma-kms/db/test/index/lucene.log.1] version=0, lastTxId=1 (clean)
-2013-11-29 13:50:51.447+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:Versions START ---
-2013-11-29 13:50:51.447+0000 INFO  [o.n.k.i.DiagnosticsManager]: Graph Database: org.neo4j.kernel.EmbeddedGraphDatabase StoreId[time:1385733051084, id:6711306704384763664, store version: 13561656364791302]
-2013-11-29 13:50:51.447+0000 INFO  [o.n.k.i.DiagnosticsManager]: Kernel version: Neo4j - Graph Database Kernel 1.9.2
-2013-11-29 13:50:51.447+0000 INFO  [o.n.k.i.DiagnosticsManager]: Neo4j component versions:
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   Neo4j - Graph Database Kernel 1.9.2
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:Versions END ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: Store versions:
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: Store versions:
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NeoStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NodeStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipTypeStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyIndexStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   StringPropertyStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   ArrayPropertyStore v0.A.0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: Id usage:
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: Id usage:
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NodeStore: used=1 high=0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipStore: used=0 high=-1
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipTypeStore: used=0 high=-1
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyStore: used=0 high=-1
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyIndexStore: used=0 high=-1
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   StringPropertyStore: used=1 high=0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]:   ArrayPropertyStore: used=1 high=0
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS START ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS END ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
-2013-11-29 13:50:51.448+0000 INFO  [o.n.k.i.DiagnosticsManager]: Disk space on partition (Total / Free / Free %): 242819473408 / 167340879872 / 68
+2013-12-01 23:46:49.359+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- INITIALIZED diagnostics START ---
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Neo4j Kernel properties:
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.strings.mapped_memory=541M
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.nodestore.db.mapped_memory=176M
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: store_dir=/home/antonkulaga/denigma/denigma-kms/db/test
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.arrays.mapped_memory=613M
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.propertystore.db.mapped_memory=636M
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: neostore.relationshipstore.db.mapped_memory=779M
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Diagnostics providers:
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.kernel.configuration.Config
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: org.neo4j.kernel.info.DiagnosticsManager
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: SYSTEM_MEMORY
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: JAVA_MEMORY
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: OPERATING_SYSTEM
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: JAVA_VIRTUAL_MACHINE
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: CLASSPATH
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: LIBRARY_PATH
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: SYSTEM_PROPERTIES
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: LINUX_SCHEDULERS
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: NETWORK
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: NodeCache
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: RelationshipCache
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: System memory information:
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total Physical memory: 7.68 GB
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free Physical memory: 557.32 MB
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Committed virtual memory: 5.33 GB
+2013-12-01 23:46:49.360+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total swap space: 7.88 GB
+2013-12-01 23:46:49.361+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free swap space: 7.06 GB
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: JVM memory information:
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Free  memory: 156.47 MB
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Total memory: 218.00 MB
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Max   memory: 1.71 GB
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Garbage Collector: PS Scavenge: [PS Eden Space, PS Survivor Space]
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Garbage Collector: PS MarkSweep: [PS Eden Space, PS Survivor Space, PS Old Gen]
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Code Cache (Non-heap memory): committed=13.69 MB, used=13.57 MB, max=240.00 MB, threshold=0.00 B
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Metaspace (Non-heap memory): committed=39.75 MB, used=39.27 MB, max=-1.00 B, threshold=0.00 B
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: Compressed Class Space (Non-heap memory): committed=6.50 MB, used=6.39 MB, max=1.00 GB, threshold=0.00 B
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Eden Space (Heap memory): committed=87.50 MB, used=9.73 MB, max=646.50 MB, threshold=?
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Survivor Space (Heap memory): committed=4.50 MB, used=0.00 B, max=4.50 MB, threshold=?
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Memory Pool: PS Old Gen (Heap memory): committed=126.00 MB, used=51.80 MB, max=1.28 GB, threshold=0.00 B
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Operating system information:
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Operating System: Linux; version: 3.11.0-13-generic; arch: amd64; cpus: 4
+2013-12-01 23:46:49.362+0000 INFO  [o.n.k.i.DiagnosticsManager]: Max number of file descriptors: 4096
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: Number of open file descriptors: 235
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: Process id: 30574@YOUGA
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: Byte order: LITTLE_ENDIAN
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: Local timezone: Europe/Kiev
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: JVM information:
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Name: Java HotSpot(TM) 64-Bit Server VM
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Vendor: Oracle Corporation
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Version: 25.0-b59
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: JIT compiler: HotSpot 64-Bit Tiered Compilers
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: VM Arguments: [-Didea.launcher.port=7535, -Didea.launcher.bin.path=/home/antonkulaga/idea-IU-132.1045/bin, -Dfile.encoding=UTF-8]
+2013-12-01 23:46:49.363+0000 INFO  [o.n.k.i.DiagnosticsManager]: Java classpath:
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.zookeeper/zookeeper/jars/zookeeper-3.3.2.jar
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/tyrex/tyrex/1.0.1/jars/tyrex.jar
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-kernel/jars/neo4j-kernel-1.9.2.jar
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-firefox-driver/2.32.0/jars/selenium-firefox-driver.jar
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-jdbc_2.10/2.2.1/jars/play-jdbc_2.10.jar
+2013-12-01 23:46:49.367+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/zipfs.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.javassist/javassist/3.18.0-GA/bundles/javassist.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-consistency-check/jars/neo4j-consistency-check-1.9.2.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.assembla.scala-incubator/graph-core_2.10/jars/graph-core_2.10-1.7.0.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpclient/4.0.1/jars/httpclient.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-beanutils-1.7.0.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-library.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xalan/serializer/2.7.1/jars/serializer.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-android-driver/2.32.0/jars/selenium-android-driver.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/jul-to-slf4j/1.7.5/jars/jul-to-slf4j.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-codec/commons-codec/1.6/jars/commons-codec.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-concurrent_2.10/7.0.2/bundles/scalaz-concurrent_2.10.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-datatype-json-org-2.2.3.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-com/jars/neo4j-com-1.9.2.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpmime/4.2.3/jars/httpmime.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/rt.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-iteratees_2.10/2.2.1/jars/play-iteratees_2.10.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-io/commons-io/jars/commons-io-1.3.2.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-logging/commons-logging/1.1.1/jars/commons-logging.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/snappy-0.3.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/blueprints-core-2.5.0-SNAPSHOT.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/log4j/log4j/bundles/log4j-1.2.16.jar
+2013-12-01 23:46:49.376+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpcore/4.0.1/jars/httpcore.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/cglib/cglib-nodep/2.1_3/jars/cglib-nodep.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/sbt-link/2.2.1/jars/sbt-link.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-logging-1.1.1.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-cache_2.10/2.2.1/jars/play-cache_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.specs2/specs2_2.10/2.1.1/jars/specs2_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/target/scala-2.10/classes/
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.htmlunit/htmlunit-core-js/2.12/jars/htmlunit-core-js.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/.IntelliJIdea13/config/plugins/Scala/lib/scala-plugin-runners.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/cldrdata.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-compiler.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/slf4j-api/1.7.5/jars/slf4j-api.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.java.dev.jna/platform/3.4.0/jars/platform.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunec.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scala-stm/scala-stm_2.10/0.7/jars/scala-stm_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-test_2.10/2.2.1/jars/play-test_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-configuration/commons-configuration/jars/commons-configuration-1.6.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/stax-api-1.0.1.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.novocode/junit-interface/0.10/jars/junit-interface.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.commons/commons-exec/1.1/jars/commons-exec.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-websocket/8.1.9.v20130131/jars/jetty-websocket.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/ch.qos.logback/logback-classic/1.0.13/jars/logback-classic.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunjce_provider.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-collections-3.2.1.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.nekohtml/nekohtml/1.9.18/jars/nekohtml.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-core/2.2.2/jars/jackson-core.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-annotations/2.2.2/jars/jackson-annotations.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-support/2.32.0/jars/selenium-support.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-annotations-2.2.2.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-backup/jars/neo4j-backup-1.9.2.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.googlecode.concurrentlinkedhashmap/concurrentlinkedhashmap-lru/jars/concurrentlinkedhashmap-lru-1.3.1.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/json-20090211.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-core_2.10/7.0.2/bundles/scalaz-core_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.tinkerpop.blueprints/blueprints-neo4j-graph/jars/blueprints-neo4j-graph-2.4.0.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-java/2.32.0/jars/selenium-java.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/joda-time/joda-time/jars/joda-time-2.3.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-safari-driver/2.32.0/jars/selenium-safari-driver.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/target/scala-2.10/test-classes/
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xerces/xercesImpl/2.11.0/jars/xercesImpl.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scala-tools.testing/test-interface/0.5/jars/test-interface.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.w3c.css/sac/1.3/jars/sac.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/oauth.signpost/signpost-core/1.2.1.2/jars/signpost-core.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/dnsns.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.ning/async-http-client/1.7.18/jars/async-http-client.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-ie-driver/2.32.0/jars/selenium-ie-driver.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orientdb-core-1.6.0-SNAPSHOT.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/idea-IU-132.1045/lib/idea_rt.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.jsuereth/scala-arm_2.10/1.3/jars/scala-arm_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-configuration-1.6.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.java.dev.jna/jna/3.4.0/jars/jna.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/concurrent-1.3.4.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.github.scala-incubator.io/scala-io-file_2.10/0.4.2/jars/scala-io-file_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sf.ehcache/ehcache-core/2.6.6/jars/ehcache-core.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.google.code.findbugs/jsr305/2.0.1/jars/jsr305.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/io.netty/netty/3.7.0.Final/bundles/netty.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/stax/stax-api/jars/stax-api-1.0.1.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-lang/commons-lang/jars/commons-lang-2.4.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-cluster/jars/neo4j-cluster-1.9.2.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.github.scala-incubator.io/scala-io-core_2.10/0.4.2/jars/scala-io-core_2.10.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/macro/target/scala-2.10/classes/
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/io.github.nremond/pbkdf2-scala_2.10/jars/pbkdf2-scala_2.10-0.2.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-remote-driver/2.32.0/jars/selenium-remote-driver.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xalan/xalan/2.7.1/jars/xalan.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jsse.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.netty/netty-http-pipelining/1.1.2/jars/netty-http-pipelining.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.github.t3hnar/scala-bcrypt_2.10/jars/scala-bcrypt_2.10-2.3.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-http/8.1.9.v20130131/jars/jetty-http.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.fasterxml.jackson.core/jackson-databind/2.2.2/jars/jackson-databind.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-lang-2.4.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orient-commons-1.6.0-SNAPSHOT.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.fasterxml.jackson.datatype/jackson-datatype-json-org/jars/jackson-datatype-json-org-2.1.2.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/jfxrt.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/junit/junit/4.11/jars/junit.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.htmlunit/htmlunit/2.12/jars/htmlunit.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-api/2.32.0/jars/selenium-api.jar
+2013-12-01 23:46:49.377+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.akka/akka-slf4j_2.10/2.2.0/bundles/akka-slf4j_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-chrome-driver/2.32.0/jars/selenium-chrome-driver.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/concurrent/concurrent/jars/concurrent-1.3.4.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-ha/jars/neo4j-ha-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/oauth.signpost/signpost-commonshttp4/1.2.1.2/jars/signpost-commonshttp4.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.easytesting/fest-util/1.1.6/jars/fest-util.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.fluentlenium/fluentlenium-festassert/0.8.0/jars/fluentlenium-festassert.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.fluentlenium/fluentlenium-core/0.8.0/jars/fluentlenium-core.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-io/8.1.9.v20130131/jars/jetty-io.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.jolbox/bonecp/0.8.0.RELEASE/bundles/bonecp.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-databind-2.2.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-lucene-index/jars/neo4j-lucene-index-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-management/jars/neo4j-management-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.hamcrest/hamcrest-core/1.3/jars/hamcrest-core.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jettison-1.3.3.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/deploy.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-json_2.10/2.2.1/jars/play-json_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/blueprints-orient-graph-2.5.0-SNAPSHOT.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play_2.10/2.2.1/jars/play_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/sunpkcs11.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe/config/1.0.2/bundles/config.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-htmlunit-driver/2.32.0/jars/selenium-htmlunit-driver.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/management-agent.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.mindrot/jbcrypt/jars/jbcrypt-0.3m.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jce.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.scalacheck/scalacheck_2.10/jars/scalacheck_2.10-1.11.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/ch.qos.logback/logback-core/1.0.13/jars/logback-core.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/framework/sbt/boot/scala-2.10.2/lib/scala-reflect.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/xml-apis/xml-apis/1.4.01/jars/xml-apis.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.scala-lang/scala-library/jars/scala-library-2.10.3.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.lucene/lucene-core/jars/lucene-core-3.6.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/plugin.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/net.sourceforge.cssparser/cssparser/0.9.9/jars/cssparser.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.codehaus.jettison/jettison/bundles/jettison-1.3.3.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-collections/commons-collections/3.2.1/jars/commons-collections.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.eclipse.jetty/jetty-util/8.1.9.v20130131/jars/jetty-util.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/templates_2.10/2.2.1/jars/templates_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.joda/joda-convert/1.3.1/jars/joda-convert.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.github.nscala-time/nscala-time_2.10/jars/nscala-time_2.10-0.6.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-graph-matching/jars/neo4j-graph-matching-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.google.guava/guava/14.0.1/bundles/guava.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.easytesting/fest-assert/1.4/jars/fest-assert.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/resources.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.json/json/20090211/jars/json.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.akka/akka-actor_2.10/2.2.0/jars/akka-actor_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-graph-algo/jars/neo4j-graph-algo-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-beanutils/commons-beanutils-core/jars/commons-beanutils-core-1.8.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-beanutils/commons-beanutils/jars/commons-beanutils-1.7.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-cypher/jars/neo4j-cypher-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-functional_2.10/2.2.1/jars/play-functional_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-datacommons_2.10/2.2.1/jars/play-datacommons_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.commons/commons-lang3/3.1/jars/commons-lang3.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.webbitserver/webbit/0.4.14/jars/webbit.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-digester-1.8.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/java-8-oracle/jre/classes
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/com.tinkerpop.blueprints/blueprints-core/jars/blueprints-core-2.4.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/colt/colt/jars/colt-1.2.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jackson-core-2.2.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-udc/jars/neo4j-udc-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scala-sbt/test-interface/1.0/jars/test-interface.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/platform-3.5.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.seleniumhq.selenium/selenium-iphone-driver/2.32.0/jars/selenium-iphone-driver.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/charsets.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/nashorn.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.h2database/h2/1.3.172/jars/h2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/javax.transaction/jta/1.1/jars/jta.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/jna-3.5.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/colt-1.2.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-codec/commons-codec/1.3/jars/commons-codec.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/commons-digester/commons-digester/jars/commons-digester-1.8.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/javaws.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap] /usr/lib/jvm/java-8-oracle/jre/lib/sunrsasign.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/commons-beanutils-core-1.8.0.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.neo4j/neo4j-jmx/jars/neo4j-jmx-1.9.2.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [bootstrap + classpath + loader.0] file:/usr/lib/jvm/java-8-oracle/jre/lib/jfr.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/anorm_2.10/2.2.1/jars/anorm_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/com.typesafe.play/play-exceptions/2.2.1/jars/play-exceptions.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpclient/4.2.1/jars/httpclient.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [loader.1] file:/usr/lib/jvm/java-8-oracle/jre/lib/ext/localedata.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/commons-io/commons-io/2.2/jars/commons-io.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.scalaz/scalaz-effect_2.10/7.0.2/bundles/scalaz-effect_2.10.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/denigma/denigma-kms/lib/orientdb-nativeos-1.6.0-SNAPSHOT.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.apache.httpcomponents/httpcore/4.2.1/jars/httpcore.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/local/org.slf4j/jcl-over-slf4j/1.7.5/jars/jcl-over-slf4j.jar
+2013-12-01 23:46:49.378+0000 INFO  [o.n.k.i.DiagnosticsManager]:  [classpath + loader.0] file:/home/antonkulaga/Soft/play-2.2.1/repository/cache/org.apache.geronimo.specs/geronimo-jta_1.1_spec/jars/geronimo-jta_1.1_spec-1.1.1.jar
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: Library path:
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /home/antonkulaga/idea-IU-132.1045/bin
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /home/antonkulaga/denigma/denigma-kms
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/java/packages/lib/amd64
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/lib64
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /lib64
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /lib
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: /usr/lib
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: System.properties:
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.boot.library.path = /usr/lib/jvm/java-8-oracle/jre/lib/amd64
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: path.separator = :
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: idea.launcher.port = 7535
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.encoding.pkg = sun.io
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.country = US
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.java.launcher = SUN_STANDARD
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.os.patch.level = unknown
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.dir = /home/antonkulaga/denigma/denigma-kms
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.jnu.encoding = UTF-8
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.nio.ch.bugLevel = 
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.home = /home/antonkulaga
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.timezone = Europe/Kiev
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.encoding = UTF-8
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: idea.launcher.bin.path = /home/antonkulaga/idea-IU-132.1045/bin
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.name = antonkulaga
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.java.command = com.intellij.rt.execution.application.AppMain org.jetbrains.plugins.scala.testingSupport.specs2.JavaSpecs2Runner -s SchemaSpec SecuritySpec ViewModelSpec ApplicationSpec TestGraphSpec HyperEdgeSpec GraphSpec UserSpec -showProgressMessages true -C org.jetbrains.plugins.scala.testingSupport.specs2.JavaSpecs2Notifier
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.arch.data.model = 64
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: user.language = en
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: awt.toolkit = sun.awt.X11.XToolkit
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: file.separator = /
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.io.unicode.encoding = UnicodeLittle
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.cpu.endian = little
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.desktop = gnome
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: sun.cpu.isalist = 
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: Linux scheduler information:
+2013-12-01 23:46:49.379+0000 INFO  [o.n.k.i.DiagnosticsManager]: noop [deadline] cfq 
+2013-12-01 23:46:49.380+0000 INFO  [o.n.k.i.DiagnosticsManager]: noop [deadline] cfq 
+2013-12-01 23:46:49.380+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.380+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.380+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.380+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: none
+2013-12-01 23:46:49.381+0000 INFO  [o.n.k.i.DiagnosticsManager]: Network information:
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]: Interface wlan0:
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: fe80:0:0:0:2216:d8ff:fe08:6784%wlan0
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 192.168.1.105
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]: Interface lo:
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 0:0:0:0:0:0:0:1%lo
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]:     address: 127.0.0.1
+2013-12-01 23:46:49.382+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- INITIALIZED diagnostics END ---
+2013-12-01 23:46:49.398+0000 INFO  [o.n.k.i.n.s.StoreFactory]: Creating new db @ /home/antonkulaga/denigma/denigma-kms/db/test/neostore
+2013-12-01 23:46:49.442+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=1845486b mappedMem=184549376b (storeSize=0b)
+2013-12-01 23:46:49.457+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=1 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.582+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-12-01 23:46:49.582+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.587+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.604+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.616+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-12-01 23:46:49.617+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.617+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings] brickCount=0 brickSize=567168b mappedMem=567279616b (storeSize=128b)
+2013-12-01 23:46:49.617+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-12-01 23:46:49.618+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.618+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays] brickCount=0 brickSize=642688b mappedMem=642777088b (storeSize=128b)
+2013-12-01 23:46:49.619+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db] brickCount=0 brickSize=6668937b mappedMem=666894336b (storeSize=0b)
+2013-12-01 23:46:49.619+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db] brickCount=0 brickSize=8168391b mappedMem=816840704b (storeSize=0b)
+2013-12-01 23:46:49.619+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=184545b mappedMem=184549376b (storeSize=9b)
+2013-12-01 23:46:49.620+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.626+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.635+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.643+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.652+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.671+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.689+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.702+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.711+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.725+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:49.743+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore hit=0 miss=8 switches=0 ooe=0
+2013-12-01 23:46:49.766+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-12-01 23:46:49.767+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.767+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings] brickCount=0 brickSize=567168b mappedMem=567279616b (storeSize=128b)
+2013-12-01 23:46:49.768+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys] brickCount=0 brickSize=0b mappedMem=0b (storeSize=38b)
+2013-12-01 23:46:49.768+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index] brickCount=0 brickSize=0b mappedMem=0b (storeSize=0b)
+2013-12-01 23:46:49.768+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays] brickCount=0 brickSize=642688b mappedMem=642777088b (storeSize=128b)
+2013-12-01 23:46:49.769+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db] brickCount=0 brickSize=6668937b mappedMem=666894336b (storeSize=0b)
+2013-12-01 23:46:49.769+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db] brickCount=0 brickSize=8168391b mappedMem=816840704b (storeSize=0b)
+2013-12-01 23:46:49.769+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db] brickCount=0 brickSize=184545b mappedMem=184549376b (storeSize=9b)
+2013-12-01 23:46:49.770+0000 INFO  [o.n.k.i.n.s.StoreFactory]: [/home/antonkulaga/denigma/denigma-kms/db/test/neostore] brickCount=0 brickSize=0b mappedMem=0b (storeSize=54b)
+2013-12-01 23:46:49.771+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Opened logical log [/home/antonkulaga/denigma/denigma-kms/db/test/nioneo_logical.log.1] version=0, lastTxId=1 (clean)
+2013-12-01 23:46:49.777+0000 INFO  [o.n.k.i.t.TxManager]: TM new log: tm_tx_log.1
+2013-12-01 23:46:49.785+0000 INFO  [o.n.b.BackupServer]: BackupServer communication server started and bound to /0.0.0.0:6363
+2013-12-01 23:46:49.785+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Opened logical log [/home/antonkulaga/denigma/denigma-kms/db/test/index/lucene.log.1] version=0, lastTxId=1 (clean)
+2013-12-01 23:46:49.793+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:Versions START ---
+2013-12-01 23:46:49.793+0000 INFO  [o.n.k.i.DiagnosticsManager]: Graph Database: org.neo4j.kernel.EmbeddedGraphDatabase StoreId[time:1385941609398, id:6832890144623958019, store version: 13561656364791302]
+2013-12-01 23:46:49.793+0000 INFO  [o.n.k.i.DiagnosticsManager]: Kernel version: Neo4j - Graph Database Kernel 1.9.2
+2013-12-01 23:46:49.793+0000 INFO  [o.n.k.i.DiagnosticsManager]: Neo4j component versions:
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   Neo4j - Graph Database Kernel 1.9.2
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:Versions END ---
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_VERSIONS START ---
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: Store versions:
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: Store versions:
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NeoStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NodeStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipTypeStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyIndexStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   StringPropertyStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]:   ArrayPropertyStore v0.A.0
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_VERSIONS END ---
+2013-12-01 23:46:49.796+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_ID_USAGE START ---
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: Id usage:
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: Id usage:
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   NodeStore: used=1 high=0
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipStore: used=0 high=-1
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   RelationshipTypeStore: used=0 high=-1
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyStore: used=0 high=-1
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   PropertyIndexStore: used=0 high=-1
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   StringPropertyStore: used=1 high=0
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]:   ArrayPropertyStore: used=1 high=0
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for NEO_STORE_ID_USAGE END ---
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS START ---
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for PERSISTENCE_WINDOW_POOL_STATS END ---
+2013-12-01 23:46:49.797+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles START ---
+2013-12-01 23:46:49.798+0000 INFO  [o.n.k.i.DiagnosticsManager]: Disk space on partition (Total / Free / Free %): 242819473408 / 167314788352 / 68
 Storage files: (filename : modification date - size)
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.arrays.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.nodestore.db: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.nodestore.db.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.keys: 2013-11-29T15:50:51+0200 - 38.00 B
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.449+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshipstore.db: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:   index:
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene-store.db: 2013-11-29T15:50:51+0200 - 40.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene.log.1: 2013-11-29T15:50:51+0200 - 16.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene.log.active: 2013-11-29T15:50:51+0200 - 4.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:   - Total: 2013-11-29T15:50:51+0200 - 60.00 B
-2013-11-29 13:50:51.450+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.arrays: 2013-11-29T15:50:51+0200 - 128.00 B
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   active_tx_log: 2013-11-29T15:50:51+0200 - 11.00 B
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   messages.log: 2013-11-29T15:50:51+0200 - 58.76 kB
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   nioneo_logical.log.active: 2013-11-29T15:50:51+0200 - 4.00 B
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.451+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore: 2013-11-29T15:50:51+0200 - 54.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.strings: 2013-11-29T15:50:51+0200 - 128.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   lock: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.keys.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   tm_tx_log.1: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.names.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.452+0000 INFO  [o.n.k.i.DiagnosticsManager]:   nioneo_logical.log.1: 2013-11-29T15:50:51+0200 - 16.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.strings.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshipstore.db.id: 2013-11-29T15:50:51+0200 - 9.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   store_lock: 2013-11-29T15:50:51+0200 - 0.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.names: 2013-11-29T15:50:51+0200 - 38.00 B
-2013-11-29 13:50:51.453+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
-2013-11-29 13:50:51.454+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: Started - database is now available
-2013-11-29 13:50:51.454+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: GC Monitor started. 
-2013-11-29 13:50:51.662+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: Stopping - database is now unavailable
-2013-11-29 13:50:51.662+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: GC Monitor stopped. 
-2013-11-29 13:50:51.814+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Closed log /home/antonkulaga/denigma/denigma-kms/db/test/index/lucene.log
-2013-11-29 13:50:51.824+0000 INFO  [o.n.k.i.t.TxManager]: TM shutting down
-2013-11-29 13:50:51.869+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Closed log /home/antonkulaga/denigma/denigma-kms/db/test/nioneo_logical.log
-2013-11-29 13:50:51.874+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.882+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.896+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.905+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys hit=0 miss=2 switches=0 ooe=0
-2013-11-29 13:50:51.914+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index hit=0 miss=2 switches=0 ooe=0
-2013-11-29 13:50:51.923+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.932+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db hit=18 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.942+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db hit=0 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.961+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=11 miss=0 switches=0 ooe=0
-2013-11-29 13:50:51.982+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore hit=0 miss=18 switches=0 ooe=0
-2013-11-29 13:50:51.991+0000 INFO  [o.n.k.i.n.x.NeoStoreXaDataSource]: NeoStore closed
-2013-11-29 13:50:51.991+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STOPPING diagnostics START ---
-2013-11-29 13:50:51.991+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STOPPING diagnostics END ---
+2013-12-01 23:46:49.798+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.arrays.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.798+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.nodestore.db: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.nodestore.db.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.keys: 2013-12-02T01:46:49+0200 - 38.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshipstore.db: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   index:
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene-store.db: 2013-12-02T01:46:49+0200 - 40.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene.log.1: 2013-12-02T01:46:49+0200 - 16.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:     lucene.log.active: 2013-12-02T01:46:49+0200 - 4.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   - Total: 2013-12-02T01:46:49+0200 - 60.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.arrays: 2013-12-02T01:46:49+0200 - 128.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   active_tx_log: 2013-12-02T01:46:49+0200 - 11.00 B
+2013-12-01 23:46:49.799+0000 INFO  [o.n.k.i.DiagnosticsManager]:   messages.log: 2013-12-02T01:46:49+0200 - 59.36 kB
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   nioneo_logical.log.active: 2013-12-02T01:46:49+0200 - 4.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore: 2013-12-02T01:46:49+0200 - 54.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.strings: 2013-12-02T01:46:49+0200 - 128.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   lock: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.index.keys.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.800+0000 INFO  [o.n.k.i.DiagnosticsManager]:   tm_tx_log.1: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.names.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   nioneo_logical.log.1: 2013-12-02T01:46:49+0200 - 16.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.propertystore.db.strings.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshipstore.db.id: 2013-12-02T01:46:49+0200 - 9.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   store_lock: 2013-12-02T01:46:49+0200 - 0.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]:   neostore.relationshiptypestore.db.names: 2013-12-02T01:46:49+0200 - 38.00 B
+2013-12-01 23:46:49.801+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STARTED diagnostics for KernelDiagnostics:StoreFiles END ---
+2013-12-01 23:46:49.802+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: Started - database is now available
+2013-12-01 23:46:49.804+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: GC Monitor started. 
+2013-12-01 23:46:49.961+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: Stopping - database is now unavailable
+2013-12-01 23:46:49.962+0000 INFO  [o.n.k.EmbeddedGraphDatabase]: GC Monitor stopped. 
+2013-12-01 23:46:50.098+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Closed log /home/antonkulaga/denigma/denigma-kms/db/test/index/lucene.log
+2013-12-01 23:46:50.114+0000 INFO  [o.n.k.i.t.TxManager]: TM shutting down
+2013-12-01 23:46:50.164+0000 INFO  [o.n.k.i.t.x.XaLogicalLog]: Closed log /home/antonkulaga/denigma/denigma-kms/db/test/nioneo_logical.log
+2013-12-01 23:46:50.171+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db.names hit=0 miss=1 switches=0 ooe=0
+2013-12-01 23:46:50.180+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshiptypestore.db hit=0 miss=1 switches=0 ooe=0
+2013-12-01 23:46:50.190+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.strings hit=1 miss=0 switches=0 ooe=0
+2013-12-01 23:46:50.213+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index.keys hit=0 miss=12 switches=0 ooe=0
+2013-12-01 23:46:50.223+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.index hit=0 miss=12 switches=0 ooe=0
+2013-12-01 23:46:50.232+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db.arrays hit=0 miss=0 switches=0 ooe=0
+2013-12-01 23:46:50.241+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.propertystore.db hit=19 miss=0 switches=0 ooe=0
+2013-12-01 23:46:50.261+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.relationshipstore.db hit=5 miss=0 switches=0 ooe=0
+2013-12-01 23:46:50.276+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore.nodestore.db hit=6 miss=0 switches=0 ooe=0
+2013-12-01 23:46:50.285+0000 INFO  [o.n.k.i.n.s.StoreFactory]: /home/antonkulaga/denigma/denigma-kms/db/test/neostore hit=0 miss=19 switches=0 ooe=0
+2013-12-01 23:46:50.295+0000 INFO  [o.n.k.i.n.x.NeoStoreXaDataSource]: NeoStore closed
+2013-12-01 23:46:50.295+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STOPPING diagnostics START ---
+2013-12-01 23:46:50.295+0000 INFO  [o.n.k.i.DiagnosticsManager]: --- STOPPING diagnostics END ---

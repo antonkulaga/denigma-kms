@@ -42,5 +42,10 @@ case class DateTimeOf(propertyName:String, after:DateTime = null, before:DateTim
     v
   }
 
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:DateTime=>this.validate(v)
+    case _=>false
+  }
+
 
 }

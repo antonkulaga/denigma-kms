@@ -39,4 +39,9 @@ case class StringOf(propertyName:String,regExp:String="") extends Property(prope
     v.setProperty(CONSTRAINT,StringOf.constraint)
     v
   }
+
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:String=>this.validate(v)
+    case _=>false
+  }
 }

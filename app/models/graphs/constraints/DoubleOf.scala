@@ -31,4 +31,9 @@ case class DoubleOf(propertyName:String,min:Double= Double.MinValue, max:Double 
     v.setProperty(CONSTRAINT,DoubleOf.constraint)
     v
   }
+
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:Double=>this.validate(v)
+    case _=>false
+  }
 }

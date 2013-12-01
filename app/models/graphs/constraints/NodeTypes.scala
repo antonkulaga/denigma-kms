@@ -7,6 +7,7 @@ import play.Logger
 import scala.collection.JavaConversions._
 import SG._
 import models.graphs.constraints.StringOf
+import scala.collection.IterableView
 
 
 class LinkType(name:String) extends NodeType(name)
@@ -19,7 +20,6 @@ class NodeType(val name:String)
 {
   val should = new Schema()
   val must = new Schema()
-
 }
 
 object NodeType {
@@ -40,8 +40,10 @@ object NodeType {
 }
 
 class Schema extends Properties with Links {
-  def parse(v:Vertex, label:String) = {
-    v.getVertices(Direction.OUT, label).view.foreach(this.parseProp)
+
+  def parse(v:Vertex, label:String): IterableView[Option[Property], Iterable[_]] =
+  {
+    v.getVertices(Direction.OUT, label).view.map(this.parseProp)
   }
 
   def write(v:Vertex) = this.writeLinks(this.writeProperties(v))

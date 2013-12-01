@@ -28,4 +28,9 @@ case class BooleanOf(propertyName:String,default:Boolean=false) extends Property
     v
   }
 
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:Boolean=>this.validate(v)
+    case _=>false
+  }
+
 }

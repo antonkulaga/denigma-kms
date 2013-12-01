@@ -3,6 +3,7 @@ package models.graphs.constraints
 import com.tinkerpop.blueprints.Vertex
 import models.graphs.{SG, SemanticGraph}
 import collection.JavaConversions._
+import org.denigma.macroses.ModelLike
 
 trait Properties extends PropertyCollector
 {
@@ -38,6 +39,14 @@ trait Properties extends PropertyCollector
 
   }
   v
+  }
+
+  //def missing[T<: ModelLike](model:T): Set[String] = this.items.keySet.diff(model.toMap[T].keySet)
+
+  def validate(mp:Map[String,Any]):Map[String,Option[Boolean]] =  items.foldLeft(Map.empty[String,Option[Boolean]]){
+    case (acc: Map[String, Option[Boolean]],(key: String,prop: Property))=>
+      acc + (key->mp.get(key).map(v=>
+        prop.checkValidity(v)))
   }
 
 }

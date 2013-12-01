@@ -19,8 +19,9 @@ object HashOf extends PropertyParser[HashOf]
   }
 }
 
-case class HashOf(propertyName:String) extends Property(propertyName) //with PropertyWriter
+case class HashOf(propertyName:String) extends Property(propertyName) with Validator[String]
 {
+
 
   def checkPassword(pass:String,hash:String) = pass.isBcrypted(hash)
   def makeHash(pass:String, salt:String): String = pass.bcrypt(salt)
@@ -31,5 +32,12 @@ case class HashOf(propertyName:String) extends Property(propertyName) //with Pro
     v.setProperty(NAME,name)
     v.setProperty(CONSTRAINT,HashOf.constraint)
     v
+  }
+
+  def validate(value: String): Boolean =  true
+
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:String=>this.validate(v)
+    case _=>false
   }
 }

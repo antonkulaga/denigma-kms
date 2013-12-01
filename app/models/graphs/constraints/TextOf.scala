@@ -32,4 +32,9 @@ case class TextOf(propertyName:String,len:Int = TextOf.defMax) extends Property(
     v.setProperty(CONSTRAINT,TextOf.constraint)
     v
   }
+
+  def checkValidity(value: Any): Boolean  = value match {
+    case v:String=>this.validate(v)
+    case _=>false
+  }
 }
