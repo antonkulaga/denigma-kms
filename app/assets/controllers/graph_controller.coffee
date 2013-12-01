@@ -60,7 +60,30 @@ class Denigma.GraphController extends Batman.Controller
     #Mercury.hide()
 
 
+  @accessor 'v',
+    get: -> if @_v? then @_v else "testRoot"
+    set: (_, value) -> @_v = value
+    unset: -> delete @_v
 
+  @accessor 'inE', ->
+    id = "testRoot"
+    unless @il then Denigma.Edge.loadWithOptions({url:"incoming/#{id}"})
+    #fun = (f)->f.get("outgoing").some((v)->v.id==id)
+    fun = (f)->true
+    @il = true
+    Denigma.Edge.get('loaded')
+
+  ol:false
+  il:false
+
+  @accessor 'outE', ->
+    id = "testRoot"
+    unless @ol then Denigma.Edge.loadWithOptions({url:"outgoing/#{id}"})
+    @ol = true
+    #fun = (f)->f.get("outgoing").some((v)->v.id==id)
+    fun = (f)->true
+
+    Denigma.Edge.get('some')
 
   add: ->
     props =

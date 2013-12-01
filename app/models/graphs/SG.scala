@@ -9,8 +9,8 @@ import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 import scala.collection.JavaConversions._
 import play.Logger
 import java.lang
-import models.graphs.constraints.NodeType
 import com.orientechnologies.orient.core.hook.ORecordHook.TYPE
+import models.graphs.constraints.NodeType
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 

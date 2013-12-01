@@ -1,8 +1,9 @@
 package models.graphs.constraints
 
 import com.github.nscala_time.time.Imports._
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.{Element, Vertex}
 import models.graphs.SemanticGraph
+import models.graphs.SG._
 
 object DateTimeOf extends PropertyParser[DateTimeOf]
 {
@@ -30,6 +31,15 @@ case class DateTimeOf(propertyName:String, after:DateTime = null, before:DateTim
     case (null, aft)=> dt>=aft
     case (bef,null) => dt<=bef
     case (bef,aft) =>   dt>=aft && dt<=bef
+  }
+
+  def write(v: Element): Element = {
+
+    v.setProperty(NAME,name)
+    if(before!=null) v.setProperty(DateTimeOf.BEFORE,before)
+    if(after!=null)v.setProperty(DateTimeOf.AFTER,after)
+    v.setProperty(CONSTRAINT,DateTimeOf.constraint)
+    v
   }
 
 

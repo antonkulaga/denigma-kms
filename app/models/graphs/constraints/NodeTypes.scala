@@ -6,6 +6,7 @@ import com.tinkerpop.blueprints.Direction
 import play.Logger
 import scala.collection.JavaConversions._
 import SG._
+import models.graphs.constraints.StringOf
 
 
 class LinkType(name:String) extends NodeType(name)
@@ -18,12 +19,6 @@ class NodeType(val name:String)
 {
   val should = new Schema()
   val must = new Schema()
-
-//  def write(v:Vertex) = {
-//
-//    this.must.items.foreach(p=>
-//    p.write(v))
-//  }
 
 }
 
@@ -49,6 +44,8 @@ class Schema extends Properties with Links {
     v.getVertices(Direction.OUT, label).view.foreach(this.parseProp)
   }
 
+  def write(v:Vertex) = this.writeLinks(this.writeProperties(v))
+
 
   def parseProp(v:Vertex): Option[Property] = v.getProperty[String](CONSTRAINT) match
   {
@@ -63,6 +60,8 @@ class Schema extends Properties with Links {
 
 
   }
+
+
 
 
 

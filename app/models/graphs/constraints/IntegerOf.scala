@@ -1,6 +1,6 @@
 package models.graphs.constraints
 
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.{Element, Vertex}
 import models.graphs.SG._
 
 
@@ -18,18 +18,19 @@ object IntegerOf extends PropertyParser[IntegerOf]
   }
 }
 
-case class IntegerOf(propertyName:String,min:Int, max:Int) extends Property(propertyName)  with Validator[Int]  //with PropertyWriter
+case class IntegerOf(propertyName:String,min:Int=Int.MinValue, max:Int=Int.MaxValue) extends Property(propertyName)  with Validator[Int]  //with PropertyWriter
 {
   def validate(value:Int) = value>min && value < max
 
-  //def makeHashSalt(pass:String):(String,String) =  bcrypt.generateSalt match {case salt=>(makeHash(pass,bcrypt.generateSalt),salt) }
-  def write(v: Vertex): Vertex = {
+
+
+  def write(v: Element): Element = {
 
     v.setProperty(NAME,name)
-    v.setProperty(CONSTRAINT,constraint)
+    v.setProperty(IntegerOf.MAX,max)
+    v.setProperty(IntegerOf.MIN,min)
+    v.setProperty(CONSTRAINT,IntegerOf.constraint)
     v
   }
-
-  val constraint: String = "HASH"
 }
 

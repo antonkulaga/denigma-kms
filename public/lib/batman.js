@@ -433,6 +433,7 @@
     "<": "&lt;",
     ">": "&gt;",
     "\"": "&#34;",
+    "/": "&#47;",
     "'": "&#39;"
   };
 
@@ -636,7 +637,7 @@
 
   humanize_rx1 = /_id$/;
 
-  humanize_rx2 = /_|-/g;
+  humanize_rx2 = /_|-|\./g;
 
   humanize_rx3 = /^\w/g;
 
@@ -1690,7 +1691,24 @@
       return obj;
     };
 
-    SimpleHash.prototype.toJSON = SimpleHash.prototype.toObject;
+    SimpleHash.prototype.toJSON = function() {
+      var key, obj, objectKey, value, values, _ref, _ref1, _ref2;
+      obj = {};
+      _ref = this._storage;
+      for (key in _ref) {
+        value = _ref[key];
+        obj[this.unprefixedKey(key)] = (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+      }
+      if (this._objectStorage) {
+        _ref1 = this._objectStorage;
+        for (key in _ref1) {
+          values = _ref1[key];
+          _ref2 = values[0], objectKey = _ref2[0], value = _ref2[1];
+          obj[key] = (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+        }
+      }
+      return obj;
+    };
 
     return SimpleHash;
 
@@ -2243,7 +2261,9 @@
 
     Property.prototype.sourceChangeHandler = function() {
       var _this = this;
-      this._sourceChangeHandler || (this._sourceChangeHandler = this._handleSourceChange.bind(this));
+      this._sourceChangeHandler || (this._sourceChangeHandler = function() {
+        return _this._handleSourceChange();
+      });
       Batman.developer["do"](function() {
         return _this._sourceChangeHandler.property = _this;
       });
@@ -3451,7 +3471,7 @@
         });
       } else {
         return Batman.t('errors.format', {
-          attribute: Batman.helpers.humanize(this.attribute),
+          attribute: Batman.helpers.humanize(Batman.ValidationError.singularizeAssociated(this.attribute)),
           message: this.message
         });
       }
@@ -3463,6 +3483,15 @@
         message: message
       });
     }
+
+    ValidationError.singularizeAssociated = function(attribute) {
+      var i, parts, _i, _ref;
+      parts = attribute.split(".");
+      for (i = _i = 0, _ref = parts.length - 1; _i < _ref; i = _i += 1) {
+        parts[i] = Batman.helpers.singularize(parts[i]);
+      }
+      return parts.join(" ");
+    };
 
     return ValidationError;
 
@@ -4851,9 +4880,13 @@
 
     function ControllerActionRoute(templatePath, options) {
       this.callback = __bind(this.callback, this);
-      var action, controller, _ref;
+      var action, controller, _ref, _ref1;
       if (options.signature) {
-        _ref = options.signature.split('#'), controller = _ref[0], action = _ref[1];
+        if (Batman.typeOf(options.signature) === 'String') {
+          _ref = options.signature.split('#'), controller = _ref[0], action = _ref[1];
+        } else {
+          _ref1 = options.signature, controller = _ref1.controller, action = _ref1.action;
+        }
         action || (action = 'index');
         options.controller = controller;
         options.action = action;
@@ -5106,420 +5139,6 @@
   var __hasProp = {}.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-  Batman.RenderCache = (function(_super) {
-    __extends(RenderCache, _super);
-
-    RenderCache.prototype.maximumLength = 4;
-
-    function RenderCache() {
-      RenderCache.__super__.constructor.apply(this, arguments);
-      this.keyQueue = [];
-    }
-
-    RenderCache.prototype.viewForOptions = function(options) {
-      var _this = this;
-      if (Batman.config.cacheViews || options.cache || options.viewClass.prototype.cache) {
-        return this.getOrSet(options, function() {
-          return _this._newViewFromOptions(Batman.extend({}, options));
-        });
-      } else {
-        return this._newViewFromOptions(options);
-      }
-    };
-
-    RenderCache.prototype._newViewFromOptions = function(options) {
-      return new options.viewClass(options);
-    };
-
-    RenderCache.wrapAccessor(function(core) {
-      return {
-        cache: false,
-        get: function(key) {
-          var result;
-          result = core.get.call(this, key);
-          if (result) {
-            this._addOrBubbleKey(key);
-          }
-          return result;
-        },
-        set: function(key, value) {
-          var result;
-          result = core.set.apply(this, arguments);
-          result.set('cached', true);
-          this._addOrBubbleKey(key);
-          this._evictExpiredKeys();
-          return result;
-        },
-        unset: function(key) {
-          var result;
-          result = core.unset.apply(this, arguments);
-          result.set('cached', false);
-          this._removeKeyFromQueue(key);
-          return result;
-        }
-      };
-    });
-
-    RenderCache.prototype.equality = function(incomingOptions, storageOptions) {
-      var key;
-      if (Object.keys(incomingOptions).length !== Object.keys(storageOptions).length) {
-        return false;
-      }
-      for (key in incomingOptions) {
-        if (!(key === 'view')) {
-          if (incomingOptions[key] !== storageOptions[key]) {
-            return false;
-          }
-        }
-      }
-      return true;
-    };
-
-    RenderCache.prototype.reset = function() {
-      var key, _i, _len, _ref;
-      _ref = this.keyQueue.slice(0);
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        key = _ref[_i];
-        this.unset(key);
-      }
-    };
-
-    RenderCache.prototype._addOrBubbleKey = function(key) {
-      this._removeKeyFromQueue(key);
-      return this.keyQueue.unshift(key);
-    };
-
-    RenderCache.prototype._removeKeyFromQueue = function(key) {
-      var index, queuedKey, _i, _len, _ref;
-      _ref = this.keyQueue;
-      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
-        queuedKey = _ref[index];
-        if (this.equality(queuedKey, key)) {
-          this.keyQueue.splice(index, 1);
-          break;
-        }
-      }
-      return key;
-    };
-
-    RenderCache.prototype._evictExpiredKeys = function() {
-      var currentKeys, i, key, _i, _ref, _ref1;
-      if (this.length > this.maximumLength) {
-        currentKeys = this.keyQueue.slice(0);
-        for (i = _i = _ref = this.maximumLength, _ref1 = currentKeys.length; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; i = _ref <= _ref1 ? ++_i : --_i) {
-          key = currentKeys[i];
-          if (!this.get(key).isInDOM()) {
-            this.unset(key);
-          }
-        }
-      }
-    };
-
-    return RenderCache;
-
-  })(Batman.Hash);
-
-}).call(this);
-
-(function() {
-  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
-    __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
-    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
-    __slice = [].slice;
-
-  Batman.Controller = (function(_super) {
-    __extends(Controller, _super);
-
-    Controller.singleton('sharedController');
-
-    Controller.wrapAccessor('routingKey', function(core) {
-      return {
-        get: function() {
-          if (this.routingKey != null) {
-            return this.routingKey;
-          } else {
-            if (Batman.config.minificationErrors) {
-              Batman.developer.error("Please define `routingKey` on the prototype of " + (Batman.functionName(this.constructor)) + " in order for your controller to be minification safe.");
-            }
-            return Batman.functionName(this.constructor).replace(/Controller$/, '');
-          }
-        }
-      };
-    });
-
-    Controller.classMixin(Batman.LifecycleEvents);
-
-    Controller.lifecycleEvent('action', function(options) {
-      var except, normalized, only;
-      if (options == null) {
-        options = {};
-      }
-      normalized = {};
-      only = Batman.typeOf(options.only) === 'String' ? [options.only] : options.only;
-      except = Batman.typeOf(options.except) === 'String' ? [options.except] : options.except;
-      normalized["if"] = function(params, frame) {
-        var _ref, _ref1;
-        if (this._afterFilterRedirect) {
-          return false;
-        }
-        if (only && (_ref = frame.action, __indexOf.call(only, _ref) < 0)) {
-          return false;
-        }
-        if (except && (_ref1 = frame.action, __indexOf.call(except, _ref1) >= 0)) {
-          return false;
-        }
-        return true;
-      };
-      return normalized;
-    });
-
-    Controller.beforeFilter = function() {
-      Batman.developer.deprecated("Batman.Controller::beforeFilter", "Please use beforeAction instead.");
-      return this.beforeAction.apply(this, arguments);
-    };
-
-    Controller.afterFilter = function() {
-      Batman.developer.deprecated("Batman.Controller::afterFilter", "Please use afterAction instead.");
-      return this.afterAction.apply(this, arguments);
-    };
-
-    Controller.afterAction(function(params) {
-      if (this.autoScrollToHash && (params['#'] != null)) {
-        return this.scrollToHash(params['#']);
-      }
-    });
-
-    Controller.catchError = function() {
-      var currentHandlers, error, errors, handlers, options, _base, _i, _j, _len, _results;
-      errors = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), options = arguments[_i++];
-      Batman.initializeObject(this);
-      (_base = this._batman).errorHandlers || (_base.errorHandlers = new Batman.SimpleHash);
-      handlers = Batman.typeOf(options["with"]) === 'Array' ? options["with"] : [options["with"]];
-      _results = [];
-      for (_j = 0, _len = errors.length; _j < _len; _j++) {
-        error = errors[_j];
-        currentHandlers = this._batman.errorHandlers.get(error) || [];
-        _results.push(this._batman.errorHandlers.set(error, currentHandlers.concat(handlers)));
-      }
-      return _results;
-    };
-
-    Controller.prototype.errorHandler = function(callback) {
-      var errorFrame, _ref,
-        _this = this;
-      errorFrame = (_ref = this._actionFrames) != null ? _ref[this._actionFrames.length - 1] : void 0;
-      return function(err, result, env) {
-        if (err) {
-          if (errorFrame != null ? errorFrame.error : void 0) {
-            return;
-          }
-          if (errorFrame != null) {
-            errorFrame.error = err;
-          }
-          if (!_this.handleError(err)) {
-            throw err;
-          }
-        } else {
-          return typeof callback === "function" ? callback(result, env) : void 0;
-        }
-      };
-    };
-
-    Controller.prototype.handleError = function(error) {
-      var handled, _ref,
-        _this = this;
-      handled = false;
-      if ((_ref = this.constructor._batman.getAll('errorHandlers')) != null) {
-        _ref.forEach(function(hash) {
-          return hash.forEach(function(key, value) {
-            var handler, _i, _len, _results;
-            if (error instanceof key) {
-              handled = true;
-              _results = [];
-              for (_i = 0, _len = value.length; _i < _len; _i++) {
-                handler = value[_i];
-                _results.push(handler.call(_this, error));
-              }
-              return _results;
-            }
-          });
-        });
-      }
-      return handled;
-    };
-
-    function Controller() {
-      this.redirect = __bind(this.redirect, this);
-      this.handleError = __bind(this.handleError, this);
-      this.errorHandler = __bind(this.errorHandler, this);
-      Controller.__super__.constructor.apply(this, arguments);
-      this._resetActionFrames();
-    }
-
-    Controller.prototype.renderCache = new Batman.RenderCache;
-
-    Controller.prototype.defaultRenderYield = 'main';
-
-    Controller.prototype.autoScrollToHash = true;
-
-    Controller.prototype.dispatch = function(action, params) {
-      var redirectTo;
-      if (params == null) {
-        params = {};
-      }
-      params.controller || (params.controller = this.get('routingKey'));
-      params.action || (params.action = action);
-      params.target || (params.target = this);
-      this._resetActionFrames();
-      this.set('action', action);
-      this.set('params', params);
-      this.executeAction(action, params);
-      redirectTo = this._afterFilterRedirect;
-      this._afterFilterRedirect = null;
-      delete this._afterFilterRedirect;
-      if (redirectTo) {
-        return Batman.redirect(redirectTo);
-      }
-    };
-
-    Controller.prototype.executeAction = function(action, params) {
-      var frame, oldRedirect, parentFrame, result, _ref, _ref1,
-        _this = this;
-      if (params == null) {
-        params = this.get('params');
-      }
-      Batman.developer.assert(this[action], "Error! Controller action " + (this.get('routingKey')) + "." + action + " couldn't be found!");
-      parentFrame = this._actionFrames[this._actionFrames.length - 1];
-      frame = new Batman.ControllerActionFrame({
-        parentFrame: parentFrame,
-        action: action,
-        params: params
-      }, function() {
-        var _ref;
-        if (!_this._afterFilterRedirect) {
-          _this.fireLifecycleEvent('afterAction', frame.params, frame);
-        }
-        _this._resetActionFrames();
-        return (_ref = Batman.navigator) != null ? _ref.redirect = oldRedirect : void 0;
-      });
-      this._actionFrames.push(frame);
-      frame.startOperation({
-        internal: true
-      });
-      oldRedirect = (_ref = Batman.navigator) != null ? _ref.redirect : void 0;
-      if ((_ref1 = Batman.navigator) != null) {
-        _ref1.redirect = this.redirect;
-      }
-      if (this.fireLifecycleEvent('beforeAction', frame.params, frame) !== false) {
-        if (!this._afterFilterRedirect) {
-          result = this[action](params);
-        }
-        if (!frame.operationOccurred) {
-          this.render();
-        }
-      }
-      frame.finishOperation();
-      return result;
-    };
-
-    Controller.prototype.redirect = function(url) {
-      var frame;
-      frame = this._actionFrames[this._actionFrames.length - 1];
-      if (frame) {
-        if (frame.operationOccurred) {
-          Batman.developer.warn("Warning! Trying to redirect but an action has already been taken during " + (this.get('routingKey')) + "." + (frame.action || this.get('action')));
-          return;
-        }
-        frame.startAndFinishOperation();
-        if (this._afterFilterRedirect != null) {
-          return Batman.developer.warn("Warning! Multiple actions trying to redirect!");
-        } else {
-          return this._afterFilterRedirect = url;
-        }
-      } else {
-        if (Batman.typeOf(url) === 'Object') {
-          if (!url.controller) {
-            url.controller = this;
-          }
-        }
-        return Batman.redirect(url);
-      }
-    };
-
-    Controller.prototype.render = function(options) {
-      var action, frame, view, yieldContentView, yieldName, _ref, _ref1, _ref2, _ref3;
-      if (options == null) {
-        options = {};
-      }
-      if (frame = (_ref = this._actionFrames) != null ? _ref[this._actionFrames.length - 1] : void 0) {
-        frame.startOperation();
-      }
-      if (options === false) {
-        frame.finishOperation();
-        return;
-      }
-      action = (frame != null ? frame.action : void 0) || this.get('action');
-      if (view = options.view) {
-        options.view = null;
-      } else {
-        options.viewClass || (options.viewClass = this._viewClassForAction(action));
-        options.source || (options.source = Batman.helpers.underscore(this.get('routingKey') + '/' + action));
-        view = this.renderCache.viewForOptions(options);
-      }
-      if (view) {
-        view.once('viewDidAppear', function() {
-          return frame != null ? frame.finishOperation() : void 0;
-        });
-        yieldName = options.into || this.defaultRenderYield;
-        if (yieldContentView = Batman.DOM.Yield.withName(yieldName).contentView) {
-          if (yieldContentView !== view && !yieldContentView.isDead) {
-            yieldContentView.die();
-          }
-        }
-        if (!view.contentFor && !view.parentNode) {
-          view.set('contentFor', yieldName);
-        }
-        view.set('controller', this);
-        if ((_ref1 = Batman.currentApp) != null) {
-          if ((_ref2 = _ref1.layout) != null) {
-            if ((_ref3 = _ref2.subviews) != null) {
-              _ref3.add(view);
-            }
-          }
-        }
-        this.set('currentView', view);
-      }
-      return view;
-    };
-
-    Controller.prototype.scrollToHash = function(hash) {
-      if (hash == null) {
-        hash = this.get('params')['#'];
-      }
-      return Batman.DOM.scrollIntoView(hash);
-    };
-
-    Controller.prototype._resetActionFrames = function() {
-      return this._actionFrames = [];
-    };
-
-    Controller.prototype._viewClassForAction = function(action) {
-      var classPrefix, _ref;
-      classPrefix = this.get('routingKey').replace('/', '_');
-      return ((_ref = Batman.currentApp) != null ? _ref[Batman.helpers.camelize("" + classPrefix + "_" + action + "_view")] : void 0) || Batman.View;
-    };
-
-    return Controller;
-
-  })(Batman.Object);
-
-}).call(this);
-
-(function() {
-  var __hasProp = {}.hasOwnProperty,
-    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
-
   Batman.Set = (function(_super) {
     var k, _fn, _i, _j, _len, _len1, _ref, _ref1,
       _this = this;
@@ -5604,7 +5223,11 @@
       _fn(k);
     }
 
-    Set.prototype.toJSON = Set.prototype.toArray;
+    Set.prototype.toJSON = function() {
+      return this.map(function(value) {
+        return (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+      });
+    };
 
     Set.prototype.add = Set.mutation(function() {
       var addedItems;
@@ -7191,11 +6814,8 @@
         loadOptions.urlContext = this.model;
       }
       return this.association.getRelatedModel().loadWithOptions(loadOptions, function(error, loadedRecords) {
-        if (error) {
-          throw error;
-        }
         if (!loadedRecords || loadedRecords.length <= 0) {
-          return callback(new Error("Couldn't find related record!"), void 0);
+          return callback(error || new Error("Couldn't find related record!"), void 0);
         } else {
           return callback(void 0, loadedRecords[0]);
         }
@@ -7230,18 +6850,12 @@
     };
 
     BelongsToProxy.prototype.fetchFromRemote = function(callback) {
-      var loadOptions,
-        _this = this;
+      var loadOptions;
       loadOptions = {};
       if (this.association.options.url) {
         loadOptions.recordUrl = this.association.options.url;
       }
-      return this.association.getRelatedModel().findWithOptions(this.get('foreignValue'), loadOptions, function(error, loadedRecord) {
-        if (error) {
-          throw error;
-        }
-        return callback(void 0, loadedRecord);
-      });
+      return this.association.getRelatedModel().findWithOptions(this.get('foreignValue'), loadOptions, callback);
     };
 
     return BelongsToProxy;
@@ -7272,18 +6886,12 @@
     };
 
     PolymorphicBelongsToProxy.prototype.fetchFromRemote = function(callback) {
-      var loadOptions,
-        _this = this;
+      var loadOptions;
       loadOptions = {};
       if (this.association.options.url) {
         loadOptions.recordUrl = this.association.options.url;
       }
-      return this.association.getRelatedModelForType(this.get('foreignTypeValue')).findWithOptions(this.get('foreignValue'), loadOptions, function(error, loadedRecord) {
-        if (error) {
-          throw error;
-        }
-        return callback(void 0, loadedRecord);
-      });
+      return this.association.getRelatedModelForType(this.get('foreignTypeValue')).findWithOptions(this.get('foreignValue'), loadOptions, callback);
     };
 
     return PolymorphicBelongsToProxy;
@@ -7668,6 +7276,173 @@
   })(Batman.Object);
 
 }).call(this);
+
+// Generated by CoffeeScript 1.6.3
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Batman.Set = (function(_super) {
+    var k, _fn, _i, _j, _len, _len1, _ref, _ref1,
+      _this = this;
+
+    __extends(Set, _super);
+
+    Set.prototype.isCollectionEventEmitter = true;
+
+    function Set() {
+      Batman.SimpleSet.apply(this, arguments);
+    }
+
+    Batman.extend(Set.prototype, Batman.Enumerable);
+
+    Set._applySetAccessors = function(klass) {
+      var accessor, accessors, key;
+      accessors = {
+        first: function() {
+          return this.toArray()[0];
+        },
+        last: function() {
+          return this.toArray()[this.length - 1];
+        },
+        isEmpty: function() {
+          return this.isEmpty();
+        },
+        toArray: function() {
+          return this.toArray();
+        },
+        length: function() {
+          this.registerAsMutableSource();
+          return this.length;
+        },
+        indexedBy: function() {
+          var _this = this;
+          return new Batman.TerminalAccessible(function(key) {
+            return _this.indexedBy(key);
+          });
+        },
+        indexedByUnique: function() {
+          var _this = this;
+          return new Batman.TerminalAccessible(function(key) {
+            return _this.indexedByUnique(key);
+          });
+        },
+        sortedBy: function() {
+          var _this = this;
+          return new Batman.TerminalAccessible(function(key) {
+            return _this.sortedBy(key);
+          });
+        },
+        sortedByDescending: function() {
+          var _this = this;
+          return new Batman.TerminalAccessible(function(key) {
+            return _this.sortedBy(key, 'desc');
+          });
+        }
+      };
+      for (key in accessors) {
+        accessor = accessors[key];
+        klass.accessor(key, accessor);
+      }
+    };
+
+    Set._applySetAccessors(Set);
+
+    _ref = ['indexedBy', 'indexedByUnique', 'sortedBy', 'equality', '_indexOfItem'];
+    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+      k = _ref[_i];
+      Set.prototype[k] = Batman.SimpleSet.prototype[k];
+    }
+
+    _ref1 = ['at', 'find', 'merge', 'forEach', 'toArray', 'isEmpty', 'has'];
+    _fn = function(k) {
+      return Set.prototype[k] = function() {
+        this.registerAsMutableSource();
+        return Batman.SimpleSet.prototype[k].apply(this, arguments);
+      };
+    };
+    for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
+      k = _ref1[_j];
+      _fn(k);
+    }
+
+    Set.prototype.toJSON = function() {
+      return this.map(function(value) {
+        return (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+      });
+    };
+
+    Set.prototype.add = Set.mutation(function() {
+      var addedItems;
+      addedItems = Batman.SimpleSet.prototype.add.apply(this, arguments);
+      if (addedItems.length) {
+        this.fire('itemsWereAdded', addedItems);
+      }
+      return addedItems;
+    });
+
+    Set.prototype.insert = function() {
+      return this.insertWithIndexes.apply(this, arguments).addedItems;
+    };
+
+    Set.prototype.insertWithIndexes = Set.mutation(function() {
+      var addedIndexes, addedItems, _ref2;
+      _ref2 = Batman.SimpleSet.prototype.insertWithIndexes.apply(this, arguments), addedItems = _ref2.addedItems, addedIndexes = _ref2.addedIndexes;
+      if (addedItems.length) {
+        this.fire('itemsWereAdded', addedItems, addedIndexes);
+      }
+      return {
+        addedItems: addedItems,
+        addedIndexes: addedIndexes
+      };
+    });
+
+    Set.prototype.remove = function() {
+      return this.removeWithIndexes.apply(this, arguments).removedItems;
+    };
+
+    Set.prototype.removeWithIndexes = Set.mutation(function() {
+      var removedIndexes, removedItems, _ref2;
+      _ref2 = Batman.SimpleSet.prototype.removeWithIndexes.apply(this, arguments), removedItems = _ref2.removedItems, removedIndexes = _ref2.removedIndexes;
+      if (removedItems.length) {
+        this.fire('itemsWereRemoved', removedItems, removedIndexes);
+      }
+      return {
+        removedItems: removedItems,
+        removedIndexes: removedIndexes
+      };
+    });
+
+    Set.prototype.clear = Set.mutation(function() {
+      var removedItems;
+      removedItems = Batman.SimpleSet.prototype.clear.call(this);
+      if (removedItems.length) {
+        this.fire('itemsWereRemoved', removedItems);
+      }
+      return removedItems;
+    });
+
+    Set.prototype.replace = Set.mutation(function(other) {
+      var addedItems, removedItems;
+      removedItems = Batman.SimpleSet.prototype.clear.call(this);
+      addedItems = Batman.SimpleSet.prototype.add.apply(this, other.toArray());
+      if (removedItems.length) {
+        this.fire('itemsWereRemoved', removedItems);
+      }
+      if (addedItems.length) {
+        return this.fire('itemsWereAdded', addedItems);
+      }
+    });
+
+    return Set;
+
+  }).call(this, Batman.Object);
+
+}).call(this);
+
+/*
+//@ sourceMappingURL=set.map
+*/
 
 (function() {
   var __hasProp = {}.hasOwnProperty,
@@ -8466,6 +8241,745 @@
 
 }).call(this);
 
+// Generated by CoffeeScript 1.6.3
+(function() {
+  var _objectToString,
+    __slice = [].slice;
+
+  _objectToString = Object.prototype.toString;
+
+  Batman.SimpleHash = (function() {
+    function SimpleHash(obj) {
+      this._storage = {};
+      this.length = 0;
+      if (obj != null) {
+        this.update(obj);
+      }
+    }
+
+    Batman.extend(SimpleHash.prototype, Batman.Enumerable);
+
+    SimpleHash.prototype.hasKey = function(key) {
+      var pair, pairs, _i, _len;
+      if (this.objectKey(key)) {
+        if (!this._objectStorage) {
+          return false;
+        }
+        if (pairs = this._objectStorage[this.hashKeyFor(key)]) {
+          for (_i = 0, _len = pairs.length; _i < _len; _i++) {
+            pair = pairs[_i];
+            if (this.equality(pair[0], key)) {
+              return true;
+            }
+          }
+        }
+        return false;
+      } else {
+        key = this.prefixedKey(key);
+        return this._storage.hasOwnProperty(key);
+      }
+    };
+
+    SimpleHash.prototype.getObject = function(key) {
+      var pair, pairs, _i, _len;
+      if (!this._objectStorage) {
+        return;
+      }
+      if (pairs = this._objectStorage[this.hashKeyFor(key)]) {
+        for (_i = 0, _len = pairs.length; _i < _len; _i++) {
+          pair = pairs[_i];
+          if (this.equality(pair[0], key)) {
+            return pair[1];
+          }
+        }
+      }
+    };
+
+    SimpleHash.prototype.getString = function(key) {
+      return this._storage["_" + key];
+    };
+
+    SimpleHash.prototype.setObject = function(key, val) {
+      var pair, pairs, _base, _i, _len, _name;
+      this._objectStorage || (this._objectStorage = {});
+      pairs = (_base = this._objectStorage)[_name = this.hashKeyFor(key)] || (_base[_name] = []);
+      for (_i = 0, _len = pairs.length; _i < _len; _i++) {
+        pair = pairs[_i];
+        if (this.equality(pair[0], key)) {
+          return pair[1] = val;
+        }
+      }
+      this.length++;
+      pairs.push([key, val]);
+      return val;
+    };
+
+    SimpleHash.prototype.setString = function(key, val) {
+      key = "_" + key;
+      if (this._storage[key] == null) {
+        this.length++;
+      }
+      return this._storage[key] = val;
+    };
+
+    SimpleHash.prototype.get = function(key) {
+      var pair, pairs, _i, _len;
+      if (this.objectKey(key)) {
+        if (!this._objectStorage) {
+          return;
+        }
+        if (pairs = this._objectStorage[this.hashKeyFor(key)]) {
+          for (_i = 0, _len = pairs.length; _i < _len; _i++) {
+            pair = pairs[_i];
+            if (this.equality(pair[0], key)) {
+              return pair[1];
+            }
+          }
+        }
+      } else {
+        return this._storage[this.prefixedKey(key)];
+      }
+    };
+
+    SimpleHash.prototype.set = function(key, val) {
+      var pair, pairs, _base, _i, _len, _name;
+      if (this.objectKey(key)) {
+        this._objectStorage || (this._objectStorage = {});
+        pairs = (_base = this._objectStorage)[_name = this.hashKeyFor(key)] || (_base[_name] = []);
+        for (_i = 0, _len = pairs.length; _i < _len; _i++) {
+          pair = pairs[_i];
+          if (this.equality(pair[0], key)) {
+            return pair[1] = val;
+          }
+        }
+        this.length++;
+        pairs.push([key, val]);
+        return val;
+      } else {
+        key = this.prefixedKey(key);
+        if (this._storage[key] == null) {
+          this.length++;
+        }
+        return this._storage[key] = val;
+      }
+    };
+
+    SimpleHash.prototype.unset = function(key) {
+      var hashKey, index, obj, pair, pairs, val, value, _i, _len, _ref;
+      if (this.objectKey(key)) {
+        if (!this._objectStorage) {
+          return;
+        }
+        hashKey = this.hashKeyFor(key);
+        if (pairs = this._objectStorage[hashKey]) {
+          for (index = _i = 0, _len = pairs.length; _i < _len; index = ++_i) {
+            _ref = pairs[index], obj = _ref[0], value = _ref[1];
+            if (this.equality(obj, key)) {
+              pair = pairs.splice(index, 1);
+              if (!pairs.length) {
+                delete this._objectStorage[hashKey];
+              }
+              this.length--;
+              return pair[0][1];
+            }
+          }
+        }
+      } else {
+        key = this.prefixedKey(key);
+        val = this._storage[key];
+        if (this._storage[key] != null) {
+          this.length--;
+          delete this._storage[key];
+        }
+        return val;
+      }
+    };
+
+    SimpleHash.prototype.getOrSet = function(key, valueFunction) {
+      var currentValue;
+      currentValue = this.get(key);
+      if (!currentValue) {
+        currentValue = valueFunction();
+        this.set(key, currentValue);
+      }
+      return currentValue;
+    };
+
+    SimpleHash.prototype.prefixedKey = function(key) {
+      return "_" + key;
+    };
+
+    SimpleHash.prototype.unprefixedKey = function(key) {
+      return key.slice(1);
+    };
+
+    SimpleHash.prototype.hashKeyFor = function(obj) {
+      var hashKey, typeString;
+      if (hashKey = obj != null ? typeof obj.hashKey === "function" ? obj.hashKey() : void 0 : void 0) {
+        return hashKey;
+      } else {
+        typeString = _objectToString.call(obj);
+        if (typeString === "[object Array]") {
+          return typeString;
+        } else {
+          return obj;
+        }
+      }
+    };
+
+    SimpleHash.prototype.equality = function(lhs, rhs) {
+      if (lhs === rhs) {
+        return true;
+      }
+      if (lhs !== lhs && rhs !== rhs) {
+        return true;
+      }
+      if ((lhs != null ? typeof lhs.isEqual === "function" ? lhs.isEqual(rhs) : void 0 : void 0) && (rhs != null ? typeof rhs.isEqual === "function" ? rhs.isEqual(lhs) : void 0 : void 0)) {
+        return true;
+      }
+      return false;
+    };
+
+    SimpleHash.prototype.objectKey = function(key) {
+      return typeof key !== 'string';
+    };
+
+    SimpleHash.prototype.forEach = function(iterator, ctx) {
+      var key, obj, results, value, values, _i, _len, _ref, _ref1, _ref2, _ref3;
+      results = [];
+      if (this._objectStorage) {
+        _ref = this._objectStorage;
+        for (key in _ref) {
+          values = _ref[key];
+          _ref1 = values.slice();
+          for (_i = 0, _len = _ref1.length; _i < _len; _i++) {
+            _ref2 = _ref1[_i], obj = _ref2[0], value = _ref2[1];
+            results.push(iterator.call(ctx, obj, value, this));
+          }
+        }
+      }
+      _ref3 = this._storage;
+      for (key in _ref3) {
+        value = _ref3[key];
+        results.push(iterator.call(ctx, this.unprefixedKey(key), value, this));
+      }
+      return results;
+    };
+
+    SimpleHash.prototype.keys = function() {
+      var result;
+      result = [];
+      Batman.SimpleHash.prototype.forEach.call(this, function(key) {
+        return result.push(key);
+      });
+      return result;
+    };
+
+    SimpleHash.prototype.toArray = SimpleHash.prototype.keys;
+
+    SimpleHash.prototype.clear = function() {
+      this._storage = {};
+      delete this._objectStorage;
+      return this.length = 0;
+    };
+
+    SimpleHash.prototype.isEmpty = function() {
+      return this.length === 0;
+    };
+
+    SimpleHash.prototype.merge = function() {
+      var hash, merged, others, _i, _len;
+      others = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      merged = new this.constructor;
+      others.unshift(this);
+      for (_i = 0, _len = others.length; _i < _len; _i++) {
+        hash = others[_i];
+        hash.forEach(function(obj, value) {
+          return merged.set(obj, value);
+        });
+      }
+      return merged;
+    };
+
+    SimpleHash.prototype.update = function(object) {
+      var k, v;
+      for (k in object) {
+        v = object[k];
+        this.set(k, v);
+      }
+    };
+
+    SimpleHash.prototype.replace = function(object) {
+      var _this = this;
+      this.forEach(function(key, value) {
+        if (!(key in object)) {
+          return _this.unset(key);
+        }
+      });
+      return this.update(object);
+    };
+
+    SimpleHash.prototype.toObject = function() {
+      var key, obj, pair, value, _ref, _ref1;
+      obj = {};
+      _ref = this._storage;
+      for (key in _ref) {
+        value = _ref[key];
+        obj[this.unprefixedKey(key)] = value;
+      }
+      if (this._objectStorage) {
+        _ref1 = this._objectStorage;
+        for (key in _ref1) {
+          pair = _ref1[key];
+          obj[key] = pair[0][1];
+        }
+      }
+      return obj;
+    };
+
+    SimpleHash.prototype.toJSON = function() {
+      var key, obj, objectKey, value, values, _ref, _ref1, _ref2;
+      obj = {};
+      _ref = this._storage;
+      for (key in _ref) {
+        value = _ref[key];
+        obj[this.unprefixedKey(key)] = (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+      }
+      if (this._objectStorage) {
+        _ref1 = this._objectStorage;
+        for (key in _ref1) {
+          values = _ref1[key];
+          _ref2 = values[0], objectKey = _ref2[0], value = _ref2[1];
+          obj[key] = (typeof value.toJSON === "function" ? value.toJSON() : void 0) || value;
+        }
+      }
+      return obj;
+    };
+
+    return SimpleHash;
+
+  })();
+
+}).call(this);
+
+/*
+//@ sourceMappingURL=simple_hash.map
+*/
+
+(function() {
+  var __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+
+  Batman.RenderCache = (function(_super) {
+    __extends(RenderCache, _super);
+
+    RenderCache.prototype.maximumLength = 4;
+
+    function RenderCache() {
+      RenderCache.__super__.constructor.apply(this, arguments);
+      this.keyQueue = [];
+    }
+
+    RenderCache.prototype.viewForOptions = function(options) {
+      var _this = this;
+      if (Batman.config.cacheViews || options.cache || options.viewClass.prototype.cache) {
+        return this.getOrSet(options, function() {
+          return _this._newViewFromOptions(Batman.extend({}, options));
+        });
+      } else {
+        return this._newViewFromOptions(options);
+      }
+    };
+
+    RenderCache.prototype._newViewFromOptions = function(options) {
+      return new options.viewClass(options);
+    };
+
+    RenderCache.wrapAccessor(function(core) {
+      return {
+        cache: false,
+        get: function(key) {
+          var result;
+          result = core.get.call(this, key);
+          if (result) {
+            this._addOrBubbleKey(key);
+          }
+          return result;
+        },
+        set: function(key, value) {
+          var result;
+          result = core.set.apply(this, arguments);
+          result.set('cached', true);
+          this._addOrBubbleKey(key);
+          this._evictExpiredKeys();
+          return result;
+        },
+        unset: function(key) {
+          var result;
+          result = core.unset.apply(this, arguments);
+          result.set('cached', false);
+          this._removeKeyFromQueue(key);
+          return result;
+        }
+      };
+    });
+
+    RenderCache.prototype.equality = function(incomingOptions, storageOptions) {
+      var key;
+      if (Object.keys(incomingOptions).length !== Object.keys(storageOptions).length) {
+        return false;
+      }
+      for (key in incomingOptions) {
+        if (!(key === 'view')) {
+          if (incomingOptions[key] !== storageOptions[key]) {
+            return false;
+          }
+        }
+      }
+      return true;
+    };
+
+    RenderCache.prototype.reset = function() {
+      var key, _i, _len, _ref;
+      _ref = this.keyQueue.slice(0);
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        key = _ref[_i];
+        this.unset(key);
+      }
+    };
+
+    RenderCache.prototype._addOrBubbleKey = function(key) {
+      this._removeKeyFromQueue(key);
+      return this.keyQueue.unshift(key);
+    };
+
+    RenderCache.prototype._removeKeyFromQueue = function(key) {
+      var index, queuedKey, _i, _len, _ref;
+      _ref = this.keyQueue;
+      for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
+        queuedKey = _ref[index];
+        if (this.equality(queuedKey, key)) {
+          this.keyQueue.splice(index, 1);
+          break;
+        }
+      }
+      return key;
+    };
+
+    RenderCache.prototype._evictExpiredKeys = function() {
+      var currentKeys, i, key, _i, _ref, _ref1;
+      if (this.length > this.maximumLength) {
+        currentKeys = this.keyQueue.slice(0);
+        for (i = _i = _ref = this.maximumLength, _ref1 = currentKeys.length; _ref <= _ref1 ? _i < _ref1 : _i > _ref1; i = _ref <= _ref1 ? ++_i : --_i) {
+          key = currentKeys[i];
+          if (!this.get(key).isInDOM()) {
+            this.unset(key);
+          }
+        }
+      }
+    };
+
+    return RenderCache;
+
+  })(Batman.Hash);
+
+}).call(this);
+
+(function() {
+  var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; },
+    __slice = [].slice;
+
+  Batman.Controller = (function(_super) {
+    __extends(Controller, _super);
+
+    Controller.singleton('sharedController');
+
+    Controller.wrapAccessor('routingKey', function(core) {
+      return {
+        get: function() {
+          if (this.routingKey != null) {
+            return this.routingKey;
+          } else {
+            if (Batman.config.minificationErrors) {
+              Batman.developer.error("Please define `routingKey` on the prototype of " + (Batman.functionName(this.constructor)) + " in order for your controller to be minification safe.");
+            }
+            return Batman.functionName(this.constructor).replace(/Controller$/, '');
+          }
+        }
+      };
+    });
+
+    Controller.classMixin(Batman.LifecycleEvents);
+
+    Controller.lifecycleEvent('action', function(options) {
+      var except, normalized, only;
+      if (options == null) {
+        options = {};
+      }
+      normalized = {};
+      only = Batman.typeOf(options.only) === 'String' ? [options.only] : options.only;
+      except = Batman.typeOf(options.except) === 'String' ? [options.except] : options.except;
+      normalized["if"] = function(params, frame) {
+        var _ref, _ref1;
+        if (this._afterFilterRedirect) {
+          return false;
+        }
+        if (only && (_ref = frame.action, __indexOf.call(only, _ref) < 0)) {
+          return false;
+        }
+        if (except && (_ref1 = frame.action, __indexOf.call(except, _ref1) >= 0)) {
+          return false;
+        }
+        return true;
+      };
+      return normalized;
+    });
+
+    Controller.beforeFilter = function() {
+      Batman.developer.deprecated("Batman.Controller::beforeFilter", "Please use beforeAction instead.");
+      return this.beforeAction.apply(this, arguments);
+    };
+
+    Controller.afterFilter = function() {
+      Batman.developer.deprecated("Batman.Controller::afterFilter", "Please use afterAction instead.");
+      return this.afterAction.apply(this, arguments);
+    };
+
+    Controller.afterAction(function(params) {
+      if (this.autoScrollToHash && (params['#'] != null)) {
+        return this.scrollToHash(params['#']);
+      }
+    });
+
+    Controller.catchError = function() {
+      var currentHandlers, error, errors, handlers, options, _base, _i, _j, _len, _results;
+      errors = 2 <= arguments.length ? __slice.call(arguments, 0, _i = arguments.length - 1) : (_i = 0, []), options = arguments[_i++];
+      Batman.initializeObject(this);
+      (_base = this._batman).errorHandlers || (_base.errorHandlers = new Batman.SimpleHash);
+      handlers = Batman.typeOf(options["with"]) === 'Array' ? options["with"] : [options["with"]];
+      _results = [];
+      for (_j = 0, _len = errors.length; _j < _len; _j++) {
+        error = errors[_j];
+        currentHandlers = this._batman.errorHandlers.get(error) || [];
+        _results.push(this._batman.errorHandlers.set(error, currentHandlers.concat(handlers)));
+      }
+      return _results;
+    };
+
+    Controller.prototype.errorHandler = function(callback) {
+      var errorFrame, _ref,
+        _this = this;
+      errorFrame = (_ref = this._actionFrames) != null ? _ref[this._actionFrames.length - 1] : void 0;
+      return function(err, result, env) {
+        if (err) {
+          if (errorFrame != null ? errorFrame.error : void 0) {
+            return;
+          }
+          if (errorFrame != null) {
+            errorFrame.error = err;
+          }
+          if (!_this.handleError(err)) {
+            throw err;
+          }
+        } else {
+          return typeof callback === "function" ? callback(result, env) : void 0;
+        }
+      };
+    };
+
+    Controller.prototype.handleError = function(error) {
+      var handled, _ref,
+        _this = this;
+      handled = false;
+      if ((_ref = this.constructor._batman.getAll('errorHandlers')) != null) {
+        _ref.forEach(function(hash) {
+          return hash.forEach(function(key, value) {
+            var handler, _i, _len, _results;
+            if (error instanceof key) {
+              handled = true;
+              _results = [];
+              for (_i = 0, _len = value.length; _i < _len; _i++) {
+                handler = value[_i];
+                _results.push(handler.call(_this, error));
+              }
+              return _results;
+            }
+          });
+        });
+      }
+      return handled;
+    };
+
+    function Controller() {
+      this.redirect = __bind(this.redirect, this);
+      this.handleError = __bind(this.handleError, this);
+      this.errorHandler = __bind(this.errorHandler, this);
+      Controller.__super__.constructor.apply(this, arguments);
+      this._resetActionFrames();
+    }
+
+    Controller.prototype.renderCache = new Batman.RenderCache;
+
+    Controller.prototype.defaultRenderYield = 'main';
+
+    Controller.prototype.autoScrollToHash = true;
+
+    Controller.prototype.dispatch = function(action, params) {
+      var redirectTo;
+      if (params == null) {
+        params = {};
+      }
+      params.controller || (params.controller = this.get('routingKey'));
+      params.action || (params.action = action);
+      params.target || (params.target = this);
+      this._resetActionFrames();
+      this.set('action', action);
+      this.set('params', params);
+      this.executeAction(action, params);
+      redirectTo = this._afterFilterRedirect;
+      this._afterFilterRedirect = null;
+      delete this._afterFilterRedirect;
+      if (redirectTo) {
+        return Batman.redirect(redirectTo);
+      }
+    };
+
+    Controller.prototype.executeAction = function(action, params) {
+      var frame, oldRedirect, parentFrame, result, _ref, _ref1,
+        _this = this;
+      if (params == null) {
+        params = this.get('params');
+      }
+      Batman.developer.assert(this[action], "Error! Controller action " + (this.get('routingKey')) + "." + action + " couldn't be found!");
+      parentFrame = this._actionFrames[this._actionFrames.length - 1];
+      frame = new Batman.ControllerActionFrame({
+        parentFrame: parentFrame,
+        action: action,
+        params: params
+      }, function() {
+        var _ref;
+        if (!_this._afterFilterRedirect) {
+          _this.fireLifecycleEvent('afterAction', frame.params, frame);
+        }
+        _this._resetActionFrames();
+        return (_ref = Batman.navigator) != null ? _ref.redirect = oldRedirect : void 0;
+      });
+      this._actionFrames.push(frame);
+      frame.startOperation({
+        internal: true
+      });
+      oldRedirect = (_ref = Batman.navigator) != null ? _ref.redirect : void 0;
+      if ((_ref1 = Batman.navigator) != null) {
+        _ref1.redirect = this.redirect;
+      }
+      if (this.fireLifecycleEvent('beforeAction', frame.params, frame) !== false) {
+        if (!this._afterFilterRedirect) {
+          result = this[action](params);
+        }
+        if (!frame.operationOccurred) {
+          this.render();
+        }
+      }
+      frame.finishOperation();
+      return result;
+    };
+
+    Controller.prototype.redirect = function(url) {
+      var frame;
+      frame = this._actionFrames[this._actionFrames.length - 1];
+      if (frame) {
+        if (frame.operationOccurred) {
+          Batman.developer.warn("Warning! Trying to redirect but an action has already been taken during " + (this.get('routingKey')) + "." + (frame.action || this.get('action')));
+          return;
+        }
+        frame.startAndFinishOperation();
+        if (this._afterFilterRedirect != null) {
+          return Batman.developer.warn("Warning! Multiple actions trying to redirect!");
+        } else {
+          return this._afterFilterRedirect = url;
+        }
+      } else {
+        if (Batman.typeOf(url) === 'Object') {
+          if (!url.controller) {
+            url.controller = this;
+          }
+        }
+        return Batman.redirect(url);
+      }
+    };
+
+    Controller.prototype.render = function(options) {
+      var action, frame, view, yieldContentView, yieldName, _ref, _ref1, _ref2, _ref3, _ref4;
+      if (options == null) {
+        options = {};
+      }
+      if (frame = (_ref = this._actionFrames) != null ? _ref[this._actionFrames.length - 1] : void 0) {
+        frame.startOperation();
+      }
+      if (options === false) {
+        frame.finishOperation();
+        return;
+      }
+      action = (frame != null ? frame.action : void 0) || this.get('action');
+      if (view = options.view) {
+        options.view = null;
+      } else {
+        options.viewClass || (options.viewClass = this._viewClassForAction(action));
+        options.source || (options.source = ((_ref1 = options.viewClass) != null ? _ref1.prototype.source : void 0) || Batman.helpers.underscore(this.get('routingKey') + '/' + action));
+        view = this.renderCache.viewForOptions(options);
+      }
+      if (view) {
+        view.once('viewDidAppear', function() {
+          return frame != null ? frame.finishOperation() : void 0;
+        });
+        yieldName = options.into || this.defaultRenderYield;
+        if (yieldContentView = Batman.DOM.Yield.withName(yieldName).contentView) {
+          if (yieldContentView !== view && !yieldContentView.isDead) {
+            yieldContentView.die();
+          }
+        }
+        if (!view.contentFor && !view.parentNode) {
+          view.set('contentFor', yieldName);
+        }
+        view.set('controller', this);
+        if ((_ref2 = Batman.currentApp) != null) {
+          if ((_ref3 = _ref2.layout) != null) {
+            if ((_ref4 = _ref3.subviews) != null) {
+              _ref4.add(view);
+            }
+          }
+        }
+        this.set('currentView', view);
+      }
+      return view;
+    };
+
+    Controller.prototype.scrollToHash = function(hash) {
+      if (hash == null) {
+        hash = this.get('params')['#'];
+      }
+      return Batman.DOM.scrollIntoView(hash);
+    };
+
+    Controller.prototype._resetActionFrames = function() {
+      return this._actionFrames = [];
+    };
+
+    Controller.prototype._viewClassForAction = function(action) {
+      var classPrefix, _ref;
+      classPrefix = this.get('routingKey').replace('/', '_');
+      return ((_ref = Batman.currentApp) != null ? _ref[Batman.helpers.camelize("" + classPrefix + "_" + action + "_view")] : void 0) || Batman.View;
+    };
+
+    return Controller;
+
+  })(Batman.Object);
+
+}).call(this);
+
 (function() {
   var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; },
     __slice = [].slice;
@@ -9011,6 +9525,9 @@
     };
 
     RouteMapBuilder.prototype.root = function(signature, options) {
+      if (options == null) {
+        options = {};
+      }
       return this.route('/', signature, options);
     };
 
@@ -9085,7 +9602,10 @@
       klass = options.callback ? Batman.CallbackActionRoute : Batman.ControllerActionRoute;
       options.app = this.app;
       route = new klass(path, options);
-      return this.routeMap.addRoute(name, route);
+      this.routeMap.addRoute(name, route);
+      if (name === '') {
+        return this.routeMap.addRoute('root', route);
+      }
     };
 
     RouteMapBuilder.prototype._nameFromPath = function(path) {
@@ -10793,7 +11313,7 @@
       subview.removeFromSuperview();
       subview.set('controller', subviewController || this.controller);
       subview.set('superview', this);
-      subview.fire('viewDidMoveToSuperview');
+      subview.fireAndCall('viewDidMoveToSuperview');
       if ((yieldName = subview.contentFor) && !subview.parentNode) {
         yieldObject = Batman.DOM.Yield.withName(yieldName);
         yieldObject.set('contentView', subview);
@@ -10814,7 +11334,7 @@
       if (!this.superview) {
         return;
       }
-      this.fire('viewWillRemoveFromSuperview');
+      this.fireAndCall('viewWillRemoveFromSuperview');
       this.forget('node', this._nodesChanged);
       this.forget('parentNode', this._nodesChanged);
       this.superview.forget('node', this._nodesChanged);
@@ -10895,10 +11415,7 @@
       if (value != null) {
         this.set(eventName, value);
       } else {
-        this.fire(eventName);
-        if (typeof this[eventName] === "function") {
-          this[eventName]();
-        }
+        this.fireAndCall(eventName);
       }
       _ref = this.subviews._storage;
       _results = [];
@@ -10963,7 +11480,7 @@
           if (node) {
             this.set('node', node);
           }
-          this.fire('viewDidLoad');
+          this.fireAndCall('viewDidLoad');
         }
         return this.node;
       },
@@ -10999,8 +11516,7 @@
       }
       new Batman.BindingParser(this);
       this.set('isBound', true);
-      this.fire('ready');
-      return typeof this.ready === "function" ? this.ready() : void 0;
+      return this.fireAndCall('ready');
     };
 
     View.prototype.destroyBindings = function() {
@@ -11034,11 +11550,14 @@
         Batman.developer.warn("Tried to die() a view more than once.");
         return;
       }
-      this.fire('destroy');
+      this.fireAndCall('destroy');
+      this.destroyBindings();
+      this.destroySubviews();
       if (this.node) {
         this.wasInDOM = Batman.DOM.containsNode(this.node);
         Batman.DOM.destroyNode(this.node);
       }
+      this.removeFromSuperview();
       this.forget();
       if ((_ref = this._batman.properties) != null) {
         _ref.forEach(function(key, property) {
@@ -11052,9 +11571,6 @@
           event.clearHandlers();
         }
       }
-      this.destroyBindings();
-      this.destroySubviews();
-      this.removeFromSuperview();
       this.node = null;
       this.parentNode = null;
       this.subviews = null;
@@ -11137,6 +11653,11 @@
         return;
       }
       return (_ref = Batman.Property.forBaseAndKey(target, keypath)) != null ? _ref.setValue(value) : void 0;
+    };
+
+    View.prototype.fireAndCall = function(key) {
+      this.fire(key);
+      return typeof this[key] === "function" ? this[key]() : void 0;
     };
 
     return View;
@@ -12946,8 +13467,12 @@
       IteratorBinding.__super__.constructor.apply(this, arguments);
       this.backingView.set('attributeName', this.attributeName);
       this.view.prevent('ready');
-      Batman.setImmediate(function() {
+      this._handle = Batman.setImmediate(function() {
         var parentNode;
+        if (_this.backingView.isDead) {
+          Batman.developer.warn("IteratorBinding trying to insert dead backing view into DOM");
+          return;
+        }
         parentNode = _this.prototypeNode.parentNode;
         parentNode.insertBefore(_this.backingView.get('node'), _this.prototypeNode);
         parentNode.removeChild(_this.prototypeNode);
@@ -12989,6 +13514,9 @@
     };
 
     IteratorBinding.prototype.die = function() {
+      if (this._handle) {
+        Batman.clearImmediate(this._handle);
+      }
       this.prototypeNode = null;
       return IteratorBinding.__super__.die.apply(this, arguments);
     };
@@ -13413,6 +13941,504 @@
   Batman.developer.addFilters();
 
 }).call(this);
+
+// Generated by CoffeeScript 1.6.3
+(function() {
+  var _base, _base1,
+    __hasProp = {}.hasOwnProperty,
+    __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; },
+    __slice = [].slice;
+
+  Batman.View = (function(_super) {
+    __extends(View, _super);
+
+    View.store = new Batman.HTMLStore;
+
+    View.option = function() {
+      var keys, options;
+      keys = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
+      Batman.initializeObject(this);
+      if (options = this._batman.options) {
+        keys = options.concat(keys);
+      }
+      return this._batman.set('options', keys);
+    };
+
+    View.filter = function(key, filter) {
+      var filters;
+      Batman.initializeObject(this.prototype);
+      filters = this.prototype._batman.filters || {};
+      filters[key] = filter;
+      return this.prototype._batman.set('filters', filters);
+    };
+
+    View.viewForNode = function(node, climbTree) {
+      var view;
+      if (climbTree == null) {
+        climbTree = true;
+      }
+      while (node) {
+        if (view = Batman._data(node, 'view')) {
+          return view;
+        }
+        if (!climbTree) {
+          return;
+        }
+        node = node.parentNode;
+      }
+    };
+
+    View.prototype.bindings = [];
+
+    View.prototype.subviews = [];
+
+    View.prototype.superview = null;
+
+    View.prototype.controller = null;
+
+    View.prototype.source = null;
+
+    View.prototype.html = null;
+
+    View.prototype.node = null;
+
+    View.prototype.bindImmediately = true;
+
+    View.prototype.isBound = false;
+
+    View.prototype.isInDOM = false;
+
+    View.prototype.isView = true;
+
+    View.prototype.isDead = false;
+
+    View.prototype.isBackingView = false;
+
+    function View() {
+      var superview,
+        _this = this;
+      this.bindings = [];
+      this.subviews = new Batman.Set;
+      this.subviews.on('itemsWereAdded', function(newSubviews) {
+        var subview, _i, _len;
+        for (_i = 0, _len = newSubviews.length; _i < _len; _i++) {
+          subview = newSubviews[_i];
+          _this._addSubview(subview);
+        }
+      });
+      this.subviews.on('itemsWereRemoved', function(oldSubviews) {
+        var subview, _i, _len;
+        for (_i = 0, _len = oldSubviews.length; _i < _len; _i++) {
+          subview = oldSubviews[_i];
+          subview._removeFromSuperview();
+        }
+      });
+      View.__super__.constructor.apply(this, arguments);
+      if (superview = this.superview) {
+        this.superview = null;
+        superview.subviews.add(this);
+      }
+    }
+
+    View.prototype._addChildBinding = function(binding) {
+      return this.bindings.push(binding);
+    };
+
+    View.prototype._addSubview = function(subview) {
+      var filters, subviewController, yieldName, yieldObject;
+      subviewController = subview.controller;
+      subview.removeFromSuperview();
+      subview.set('controller', subviewController || this.controller);
+      subview.set('superview', this);
+      subview.fireAndCall('viewDidMoveToSuperview');
+      if ((yieldName = subview.contentFor) && !subview.parentNode) {
+        yieldObject = Batman.DOM.Yield.withName(yieldName);
+        yieldObject.set('contentView', subview);
+      }
+      if (filters = this._batman.get('filters')) {
+        subview._batman.set('filters', Batman.mixin({}, filters, subview._batman.get('filters')));
+      }
+      this.get('node');
+      subview.get('node');
+      this.observe('node', subview._nodesChanged);
+      subview.observe('node', subview._nodesChanged);
+      subview.observe('parentNode', subview._nodesChanged);
+      return subview._nodesChanged();
+    };
+
+    View.prototype._removeFromSuperview = function() {
+      var superview;
+      if (!this.superview) {
+        return;
+      }
+      this.fireAndCall('viewWillRemoveFromSuperview');
+      this.forget('node', this._nodesChanged);
+      this.forget('parentNode', this._nodesChanged);
+      this.superview.forget('node', this._nodesChanged);
+      superview = this.get('superview');
+      this.removeFromParentNode();
+      this.set('superview', null);
+      return this.set('controller', null);
+    };
+
+    View.prototype.removeFromSuperview = function() {
+      var _ref;
+      return (_ref = this.superview) != null ? _ref.subviews.remove(this) : void 0;
+    };
+
+    View.prototype._nodesChanged = function() {
+      var parentNode, superviewNode;
+      if (!this.node) {
+        return;
+      }
+      if (this.bindImmediately) {
+        this.initializeBindings();
+      }
+      superviewNode = this.superview.get('node');
+      parentNode = this.parentNode;
+      if (typeof parentNode === 'string') {
+        parentNode = Batman.DOM.querySelector(superviewNode, parentNode);
+      }
+      if (!parentNode) {
+        parentNode = superviewNode;
+      }
+      if (parentNode) {
+        return this.addToParentNode(parentNode);
+      }
+    };
+
+    View.prototype.addToParentNode = function(parentNode) {
+      var isInDOM;
+      if (!this.get('node')) {
+        return;
+      }
+      isInDOM = Batman.DOM.containsNode(parentNode);
+      if (isInDOM) {
+        this.propagateToSubviews('viewWillAppear');
+      }
+      this.insertIntoDOM(parentNode);
+      this.propagateToSubviews('isInDOM', isInDOM);
+      if (isInDOM) {
+        return this.propagateToSubviews('viewDidAppear');
+      }
+    };
+
+    View.prototype.insertIntoDOM = function(parentNode) {
+      if (parentNode !== this.node) {
+        return parentNode.appendChild(this.node);
+      }
+    };
+
+    View.prototype.removeFromParentNode = function() {
+      var isInDOM, node, _ref, _ref1, _ref2;
+      node = this.get('node');
+      isInDOM = (_ref = this.wasInDOM) != null ? _ref : Batman.DOM.containsNode(node);
+      if (isInDOM) {
+        this.propagateToSubviews('viewWillDisappear');
+      }
+      if ((_ref1 = this.node) != null) {
+        if ((_ref2 = _ref1.parentNode) != null) {
+          _ref2.removeChild(this.node);
+        }
+      }
+      this.propagateToSubviews('isInDOM', false);
+      if (isInDOM) {
+        return this.propagateToSubviews('viewDidDisappear');
+      }
+    };
+
+    View.prototype.propagateToSubviews = function(eventName, value) {
+      var subview, _i, _len, _ref, _results;
+      if (value != null) {
+        this.set(eventName, value);
+      } else {
+        this.fireAndCall(eventName);
+      }
+      _ref = this.subviews._storage;
+      _results = [];
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        subview = _ref[_i];
+        _results.push(subview.propagateToSubviews(eventName, value));
+      }
+      return _results;
+    };
+
+    View.prototype.loadView = function(_node) {
+      var html, node;
+      if ((html = this.get('html')) != null) {
+        node = _node || document.createElement('div');
+        Batman.DOM.setInnerHTML(node, html);
+        return node;
+      }
+    };
+
+    View.accessor('html', {
+      get: function() {
+        var handler, property, source,
+          _this = this;
+        if (this.html != null) {
+          return this.html;
+        }
+        if (!(source = this.get('source'))) {
+          return;
+        }
+        source = Batman.Navigator.normalizePath(source);
+        this.html = this.constructor.store.get(source);
+        if (this.html == null) {
+          property = this.property('html');
+          handler = function(html) {
+            if (html != null) {
+              _this.set('html', html);
+            }
+            return property.removeHandler(handler);
+          };
+          property.addHandler(handler);
+        }
+        return this.html;
+      },
+      set: function(key, html) {
+        this.destroyBindings();
+        this.destroySubviews();
+        this.html = html;
+        if (this.node && (html != null)) {
+          this.loadView(this.node);
+        }
+        if (this.bindImmediately) {
+          return this.initializeBindings();
+        }
+      }
+    });
+
+    View.accessor('node', {
+      get: function() {
+        var node;
+        if ((this.node == null) && !this.isDead) {
+          node = this.loadView();
+          if (node) {
+            this.set('node', node);
+          }
+          this.fireAndCall('viewDidLoad');
+        }
+        return this.node;
+      },
+      set: function(key, node, oldNode) {
+        var _this = this;
+        if (oldNode) {
+          Batman.removeData(oldNode, 'view', true);
+        }
+        if (node === this.node) {
+          return;
+        }
+        this.destroyBindings();
+        this.destroySubviews();
+        this.node = node;
+        if (!node) {
+          return;
+        }
+        Batman._data(node, 'view', this);
+        Batman.developer["do"](function() {
+          var extraInfo, _base;
+          extraInfo = _this.get('displayName') || _this.get('source');
+          return typeof (_base = (node === document ? document.body : node)).setAttribute === "function" ? _base.setAttribute('batman-view', _this.constructor.name + (extraInfo ? ": " + extraInfo : '')) : void 0;
+        });
+        return node;
+      }
+    });
+
+    View.prototype.event('ready').oneShot = true;
+
+    View.prototype.initializeBindings = function() {
+      if (this.isBound || !this.node) {
+        return;
+      }
+      new Batman.BindingParser(this);
+      this.set('isBound', true);
+      return this.fireAndCall('ready');
+    };
+
+    View.prototype.destroyBindings = function() {
+      var binding, _i, _len, _ref;
+      _ref = this.bindings;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        binding = _ref[_i];
+        binding.die();
+      }
+      this.bindings = [];
+      return this.isBound = false;
+    };
+
+    View.prototype.destroySubviews = function() {
+      var subview, _i, _len, _ref;
+      if (this.isDead) {
+        Batman.developer.warn("Tried to destroy the subviews of a dead view.");
+        return;
+      }
+      _ref = this.subviews.toArray();
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        subview = _ref[_i];
+        subview.die();
+      }
+      return this.subviews.clear();
+    };
+
+    View.prototype.die = function() {
+      var event, _, _ref, _ref1;
+      if (this.isDead) {
+        Batman.developer.warn("Tried to die() a view more than once.");
+        return;
+      }
+      this.fireAndCall('destroy');
+      this.destroyBindings();
+      this.destroySubviews();
+      if (this.node) {
+        this.wasInDOM = Batman.DOM.containsNode(this.node);
+        Batman.DOM.destroyNode(this.node);
+      }
+      this.removeFromSuperview();
+      this.forget();
+      if ((_ref = this._batman.properties) != null) {
+        _ref.forEach(function(key, property) {
+          return property.die();
+        });
+      }
+      if (this._batman.events) {
+        _ref1 = this._batman.events;
+        for (_ in _ref1) {
+          event = _ref1[_];
+          event.clearHandlers();
+        }
+      }
+      this.node = null;
+      this.parentNode = null;
+      this.subviews = null;
+      return this.isDead = true;
+    };
+
+    View.prototype.baseForKeypath = function(keypath) {
+      return keypath.split('.')[0].split('|')[0].trim();
+    };
+
+    View.prototype.prefixForKeypath = function(keypath) {
+      var index;
+      index = keypath.lastIndexOf('.');
+      if (index !== -1) {
+        return keypath.substr(0, index);
+      } else {
+        return keypath;
+      }
+    };
+
+    View.prototype.targetForKeypath = function(keypath, forceTarget) {
+      var controller, lookupNode, nearestNonBackingView, target;
+      lookupNode = this;
+      while (lookupNode) {
+        if (target = this._testTargetForKeypath(lookupNode, keypath)) {
+          return target;
+        }
+        if (forceTarget && !nearestNonBackingView && !lookupNode.isBackingView) {
+          nearestNonBackingView = Batman.get(lookupNode, 'proxiedObject') || lookupNode;
+        }
+        if (!controller && lookupNode.isView && lookupNode.controller) {
+          controller = lookupNode.controller;
+        }
+        if (lookupNode.isView && lookupNode.superview) {
+          lookupNode = lookupNode.superview;
+        } else if (controller) {
+          lookupNode = controller;
+          controller = null;
+        } else if (!lookupNode.window) {
+          if (Batman.currentApp && lookupNode !== Batman.currentApp) {
+            lookupNode = Batman.currentApp;
+          } else {
+            lookupNode = {
+              window: Batman.container
+            };
+          }
+        } else {
+          break;
+        }
+      }
+      return nearestNonBackingView;
+    };
+
+    View.prototype._testTargetForKeypath = function(object, keypath) {
+      var proxiedObject;
+      if (proxiedObject = Batman.get(object, 'proxiedObject')) {
+        if (typeof Batman.get(proxiedObject, keypath) !== 'undefined') {
+          return proxiedObject;
+        }
+      }
+      if (typeof Batman.get(object, keypath) !== 'undefined') {
+        return object;
+      }
+    };
+
+    View.prototype.lookupKeypath = function(keypath) {
+      var base, target;
+      base = this.baseForKeypath(keypath);
+      target = this.targetForKeypath(base);
+      if (target) {
+        return Batman.get(target, keypath);
+      }
+    };
+
+    View.prototype.setKeypath = function(keypath, value) {
+      var prefix, target, _ref;
+      prefix = this.prefixForKeypath(keypath);
+      target = this.targetForKeypath(prefix, true);
+      if (!target || target === Batman.container) {
+        return;
+      }
+      return (_ref = Batman.Property.forBaseAndKey(target, keypath)) != null ? _ref.setValue(value) : void 0;
+    };
+
+    View.prototype.fireAndCall = function(key) {
+      this.fire(key);
+      return typeof this[key] === "function" ? this[key]() : void 0;
+    };
+
+    return View;
+
+  })(Batman.Object);
+
+  if ((_base = Batman.container).$context == null) {
+    _base.$context = function(node) {
+      var view;
+      while (node) {
+        if (view = Batman._data(node, 'backingView') || Batman._data(node, 'view')) {
+          return view;
+        }
+        node = node.parentNode;
+      }
+    };
+  }
+
+  if ((_base1 = Batman.container).$subviews == null) {
+    _base1.$subviews = function(view) {
+      var subviews;
+      if (view == null) {
+        view = Batman.currentApp.layout;
+      }
+      subviews = [];
+      view.subviews.forEach(function(subview) {
+        var obj, _ref;
+        obj = Batman.mixin({}, subview);
+        obj.constructor = subview.constructor;
+        obj.subviews = ((_ref = subview.subviews) != null ? _ref.length : void 0) ? $subviews(subview) : null;
+        Batman.unmixin(obj, {
+          '_batman': true
+        });
+        return subviews.push(obj);
+      });
+      return subviews;
+    };
+  }
+
+}).call(this);
+
+/*
+//@ sourceMappingURL=view.map
+*/
 
 (function() {
 

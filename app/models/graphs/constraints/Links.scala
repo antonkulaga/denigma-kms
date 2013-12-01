@@ -17,6 +17,18 @@ trait Links
   var links = Map.empty[String,Link]
   def have(link:Link): Links = {links+=(link.name->link); this }
 
+  def writeLinks(v:Vertex)  =  {this.links.foreach
+  {
+
+    case (name,link)=>
+      v.outV(CONSTRAINT).find(_.has("name",name)) match
+      {
+        case None=>link.write(v.addConnected(CONSTRAINT))
+        case Some(vt)=>link.write(vt)
+      }
+
+  }
+    v}
 }
 
 object Link
@@ -56,17 +68,12 @@ object Link
   }
 
   def write(l:Link,v:Vertex) ={
-    v.props(DIR->l.dir,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.name,MIN_Q->l.minQ,MAX_Q->l.maxQ)
+    v.props(DIR->l.dir.toString,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.name,MIN_Q->l.minQ,MAX_Q->l.maxQ)
   }
 }
 
 class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", val minQ:Int=1, val maxQ:Int = Int.MaxValue)
 {
-//  val name:String
-//  val dir:Direction
-//  val linkType:String
-//  val  nodeId:String
-//  val nodeType:String
 
   def hasLink(v:Vertex) = this.edges(v).iterator().hasNext
   def edges(v:Vertex) = v.getEdges(dir,name)
@@ -79,9 +86,10 @@ class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:St
 
   def isOfType(v:Vertex) = v.getEdges(dir, TYPE).iterator().hasNext
 
-//  def isRightNode(v:Vertex)= ()
-//
-//  def linkOfType
+  def write(v:Vertex) ={
+    Link.write(this,v)
+  }
+
 }
 
 case class OutLinkOf(lname:String,lType:String="",nType:String="") extends Link(lname, Direction.OUT,lType,nType)

@@ -2,10 +2,11 @@ package models.graphs
 
 import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 import com.tinkerpop.blueprints.{Vertex, Graph}
-import models.graphs.constraints.NodeType
 import scala.collection.JavaConversions._
 import scala.collection.immutable.IndexedSeq
-import models.graphs.NodeViewModel
+import models.graphs.views._
+import models.graphs.constraints.NodeType
+import play.api.Play
 
 //import scalax.collection.Graph // or
 import scalax.collection.mutable._
@@ -39,13 +40,24 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
 
   def addType(tp:NodeType,commit:Boolean = false) =   this.nodeType(tp.name) match {
       case None=>
-        val t = this.addNode((TYPE->tp.name))
-        //tp.must.
+        val t: Vertex = this.addNode((TYPE->tp.name))
+        t.setProperty(NAME,tp.name)
+        tp.must.write(t)
+        tp.should.write(t)
         if(commit)g.commit()
 
-      case Some(tp)=>
-        if(commit)g.commit()
+      case Some(ntp)=>
+        if(tp!=ntp)
+        {
+          //TODO: add logger here
+          val t: Vertex = this.addNode((TYPE->tp.name))
+          t.setProperty(NAME,tp.name)
+          tp.must.write(t)
+          tp.should.write(t)
+          if(commit)g.commit()
+        }
     }
+
 //
 //  def graphById(id: String) = {
 //    val v = this.nodeById(id).get

@@ -45,6 +45,8 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
 
   def nodeById(id:String): Option[Vertex] = ids.get(GP.ID,id).headOption
 
+  def nodeByIdOrName(id:String): Option[Vertex] = nodeById(id).orElse(nodeByName(id))
+
   def nodeByName(name: String): Option[Vertex] = names.get(GP.NAME, name).headOption
 
 

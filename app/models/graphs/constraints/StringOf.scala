@@ -1,5 +1,5 @@
 package models.graphs.constraints
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints._
 import models.graphs.{SG, GP, SemanticGraph}
 import SG._
 
@@ -32,7 +32,7 @@ case class StringOf(propertyName:String,regExp:String="") extends Property(prope
   def matches(str:String) = regex.findAllMatchIn(str)
 
 
-  def write(v: Vertex): Vertex = {
+  def write(v: Element): Element = {
 
     v.setProperty(NAME,name)
     v.setProperty("regex",regExp)

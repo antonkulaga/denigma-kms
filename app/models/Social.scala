@@ -29,8 +29,14 @@ trait CreatedByUser extends NodeType{
 case class UserLinkOf(lname:String,lType:String="") extends Link(lname, Direction.OUT,lType,User.name)
 
 
-object City extends NodeType(GP.USER)
+object City extends NodeType("City")
 {
   must have StringOf("name")
+  should have OutLinkOf("situated_in")
   //should have OutLinkOf("LiveIn","City")
+}
+
+object Country extends NodeType("Country")
+{
+  must have StringOf("name")
 }

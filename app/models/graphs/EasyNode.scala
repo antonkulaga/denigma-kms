@@ -28,6 +28,8 @@ trait EasyNode {
   def props(params:(String,Any)*) = params.foreach{case (key,value)=>v.setProperty(key,value)}
 
   def p[T](label:String): Option[T] = v.getProperty[T](label) match {case null=>None; case value:T=>Some(value)}
+  def has[T](prop:String,value:T): Boolean = v.getProperty[T](prop) match {case null=>false; case v:T=>v==value}
+
   def str(name:String): Option[String] = p[String](name)
   def double(name:String): Option[Double] = p[Double](name)
   def int(name:String): Option[Int] = p[Int](name)
@@ -52,6 +54,10 @@ trait EasyNode {
   def outV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*)
   def outE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.OUT,labels:_*)
   def outL(labels:String*): Iterable[Vertex] = v.getVertices(Direction.OUT,labels:_*).filter(linkFilter(v,labels:_*))
+
+  def allInV: Iterable[(String, Vertex)] = v.getEdges(Direction.IN).map(e=>(e.getLabel,e.getVertex(Direction.IN)))
+  def allOutV = v.getEdges(Direction.OUT).map(e=>(e.getLabel,e.getVertex(Direction.OUT)))
+  //def allV = v.getEdges(Direction.BOTH).map(e=>(e.getLabel,e.getVertex(Direction.BOTH)))
 
   //def outLV(labels: String*): Iterable[Vertex] = outL(labels:_*).flatMap(r=>r.getVertices(Direction.OUT,labels:_*))
 

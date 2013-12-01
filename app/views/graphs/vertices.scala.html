@@ -6,20 +6,9 @@
         <section class="v" data-foreach-vertex="Vertex.all" data-view="VertexView">
 
             <div class="name active title" data-bind="vertex.name"></div>
-
             <div class="active content">
-                <div class="description" data-mercury="html" data-event-focusin="showEditor" data-event-focusout="controller.hideEditor"  data-bind="vertex.description"></div>
                 <div class="ui accordion">
-                    <header class="active title">
-                Properties
-                        <i class="dropdown icon"></i>
-                    </header>
-                    <div class="active content">
-                        <div class="props" data-foreach-prop="vertex.properties">
-                            <b class="key"data-mercury="html"  data-bind="prop">something inside</b>
-                            <b class="value" data-mercury="html" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor" data-bind-id="prop" data-bind="vertex.properties[prop]">something inside</b>
-                        </div>
-                    </div>
+                    @properties("vertex")
                 </div>
             </div>
         </section>

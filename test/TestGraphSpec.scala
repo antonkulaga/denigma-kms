@@ -81,6 +81,28 @@ class TestGraphSpec extends SemanticSpec
       sg.g.shutdown()
     }
 
+    "have vIn and vOut that work well" in new WithApplication{
+
+      val sg = prepareTest
+      val r = sg.root(tg.testNodeId)
+      import tg._
+      val tm = sg.names.get(GP.NAME, "Test Master").toList.headOption
+      tm must not beNone
+      val user = tm.get
+      import SG._
+
+//      val all = user.allV
+      val incoming = user.allInV
+      val outgoing = user.allOutV
+  //    all.size shouldEqual 3
+      incoming.size shouldEqual 1
+      outgoing.size shouldEqual 2
+    //  all should containAllOf(List(LIVE_IN,WORKS_FOR,CREATED_BY))
+      incoming.map(_._1) should containAllOf(List(CREATED_BY))
+      outgoing.map(_._1) should containAllOf(List(LIVE_IN,WORKS_FOR))
+
+    }
+
 
   }
 

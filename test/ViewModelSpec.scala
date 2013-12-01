@@ -1,4 +1,5 @@
-import models.graphs.{NodeViewModel, EdgeViewModel, SG, SemanticGraph}
+import models.graphs.views.NodeViewModel
+import models.graphs.{SG, SemanticGraph}
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._

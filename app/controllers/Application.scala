@@ -1,20 +1,27 @@
 package controllers
 
-import play.api._
 import play.api.mvc._
 import models._
 
-import play.api.libs.json.{JsArray, JsObject, JsValue, Json}
-import com.tinkerpop.blueprints.{Vertex, Graph}
-import com.tinkerpop.blueprints.impls.orient.OrientGraph
-import scala.collection.JavaConversions._
-import models.graphs.{NodeViewModel, SG, SemanticGraph}
+import play.api.libs.json.{JsNull, JsObject, Json}
+import com.tinkerpop.blueprints.Vertex
+import models.graphs.SG
 import org.joda.time.DateTimeZone
-import scalax.collection.mutable.Graph
 import scala.collection.immutable.IndexedSeq
+import models.graphs.views.NodeViewModel
+import models.graphs.views.EdgeViewModel
+import scala.collection._
+import scala._
+import models.graphs.views.EdgeViewModel
+import models.graphs.views.NodeViewModel
+import models.graphs.SG._
+import scala.collection.JavaConversions._
+import models.graphs.views.EdgeViewModel
+import models.graphs.views.NodeViewModel
+import play.api.libs.json.JsObject
+import scala.Some
 
-
-object Application extends Controller {
+object Application extends Controller with GenGraph{
 
   DateTimeZone.setDefault(DateTimeZone.UTC)
 
@@ -29,73 +36,68 @@ object Application extends Controller {
       Ok(views.html.graphs.vertex(id)) //Ok(views.html.page("node","menu","0"))
   }
 
-  def test = Action {
+  def vertices(id:String) = Action {
     implicit request =>
-      Ok(views.html.test()) //Ok(views.html.page("node","menu","0"))
+      vo(id) match {
+        case None=>
+          Ok(Json.obj("vertices" ->  JsNull)).as("application/json")
+        case Some(r)=>
+          Ok(Json.obj("vertices" -> Json.toJson(List(this.node2js(r))))).as("application/json") //Ok(views.html.page("node","menu","0"))
+      }
   }
 
-  def hallo = Action {
+
+
+  def node2js(nv:NodeViewModel): JsObject = Json.obj("id" -> nv.id,
+    "name" -> ("node_id_" + nv.id),
+    "properties" -> Json.toJson(nv.properties)
+  )
+
+
+  def node2js(v:Vertex): JsObject  = this.node2js(new NodeViewModel(v.id,v))
+
+
+
+  def edge2js(e:EdgeViewModel) = Json.obj("id" -> e.id,
+    "name" -> ("node_id_" + e.id),
+    "properties" -> Json.toJson(e.properties),
+    "incoming" -> Json.toJson(e.v.inV().map(node2js)),
+    "outgoing" -> Json.toJson(e.v.outV().map(node2js))
+  )
+
+  //def getV(id:String) = sg.nodeByIdOrName(id).orElse(TestGraph.rootOption())
+  def vo(id:String) = sg.nodeByIdOrName(id).orElse(TestGraph.rootOption())
+
+
+  /*
+  gets incoming edges as json
+   */
+  def incoming(to:String) = Action{
     implicit request =>
-      Ok(views.html.hallo()) //Ok(views.html.page("node","menu","0"))
+      vo(to) match
+      {
+        case None =>Ok(Json.obj("edges" ->  JsNull)).as("application/json")
+        case Some(vert) =>
+          val edges = vert.allInV.map{case (label:String,v:Vertex)=>new EdgeViewModel(v.id, label, v)}
+          Ok(Json.obj("edges" -> Json.toJson(edges.map(edge2js)))).as("application/json") //Ok(views.html.page("node","menu","0"))
+    }
   }
 
-  def vertex = Action {
+  /*
+  gets outgoing edges as json
+   */
+  def outgoing(from:String) = Action{
     implicit request =>
-
-      import SG._
-      val tg = TestGraph
-      val r: Vertex = tg.root()//tg.init()
-      val vm = new NodeViewModel(r.id, r)
-      val nodes: IndexedSeq[JsObject] = (0 until 5).map(v =>
-        Json.obj("id" -> v.toString,
-          "name" -> ("node_name_" + v.toString),
-          "description" -> ("DESC about " + v.toString),
-          "properties" -> Json.toJson(vm.properties)
-        )
-      )
-
-      Ok(Json.obj("vertices" -> Json.toJson(nodes))).as("application/json") //Ok(views.html.page("node","menu","0"))
-
-      //Ok(Json.obj("vertices"->genNodes())).as("application/json") //Ok(views.html.page("node","menu","0"))
+      vo(from) match
+      {
+        case None =>Ok(Json.obj("edges" ->  JsNull)).as("application/json")
+        case Some(vert) =>
+          val edges = vert.allOutV.map{case (label:String,v:Vertex)=>new EdgeViewModel(v.id, label, v)}
+          Ok(Json.obj("edges" -> Json.toJson(edges.map(edge2js)))).as("application/json") //Ok(views.html.page("node","menu","0"))
+      }
   }
 
 
 
-
-  def genNodes(ns:Int=5, prs:Int=5): JsValue = {
-    def props = Json.toJson((0 until prs).map(r => ("property_" + r, "value+" + r)).toMap)
-
-    val nodes: IndexedSeq[JsObject] = (0 until ns).map(v =>
-      Json.obj("id" -> v.toString,
-        "name" -> ("node_name_" + v.toString),
-        "description" -> ("DESC about " + v.toString),
-        "properties" -> props
-      )
-    )
-      Json.toJson(nodes)
-
-  }
-
-  def edge = Action {
-    implicit request =>
-
-      //val v = TestGraph.init()
-      Ok(Json.obj("edges" -> genEdges)).as("application/json") //Ok(views.html.page("node","menu","0"))
-  }
-  def genEdges: JsValue = {
-    def props = Json.toJson((1 until 2).map(r => ("property_" + r, "value+" + r)).toMap)
-    val edges: IndexedSeq[JsObject] = (1 until 10).map(e =>
-      Json.obj("id" -> e.toString,
-        "name" -> ("edge_name_" + e.toString),
-        "description" -> ("DESC about " + e.toString),
-        "properties" -> props
-        , "incoming" -> genNodes(2,2)
-        , "outgoing" -> genNodes(3, 3)
-
-      )
-    )
-
-    Json.toJson(edges)
-  }
 
 }

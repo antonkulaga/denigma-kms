@@ -2,7 +2,7 @@ package models.graphs.constraints
 
 
 
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.{Element, Vertex}
 import models.graphs.{SG, SemanticGraph}
 import SG._
 object BooleanOf extends PropertyParser[BooleanOf]
@@ -21,12 +21,11 @@ object BooleanOf extends PropertyParser[BooleanOf]
 case class BooleanOf(propertyName:String,default:Boolean=false) extends Property(propertyName) with Validator[Boolean]
 { // with PropertyWriter{
   def validate(value: Boolean): Boolean = true
-
-  def write(v: Vertex): Vertex = {
-
+  def write(v: Element): Element = {
     v.setProperty(NAME,name)
     v.setProperty(DEFAULT,default)
     v.setProperty(CONSTRAINT,BooleanOf.constraint)
     v
   }
+
 }

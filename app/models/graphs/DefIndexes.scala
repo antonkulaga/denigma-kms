@@ -21,7 +21,7 @@ trait DefIndexes[T<: IndexableGraph] extends GraphConsts{
     ids = index(GP.ID,fulltext = false,graph)
     names = index(GP.NAME,fulltext = true,graph)
     users = index(GP.USER,fulltext = true,graph)
-    types = index("type",fulltext = false,graph)
+    types = index(GP.TYPE,fulltext = false,graph)
     roots = index(GP.ROOT,fulltext = false,graph)
   }
 }

@@ -6,11 +6,13 @@
 GET        /                    controllers.Application.index
 GET        /graph/*id           controllers.Application.node(id)
 GET        /test                controllers.Application.test
-GET        /vertices            controllers.Application.vertex
-GET        /edges               controllers.Application.edge
-GET        /hallo               controllers.Application.hallo
-
-#GET        /:v                   controllers.Application.node(v:String)
+GET        /vertices            controllers.Application.vertices(id:String ="")
+GET        /vertices/:id        controllers.Application.vertices(id:String)
+GET        /incoming/           controllers.Application.incoming(id:String ="")
+GET        /incoming/:id        controllers.Application.incoming(id:String)
+GET        /outgoing/           controllers.Application.outgoing(id:String ="")
+GET        /outgoing/:id        controllers.Application.outgoing(id:String)
+GET        /edges              controllers.Application.outgoing(id:String ="")
 
 
 # Map static resources from the /public folder to the /assets URL path

@@ -3,22 +3,14 @@
     <h4 class="ui top attached inverted green header">Outgoing</h4>
     <p style="ui segment attached">some outgoing nodes</p>
     <div class="ui accordion">
-        <section class="e" data-foreach-edge="Edge.all" data-view="EdgeView">
+        <section class="e" data-foreach-edge="controllers.graph.outE" data-view="EdgeView">
             <div class="name green active title" data-bind="edge.name"></div>
 
             <div class="active content">
 
 
                 <section class="accordion ">
-                    <header class="active title"><i class="dropdown icon"></i>
-                        Properties
-                    </header>
-                    <div class="active content">
-                        <div class="props" data-foreach-prop="edge.properties">
-                            <b class="key" data-bind="prop">something inside</b>
-                            <b class="value" data-mercury="html" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor"  data-bind-id="prop" data-bind="edge.properties[prop]">something inside</b>
-                        </div>
-                    </div>
+                    @properties("edge")
 
                     <header class="active title"><i class="dropdown icon"></i>
                         Outgoing vertices:

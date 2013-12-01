@@ -43,6 +43,15 @@ object TestGraph {
     roots.get(ROOT, testNodeId).headOption.get
   }
 
+  def rootOption(): Option[Vertex] ={
+    val c = SG.sg
+    import c._
+
+    val g = sg.g
+
+    roots.get(ROOT, testNodeId).headOption
+  }
+
   def createTestNodes(): Vertex = {
     val c = SG.sg
     import c._

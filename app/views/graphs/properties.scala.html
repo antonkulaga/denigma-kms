@@ -1,0 +1,14 @@
+@(owner:String)(implicit request: RequestHeader)
+
+        <header class="active title">
+                Properties
+            <i class="dropdown icon"></i>
+        </header>
+        <div class="active content">
+            <div class="props" data-foreach-prop="@{owner}.properties">
+                <b class="key" data-bind="prop">something inside</b>
+                <b class="value" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor" data-bind-id="prop" data-bind="@{owner}.properties[prop]">something inside</b>
+            </div>
+        </div>
+
+PROPS!

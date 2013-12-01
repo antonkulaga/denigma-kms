@@ -1,7 +1,7 @@
 package models.graphs.constraints
 
 import com.github.t3hnar.bcrypt._
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.{Element, Vertex}
 import models.graphs.{SG}
 import SG._
 
@@ -26,13 +26,10 @@ case class HashOf(propertyName:String) extends Property(propertyName) //with Pro
   def makeHash(pass:String, salt:String): String = pass.bcrypt(salt)
   def makeHash(pass:String): String =  makeHash(pass,generateSalt)
 
-  //def makeHashSalt(pass:String):(String,String) =  bcrypt.generateSalt match {case salt=>(makeHash(pass,bcrypt.generateSalt),salt) }
-  def write(v: Vertex): Vertex = {
+  def write(v: Element): Element = {
 
     v.setProperty(NAME,name)
-    v.setProperty(CONSTRAINT,constraint)
+    v.setProperty(CONSTRAINT,HashOf.constraint)
     v
   }
-
-  val constraint: String = "HASH"
 }
