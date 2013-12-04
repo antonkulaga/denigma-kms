@@ -1,16 +1,11 @@
 package models.graphs
 
-import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 
 import com.tinkerpop.blueprints._
 import scala.{collection, Some}
 
-import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
 import scala.collection.JavaConversions._
 import play.Logger
-import java.lang
-import com.orientechnologies.orient.core.hook.ORecordHook.TYPE
-import models.graphs.constraints.NodeType
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 
@@ -119,11 +114,13 @@ object SG extends GraphParams
       n
     }
 
+    /* get node that represents the link*/
     def getLinkNode(label:String): Option[Vertex] = v.getVertices(Direction.OUT, label).find(p => p.isLink(label))
 
     def getSetLinkNode(label:String, params:(String,String)*): Vertex =  sg.setParams(v.getLinkNode(label).getOrElse(sg.addNode().toLink(label)))
 
 
+    /* if this node is link*/
     def isLink: Boolean = v.getProperty[String](LINK) match {
       case null => false
       //case false=>false

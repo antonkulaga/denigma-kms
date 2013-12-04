@@ -12,6 +12,7 @@ abstract class LinkBuilder(v:Vertex,d:Direction,label:String) {
 
 }
 
+/* abstract basic class that is needed to create syuntax sugar for links*/
 abstract class LinkCreator(v:Vertex,d:Direction,label:String, props:(String,String)*) extends LinkBuilder(v,d,label) {
 
   def l: Vertex = this.link match {
@@ -26,6 +27,8 @@ abstract class LinkCreator(v:Vertex,d:Direction,label:String, props:(String,Stri
   }
 
 }
+
+/* syntax sugar for out linkgs creation*/
 class LinkOutCreator(v:Vertex,label:String, props:(String,String)*) extends LinkCreator(v,Direction.OUT,label,props:_*){
 
   def ~>(node:Vertex): Vertex = {

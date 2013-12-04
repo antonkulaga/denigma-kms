@@ -19,6 +19,8 @@ trait GraphParams extends GraphConsts{
 
   val CONSTRAINT = sys+"constraint"
 
+  val OF_TYPE = sys+"subClassOf"
+
 }
 
 object GP extends GraphParams{

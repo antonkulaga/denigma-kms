@@ -8,6 +8,7 @@ import scala.collection.JavaConversions._
 import SG._
 import models.graphs.constraints.StringOf
 import scala.collection.IterableView
+import scala.util._
 
 
 class LinkType(name:String) extends NodeType(name)
@@ -20,6 +21,44 @@ class NodeType(val name:String)
 {
   val should = new Schema()
   val must = new Schema()
+
+  class NotValidVertex(check:Map[String,Option[Boolean]]) extends Exception("object is not valid: "+check.toString())
+
+  def write(obj:Map[String,Any]): Try[Vertex] = obj.get("id") match {
+    case Some(id)=>
+      sg.nodeById(id.toString) match
+      {
+
+
+        case Some(nd)=>
+          val props = nd.propsWithNew(obj)
+          if(must.isValid(props))
+          {
+            sg.setParams(nd,props)
+            //nd.addEdge(SG.TYPE,nd)
+            Success(nd)
+          }
+          else Failure(new NotValidVertex(must.validate(props)))
+
+        case _=>
+          if(must.isValid(obj))
+          {
+            val nd = sg.addNode(obj)
+            //nd.addEdge(SG.TYPE,nd)
+            Success(nd)
+          }
+          else  Failure(new NotValidVertex(must.validate(obj)))
+      }
+    case None=>
+      if(must.isValid(obj))
+      {
+        val nd = sg.addNode(obj)
+        //nd.addEdge(SG.TYPE,nd)
+        Success(nd)
+      }
+      else  Failure(new NotValidVertex(must.validate(obj)))
+  }
+
 }
 
 object NodeType {
@@ -39,6 +78,7 @@ object NodeType {
 
 }
 
+/* class that encapsulates restrictions*/
 class Schema extends Properties with Links {
 
   def parse(v:Vertex, label:String): IterableView[Option[Property], Iterable[_]] =

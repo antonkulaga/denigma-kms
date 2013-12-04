@@ -22,3 +22,4 @@ addSbtPlugin("com.typesafe.sbt" % "sbt-atmos-play" % "0.3.0")
 resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
+

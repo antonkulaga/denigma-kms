@@ -3,23 +3,18 @@ package controllers
 import play.api.mvc._
 import models._
 
-import play.api.libs.json.{JsNull, JsObject, Json}
+import play.api.libs.json.{JsNull, Json}
 import com.tinkerpop.blueprints.Vertex
-import models.graphs.SG
 import org.joda.time.DateTimeZone
-import scala.collection.immutable.IndexedSeq
-import models.graphs.views.NodeViewModel
-import models.graphs.views.EdgeViewModel
-import scala.collection._
 import scala._
-import models.graphs.views.EdgeViewModel
-import models.graphs.views.NodeViewModel
 import models.graphs.SG._
 import scala.collection.JavaConversions._
 import models.graphs.views.EdgeViewModel
 import models.graphs.views.NodeViewModel
 import play.api.libs.json.JsObject
 import scala.Some
+
+
 
 object Application extends Controller with GenGraph{
 

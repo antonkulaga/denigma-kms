@@ -49,4 +49,12 @@ trait Properties extends PropertyCollector
         prop.checkValidity(v)))
   }
 
+  def isValid(mp:Map[String,Any]): Boolean = items.forall{
+    case (key,prop)=>
+      mp.get(key) match {
+        case None=>false
+        case Some(param)=>prop.checkValidity(param)
+      }
+    }
+
 }

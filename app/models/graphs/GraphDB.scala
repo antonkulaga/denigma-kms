@@ -4,14 +4,9 @@ import play.api.Play
 import play.api.Play.current
 
 import scala.collection.JavaConversions._
-import com.tinkerpop.blueprints.impls.orient.OrientGraph
-import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
-import org.neo4j.index.impl.lucene.LowerCaseKeywordAnalyzer
 import com.tinkerpop.blueprints._
 import org.apache.commons.io.FileUtils
 import java.io.File
-import java.util.UUID
-import scala.Some
 
 /**
  * Graph database
@@ -21,9 +16,6 @@ abstract class GraphDB[TG<: IndexableGraph]{
 
   lazy val g: TG = init()
   def init():TG
-
-
-
 
   def addNode(params:(String,String)*):Vertex
   def nodeById(id:String): Option[Vertex]

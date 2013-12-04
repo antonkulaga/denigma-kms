@@ -39,6 +39,8 @@ object ApplicationBuild extends Build with LibVersions with Macro
 
       "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion
 
+   //   "org.scala-lang" %% "scala-pickling" % picklingVersion,
+
 
     //    "com.thinkaurelius.titan" % "titan-core" % titanVersion,
     //    "com.thinkaurelius.titan" % "titan-cassandra" % titanVersion,
@@ -117,6 +119,8 @@ trait LibVersions {
   val apacheCommonsVersion = "1.3.2"
 
   val scalaCheckVersion = "1.11.0"
+
+  val picklingVersion = "0.8.0-SNAPSHOT"
 
 }
 

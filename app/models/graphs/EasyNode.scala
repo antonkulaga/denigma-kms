@@ -45,6 +45,10 @@ trait EasyNode {
 
   def bool(name:String): Option[Boolean] = p[Boolean](name)
 
+  def allProps:Map[String,Any] = v.getPropertyKeys.map(key=>(key,v.getProperty[Any](key))).toMap
+
+  def propsWithNew(obj:Map[String,Any]) = allProps++obj
+
   def inV(labels:String*): lang.Iterable[Vertex] = v.getVertices(Direction.IN,labels:_*)
   def inE(labels:String*): lang.Iterable[Edge] = v.getEdges(Direction.IN,labels:_*)
 
