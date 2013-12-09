@@ -45,7 +45,7 @@ object Application extends Controller with GenGraph{
 
   def node2js(nv:NodeViewModel): JsObject = Json.obj("id" -> nv.id,
     "name" -> ("node_id_" + nv.id),
-    "properties" -> Json.toJson(nv.properties)
+    "properties" -> nv.jsProps
   )
 
 
@@ -55,7 +55,7 @@ object Application extends Controller with GenGraph{
 
   def edge2js(e:EdgeViewModel) = Json.obj("id" -> e.id,
     "name" -> ("node_id_" + e.id),
-    "properties" -> Json.toJson(e.properties),
+    "properties" -> e.jsProps,
     "incoming" -> Json.toJson(e.v.inV().map(node2js)),
     "outgoing" -> Json.toJson(e.v.outV().map(node2js))
   )

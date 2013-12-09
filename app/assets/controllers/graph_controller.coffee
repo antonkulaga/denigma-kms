@@ -94,6 +94,12 @@ class Denigma.GraphController extends Batman.Controller
     n = new Denigma.Vertex(id:@genId(),name:"test_name2", description:"test_description2",properties:props)
     n.save()
 
+  testClick: (one,two)->
+    vs = Denigma.Vertex.get("loaded").toArray()[0]
+    ps = vs.get("properties").toJSON
+    debugger
+    alert JSON.stringify(vs)
+    alert JSON.stringify(ps)
 
   test: ->
     hello = @g.addNode("hello",

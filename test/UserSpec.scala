@@ -123,9 +123,9 @@ class UserSpec extends SemanticSpec {
     val res = rut.get.id
     val au  = AddUser(res,"username2","email2",password = "passwordNEW")
 
-    val aut = User.write(au.asMap)
-    aut must beSuccessfulTry[Vertex]
-    g.commit()
+//    val aut = User.write(au.asMap)
+//    aut must beSuccessfulTry[Vertex]
+//    g.commit()
 
 
     g.shutdown()

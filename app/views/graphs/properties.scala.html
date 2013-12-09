@@ -6,8 +6,9 @@
     </header>
     <div class="active content">
         <div class="props" data-foreach-prop="@{owner}.properties">
-            <b class="key" data-bind="prop">something inside</b>
-            <b class="value" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor" data-bind-id="prop" data-bind="@{owner}.properties[prop]">something inside</b>
 
+
+                <b class="key" data-bind="prop.name"></b>
+                <span class="value" data-bind="prop.value" data-event-onfocus="showEditor" data-event-onblur="controller.hideEditor"></span>
         </div>
     </div>

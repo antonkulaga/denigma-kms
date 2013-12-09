@@ -5,9 +5,9 @@ class Denigma.Vertex extends Batman.Model
   @primaryKey: 'id'
   #@hasMany "members", {saveInline:false,autoload:true,inverseOf: 'organization', foreignKey:'organization'}
 
-  @hasMany "properties", {saveInline:true,autoload:false}
+  @hasMany "properties", {encoderKey: 'properties',saveInline:true,autoload:false}
 
-  @encode 'id','name','description', 'properties'
+  @encode 'id','name','description'
 
   #@hasMany "edges", inverseOf: "edge"
   #@persist Batman.LocalStorage

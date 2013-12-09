@@ -37,7 +37,9 @@ object ApplicationBuild extends Build with LibVersions with Macro
 
      "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion,
 
-      "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion
+    "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion,
+
+    "org.jscala" %% "jscala-macros" % jScalaVersion
 
    //   "org.scala-lang" %% "scala-pickling" % picklingVersion,
 
@@ -121,6 +123,8 @@ trait LibVersions {
   val scalaCheckVersion = "1.11.0"
 
   val picklingVersion = "0.8.0-SNAPSHOT"
+
+  val jScalaVersion ="0.3"
 
 }
 
