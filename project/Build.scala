@@ -4,13 +4,13 @@ import play.Project._
 import com.typesafe.sbt.SbtAtmosPlay.atmosPlaySettings
 import org.sbtidea.SbtIdeaPlugin._
 import net.litola.SassPlugin
-
+import LibVersions._
 
 /**
  * this files is intended to build the main project
  * it contains links to all dependencies that are needed
  * */
-object ApplicationBuild extends Build with LibVersions with Macro
+object ApplicationBuild extends Build with Macro
 {
 
   val testOptions = "-Dconfig.file=conf/" + Option(System.getProperty("test.config")).getOrElse("application") + ".conf"
@@ -56,7 +56,7 @@ object ApplicationBuild extends Build with LibVersions with Macro
   val main = play.Project(appName, appVersion, appDependencies).settings(
     // Add your own project settings here
 
-    scalaVersion:="2.10.3",
+    scalaVersion:=scalaVer,
 
     scalacOptions ++= Seq("-feature", "-language:_"),
 
@@ -84,6 +84,8 @@ trait Macro{
 
   lazy val macroses = Project("macro", file("macro") ) settings(
 
+    scalaVersion:=scalaVer,
+
     libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-reflect" % _),
 
     libraryDependencies <+= scalaVersion("org.scala-lang" % "scala-compiler" % _)
@@ -95,9 +97,9 @@ trait Macro{
 }
 
 
-trait LibVersions {
+object LibVersions {
 
-  val orientVersion = "1.5.1"
+  val orientVersion = "1.6.2"
 
   //val titanVersion = "0.3.2"
 
@@ -108,7 +110,7 @@ trait LibVersions {
 
   val scalaGraphVersion = "1.7.0"
 
-  val scala = "2.10.3"
+  val scalaVer = "2.10.3"
 
   val parboiledVersion = "1.1.6"
 

@@ -1,0 +1,83 @@
+@import "singularitygs";
+
+@import "semantic-ui";
+
+@import "denigma";
+
+$grids: 12;
+$normal: 60em;
+$large: 80em;
+
+$grids: add-grid(12 at $normal);
+
+$rounding: 5px;
+
+$gutters: 1/3;
+$gutter-styles: 'split';
+
+$in_back: MintCream;
+$out_back: AliceBlue;
+
+.ui.header.positive
+{
+  background-color: #5BBD72 !important;
+}
+
+
+
+body {
+  background: GhostWhite ;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.ui.inverted.menu {
+  padding-top:0;
+  margin-top:0;
+}
+
+#flags {
+ margin-top: 2em;
+  padding-top: 2em;
+}
+
+.content {
+
+
+  .header {
+    border-radius: $rounding;
+    padding: 0.1em;
+
+  }
+
+  @include float-span(12, 1);
+  //@include background-grid;
+
+
+
+  .ui.segment:first-child {
+    margin-top: 1em;
+  }
+
+  .ui.segment{
+
+  }
+
+  .incoming {
+    @include grid-span(3, 1);
+
+
+  }
+
+  .vertices{
+    @include grid-span(6, 4);
+  }
+
+  .outgoing {
+    @include grid-span(3, 10);
+
+  }
+
+}
+
+

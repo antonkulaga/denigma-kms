@@ -114,5 +114,3 @@ class Denigma.GraphController extends Batman.Controller
     )
     @g.addEdge('hello_world','hello','world').draw()
 
-#activates method of the contoller
-Denigma.root("graph#index")

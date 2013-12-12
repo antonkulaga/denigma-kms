@@ -1,0 +1,19 @@
+@(implicit menu:Items, request: RequestHeader)
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>International longevity Alliance</title>
+        @libs()
+        @longevity.app()
+        </head>
+    <body>
+
+        @longevity.header(menu,request)
+        <section class="main" data-yield="main">
+        </section>
+
+        @longevity.sidebar()
+    </body>
+</html>
