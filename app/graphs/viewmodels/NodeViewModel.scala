@@ -1,13 +1,8 @@
 package graphs.viewmodels
 
-import graphs.schemes._
-
-import graphs.SG._
-import graphs.schemes
 
 import com.tinkerpop.blueprints.Vertex
 import graphs.SG
-import graphs.viewmodels.EdgeViewModel
 
 
 case class NodeViewModel(iid:String, v:Vertex) extends Container(iid,v) {

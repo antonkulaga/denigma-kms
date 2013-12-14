@@ -1,7 +1,6 @@
 package graphs
 
-import play.api.{Logger, Plugin, Application}
-import graphs.SG
+import play.api.{Logger, Plugin}
 
 /**
  * Neo4j plugin to stop server.

@@ -31,7 +31,7 @@ class NodeType(val name:String) extends NodeTypeLike
   object NotValidVertex{
     def apply(check:Map[String,Option[Boolean]]) = {
       val rep = check.map(kv=>" { "+kv._1+" : "+kv._2.toString+" } ").foldLeft("")(_+_)
-      Logger.error(s"not valid vertex params: "+rep)
+      //Logger.error(s"not valid vertex params: "+rep)
       new NotValidVertex(check)
     }
   }

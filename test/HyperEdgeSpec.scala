@@ -1,4 +1,5 @@
 import graphs._
+import org.joda.time.DateTime
 import org.specs2.mutable._
 import org.specs2.runner._
 import org.junit.runner._
@@ -11,10 +12,7 @@ import scala.collection.JavaConversions._
 
 
 /**
- * Add your spec here.
- * You can mock out a whole application including requests, plugins etc.
- * For more information, consult the wiki.
- */
+This test tests basic property writing and links creation */
 @RunWith(classOf[JUnitRunner])
 class HyperEdgeSpec extends SemanticSpec {
 
@@ -25,12 +23,15 @@ class HyperEdgeSpec extends SemanticSpec {
     val discover="discover"
     val discStr = "discoveries"
     val peopleStr="people"
+    val dtStr = "2012-12-28T12:32:50.308+01:00"
+    val when: DateTime = DateTime.parse(dtStr)
+
 
     def prepareTest = {
       val sg: SemanticGraph = prepareGraph
       import SG._
 
-      val root = sg.root(sg.ROOT,NAME->sg.ROOT,"other"->"otherval")
+      val root = sg.root(sg.ROOT,NAME->sg.ROOT,"other"->"otherval","when"->when)
 
       root.addLink(learn,"name"->learn)
       val people = sg.addNode(NAME->peopleStr)
@@ -47,6 +48,8 @@ class HyperEdgeSpec extends SemanticSpec {
       import SG._
       val rr = sg.root
       rr.getProperty[String]("other") must beEqualTo("otherval")
+      rr.getProperty[String]("when") must beEqualTo(dtStr)
+      rr.dateTime("when").get must beEqualTo(when)
       rr.outE(learn).size must beEqualTo(1)
       rr.outV(learn).size must beEqualTo(1)
       rr.outL(learn).size must beEqualTo(1)

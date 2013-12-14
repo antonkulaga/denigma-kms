@@ -21,7 +21,7 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
 
   def root: Vertex  =  this.root(ROOT)
 
-  def root(label:String,params:(String,String)*): Vertex  =  this.roots.get(ROOT,label).headOption match {
+  def root(label:String,params:(String,Any)*): Vertex  =  this.roots.get(ROOT,label).headOption match {
     case None=> val v: Vertex = addNode(params:_*)
       roots.put(ROOT,label,v)
       v
@@ -33,6 +33,9 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
     case Some(v)=>NodeType.parse(v)
   }
 
+  /*
+  should return one type vertex by name
+   */
   def nodeTypeVertex(str:String): Option[Vertex] = this.types.get(TYPE,str).headOption
 
   def addType(tp:NodeType,commit:Boolean = false) =   this.nodeType(tp.name) match {

@@ -11,7 +11,8 @@ object Page extends NodeType("Page") with CreatedByUser
 {
   val title = must be StringOf("title")
   val text = must be TextOf("text")
-  must have DateTimeOf("published")
+  val published = must be DateTimeOf("published")
+
   //  must have OutLinkOf(Created.name,Created.name,GP.USER)
 }
 

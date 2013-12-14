@@ -51,7 +51,7 @@ object SG extends GraphParams
 
     def nodeTypes = v.getVertices(Direction.OUT, TYPE)
 
-    def nodeType(name: String) = nodeTypes.find(_.getProperty(TYPE) == name)
+    def nodeType(name: String) = nodeTypes.find(_.getProperty[String](TYPE) == name)
 
     def isOfType(name: String) = nodeType(name) == None
 
@@ -60,17 +60,11 @@ object SG extends GraphParams
 
   }
 
-  trait TypedNode {
-    val v:Vertex
 
 
-  }
-
-
-
-  /*
-* class that add some new features to Vertex
-* */
+    /*
+  * class that add some new features to Vertex
+  * */
   implicit class SemanticNode(val v:Vertex)  extends EasyNode with IndexedNode
   {
 

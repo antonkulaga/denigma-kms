@@ -14,6 +14,7 @@ object Created extends LinkType("Created")
   must have DateTimeOf("created")
 }
 
+
 object User extends NodeType(GP.USER)
 {
   val username: StringOf =  must be StringOf("username")
@@ -30,12 +31,8 @@ object User extends NodeType(GP.USER)
 
 
 
-
-
-
-
 trait CreatedByUser extends NodeType{
-  must have OutLinkOf(Created.name,Created.name,GP.USER)
+  val created = must be OutLinkOf(Created.name,Created.name,GP.USER)
 }
 
 case class UserLinkOf(lname:String,lType:String="") extends Link(lname, Direction.OUT,lType,User.name)

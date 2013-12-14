@@ -17,7 +17,7 @@ abstract class GraphDB[TG<: IndexableGraph]{
   lazy val g: TG = init()
   def init():TG
 
-  def addNode(params:(String,String)*):Vertex
+  def addNode(params:(String,Any)*):Vertex
   def nodeById(id:String): Option[Vertex]
   def nodes[TV](key:String,value:TV): List[Vertex] = g.getVertices(key,value).toList
 

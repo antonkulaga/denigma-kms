@@ -8,7 +8,6 @@ trait Named
 {
   val name:String
 }
-import com.fasterxml.jackson.databind.util.Named
 
 /*
 Abstract property constraint class

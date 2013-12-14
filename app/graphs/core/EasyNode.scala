@@ -4,6 +4,7 @@ import com.tinkerpop.blueprints.{Edge, Direction, Vertex}
 import java.lang
 import scala.collection.JavaConversions._
 import play.Logger
+import org.joda.time.DateTime
 
 
 /**
@@ -34,6 +35,7 @@ trait EasyNode {
   def double(name:String): Option[Double] = p[Double](name)
   def int(name:String): Option[Int] = p[Int](name)
   def long(name:String): Option[Long] = p[Long](name)
+  def dateTime(name:String): Option[DateTime] =  p[String](name).map(DateTime.parse)
 
   def toStr(name: String): Option[String] = v.getProperty[Any](name) match
   {

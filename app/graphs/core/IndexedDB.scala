@@ -1,16 +1,13 @@
 package graphs.core
 
-import play.api.Play
-import play.api.Play.current
 
-import org.neo4j.index.impl.lucene.LowerCaseKeywordAnalyzer
 import com.tinkerpop.blueprints._
-import org.apache.commons.io.FileUtils
-import java.io.File
-import java.util.UUID
-import scala.collection.JavaConversions._
-import scala.None
 import graphs.SG
+import java.util.UUID
+import org.joda.time.DateTime
+import org.neo4j.index.impl.lucene.LowerCaseKeywordAnalyzer
+import scala.None
+import scala.collection.JavaConversions._
 
 
 /*
@@ -51,9 +48,9 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
   def nodeByName(name: String): Option[Vertex] = names.get(GP.NAME, name).headOption
 
 
-  def addNode(params:(String,String)*):Vertex = this.addNode(UUID.randomUUID().toString,params:_*)
+  def addNode(params:(String,Any)*):Vertex = this.addNode(UUID.randomUUID().toString,params:_*)
 
-  def addNode(id:String,params: (String, String)*): Vertex = {
+  def addNode(id:String,params: (String, Any)*): Vertex = {
 
     val v = g.addVertex(null)
     v.setProperty(ID, id)
@@ -101,8 +98,17 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
   }
 
 
-  def setParams(v:Vertex,params:(String,String)*): Vertex =   {
+  def setParams(v:Vertex,params:(String,Any)*): Vertex =   {
     params.foreach{
+      //to make date work well
+      case (key,value:DateTime)=>
+        val iso: String = value.toDateTimeISO.toString
+        v.setProperty(key,iso)
+        indexes.get(key)  match
+        {
+          case Some(ind: Index[Vertex])=>  ind.put(key,iso,v)
+          case _ =>
+        }
       case (key,value)=>
         v.setProperty(key,value)
         indexes.get(key)  match

@@ -20,7 +20,7 @@ object Model {
     val mapApply = Select(reify(Map).tree, newTermName("apply"))
 
     val pairs = weakTypeOf[T].declarations.collect {
-      case m: MethodSymbol if m.isCaseAccessor =>
+      case m: MethodSymbol if m.isVal || m.isCaseAccessor =>
         val name = c.literal(m.name.decoded)
         val value = c.Expr(Select(c.resetAllAttrs(c.prefix.tree), m.name))
         reify(name.splice -> value.splice).tree

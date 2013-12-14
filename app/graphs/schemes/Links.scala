@@ -12,7 +12,8 @@ trait Links
 {
   var links = Map.empty[String,Link]
   def have(link:Link): Links = {links+=(link.name->link); this }
-  def be(link:Link): Link = {links+=(link.name->link);link}
+  def be(link:OutLinkOf): Link = {links+=(link.name->link);link}
+  def be(link:InLinkOf): Link = {links+=(link.name->link);link}
 
 
   def writeLinks(v:Vertex): Vertex =  {this.links.foreach
@@ -97,8 +98,8 @@ class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:St
 
 }
 
-case class OutLinkOf(lname:String,lType:String="",nType:String="", cap:String="") extends Link(lname, Direction.OUT,lType,nType,cap)
-case class InLinkOf(lname:String,lType:String="",nType:String="", cap:String="") extends Link(lname, Direction.IN,lType,nType,cap)
+case class OutLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends Link(linkName, Direction.OUT,typeOfLink,typeOfNode,cap)
+case class InLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends Link(linkName, Direction.IN,typeOfLink,typeOfNode,cap)
 
 //case class LinkToNodeOf(linkName:String,lDir:Direction,nType:String) extends Link(linkName,lDir) {
 //  val  nodeId:String   = ""
