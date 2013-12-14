@@ -1,11 +1,12 @@
-package models.graphs.constraints
+package graphs.schemes.constraints
 
 import play.Logger
 import com.tinkerpop.blueprints.{Direction, Vertex,Element}
-import models.graphs.{SG, GP, SemanticGraph}
 import scala.collection.JavaConversions._
 import scala.util.parsing.combinator._
+import graphs.SG
 import SG._
+import graphs.core.GP
 
 abstract class PropertyParser[T]
 {

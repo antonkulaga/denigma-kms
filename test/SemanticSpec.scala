@@ -1,4 +1,4 @@
-import models.graphs.SemanticGraph
+import graphs.SemanticGraph
 import org.specs2.specification.SpecificationName
 import play.Play
 import io.github.nremond.PBKDF2

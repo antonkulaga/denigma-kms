@@ -4,11 +4,13 @@ package models
 There I store all types connected to work with content
  */
 
-import models.graphs.constraints.{NodeType, OutLinkOf, StringOf, DateTimeOf}
+import graphs.schemes.constraints._
+import graphs.schemes._
 
 object Page extends NodeType("Page") with CreatedByUser
 {
-  must have StringOf("title") have StringOf("text")
+  val title = must be StringOf("title")
+  val text = must be TextOf("text")
   must have DateTimeOf("published")
   //  must have OutLinkOf(Created.name,Created.name,GP.USER)
 }

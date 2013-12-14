@@ -1,6 +1,7 @@
-package models.graphs.constraints
+package graphs.schemes.constraints
+
 import com.tinkerpop.blueprints._
-import models.graphs.{SG, GP, SemanticGraph}
+import graphs.SG
 import SG._
 
 
@@ -14,13 +15,13 @@ object StringOf extends PropertyParser[StringOf]
   def parse(v: Vertex): Option[StringOf] = withName(v){
 
     (name,n)=>
-      StringOf(name,v.p[String](regex).getOrElse(""))
+      StringOf(name,v.p[String](regex).getOrElse(""),cap = v.p[String](CAPTION).getOrElse(""),prior=v.p[Int](PRIORITY).getOrElse(Int.MaxValue))
 
   }
 }
 
 /*checks string property*/
-case class StringOf(propertyName:String,regExp:String="") extends Property(propertyName) with Validator[String] //with PropertyWriter
+case class StringOf(propertyName:String,regExp:String="", cap:String="",prior:Int=Int.MaxValue) extends Property(propertyName,cap,priority = prior) with Validator[String] //with PropertyWriter
 {
 
   val regex = regExp.r
@@ -32,10 +33,9 @@ case class StringOf(propertyName:String,regExp:String="") extends Property(prope
   def matches(str:String) = regex.findAllMatchIn(str)
 
 
-  def write(v: Element): Element = {
-
-    v.setProperty(NAME,name)
-    v.setProperty("regex",regExp)
+  override def write(v: Element): Element = {
+    super.write(v)
+    v.setProperty(StringOf.regex,regExp)
     v.setProperty(CONSTRAINT,StringOf.constraint)
     v
   }

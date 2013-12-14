@@ -1,8 +1,6 @@
 package models
 
 import com.tinkerpop.blueprints._
-import scala.collection.JavaConversions._
-import models.graphs.SG
 
 object Menu {
 

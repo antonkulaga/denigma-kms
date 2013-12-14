@@ -1,9 +1,7 @@
-package models.graphs.constraints
-
-
+package graphs.schemes.constraints
 
 import com.tinkerpop.blueprints.{Element, Vertex}
-import models.graphs.{SG, SemanticGraph}
+import graphs.SG
 import SG._
 object BooleanOf extends PropertyParser[BooleanOf]
 {
@@ -13,16 +11,18 @@ object BooleanOf extends PropertyParser[BooleanOf]
   def parse(v: Vertex): Option[BooleanOf] = withName(v){
 
     (name,n)=>
-      BooleanOf(name,v.bool(DEFAULT).getOrElse(false))
+      BooleanOf(name,v.bool(DEFAULT).getOrElse(false),
+        cap = v.p[String](CAPTION).getOrElse(""),
+        prior=v.p[Int](PRIORITY).getOrElse(Int.MaxValue))
 
   }
 }
 
-case class BooleanOf(propertyName:String,default:Boolean=false) extends Property(propertyName) with Validator[Boolean]
+case class BooleanOf(propertyName:String,default:Boolean=false, cap:String="", prior:Int = Int.MaxValue) extends Property(propertyName,caption = cap,priority = prior) with Validator[Boolean]
 { // with PropertyWriter{
   def validate(value: Boolean): Boolean = true
-  def write(v: Element): Element = {
-    v.setProperty(NAME,name)
+  override def write(v: Element): Element = {
+    super.write(v)
     v.setProperty(DEFAULT,default)
     v.setProperty(CONSTRAINT,BooleanOf.constraint)
     v

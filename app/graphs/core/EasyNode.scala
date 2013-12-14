@@ -1,4 +1,4 @@
-package models.graphs
+package graphs.core
 
 import com.tinkerpop.blueprints.{Edge, Direction, Vertex}
 import java.lang

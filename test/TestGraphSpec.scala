@@ -1,6 +1,7 @@
 import com.tinkerpop.blueprints.Edge
+import graphs.core.{GP}
+import graphs.{SemanticGraph, SG}
 import models.TestGraph
-import models.graphs.{GP, SG, SemanticGraph}
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
 import SG._

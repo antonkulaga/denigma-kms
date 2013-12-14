@@ -1,5 +1,4 @@
-package models.graphs
-
+package graphs.core
 
 /*
 to keep constants
@@ -20,6 +19,7 @@ trait GraphParams extends GraphConsts{
   val CONSTRAINT = sys+"constraint"
 
   val OF_TYPE = sys+"subClassOf"
+  val CAPTION = sys+"caption"
 
 }
 
@@ -32,8 +32,11 @@ trait GraphConsts{
   val sys = "__"
   val ID = sys+"id"
   val TYPE = sys+"type"
+  val TITLE = sys+"title"
+
 
   val ROOT = "root"
   val NAME = "name"
   val USER = "user"
+  val PRIORITY = "priority"
 }

@@ -1,6 +1,8 @@
 package models
-import models.graphs._
-import models.graphs.constraints.{NodeType, LinkType, StringOf, DateTimeOf}
+
+import graphs.schemes._
+import graphs.schemes.constraints._
+
 
 
 object Organization extends NodeType("Organization")

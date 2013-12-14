@@ -1,4 +1,4 @@
-package models.graphs
+package graphs.core
 
 import play.api.Play
 import play.api.Play.current

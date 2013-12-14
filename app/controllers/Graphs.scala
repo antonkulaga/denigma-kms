@@ -3,17 +3,14 @@ package controllers
 import play.api.mvc._
 import models._
 
-import play.api.libs.json.{JsNull, Json}
+import play.api.libs.json._
 import com.tinkerpop.blueprints.Vertex
 import org.joda.time.DateTimeZone
 import scala._
-import models.graphs.SG._
-import scala.collection.JavaConversions._
-import models.graphs.views.EdgeViewModel
-import models.graphs.views.NodeViewModel
-import play.api.libs.json.JsObject
 import scala.Some
-
+import graphs.viewmodels._
+import graphs.SG._
+import scala.collection.JavaConversions._
 
 
 
@@ -41,7 +38,6 @@ object Graphs extends Controller with GenGraph{
           Ok(Json.obj("vertices" -> Json.toJson(List(this.node2js(r))))).as("application/json") //Ok(views.html.page("node","menu","0"))
       }
   }
-
 
 
   def node2js(nv:NodeViewModel): JsObject = Json.obj("id" -> nv.id,

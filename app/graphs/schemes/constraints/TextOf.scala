@@ -1,8 +1,7 @@
-package models.graphs.constraints
+package graphs.schemes.constraints
 
 import com.tinkerpop.blueprints.{Element, Vertex}
-import models.graphs.SG._
-import models.graphs.constraints.TextOf
+import graphs.SG._
 object TextOf extends PropertyParser[TextOf]
 {
   val constraint: String = "TEXT"
@@ -12,22 +11,21 @@ object TextOf extends PropertyParser[TextOf]
   def parse(v: Vertex): Option[TextOf] = withName(v){
 
     (name,n)=>
-      TextOf(name,v.p[Int]("len").getOrElse(100000))
+      TextOf(name,v.p[Int]("len").getOrElse(100000),cap = v.p[String](CAPTION).getOrElse(""),prior=v.p[Int](PRIORITY).getOrElse(Int.MaxValue))
 
   }
 }
 
 /*checks string property*/
-case class TextOf(propertyName:String,len:Int = TextOf.defMax) extends Property(propertyName) with Validator[String] //with PropertyWriter
+case class TextOf(propertyName:String,len:Int = TextOf.defMax, cap:String="",prior:Int=Int.MaxValue) extends Property(propertyName,cap,priority=prior) with Validator[String] //with PropertyWriter
 {
 
 
   def validate(value:String): Boolean = value.length<=len
 
 
-  def write(v: Element): Element = {
-
-    v.setProperty(NAME,name)
+  override def  write(v: Element): Element = {
+    super.write(v)
     v.setProperty(TextOf.len,len)
     v.setProperty(CONSTRAINT,TextOf.constraint)
     v

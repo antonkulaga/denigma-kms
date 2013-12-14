@@ -1,4 +1,4 @@
-package models.graphs
+package graphs.core
 
 import play.api.Play
 import play.api.Play.current
@@ -10,6 +10,7 @@ import java.io.File
 import java.util.UUID
 import scala.collection.JavaConversions._
 import scala.None
+import graphs.SG
 
 
 /*
@@ -82,6 +83,11 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
   /* adds map of properties to the vertex*/
   def setParams(v:Vertex,params:Map[String,Any], skip:String*): Vertex =   {
     params.foreach{
+      case ("id",value) if !skip.contains(SG.ID)=>
+        v.setProperty(SG.ID,value)
+        ids.put(SG.ID,value,v)
+        v
+
       case (key,value) if !skip.contains(key)=>
         v.setProperty(key,value)
         indexes.get(key)  match

@@ -1,9 +1,9 @@
 package models
 
-import models.graphs.SG
 import com.tinkerpop.blueprints.Vertex
 import scala.collection.JavaConversions._
 
+import graphs.SG
 import SG._
 
 /*it creates the test graph*/

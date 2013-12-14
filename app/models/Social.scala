@@ -2,13 +2,11 @@ package models
 
 
 import com.tinkerpop.blueprints.Direction
-import models.graphs._
-import models.graphs.constraints._
-import models.graphs.constraints.StringOf
-import models.graphs.constraints.DateTimeOf
-import models.graphs.constraints.HashOf
-import models.graphs.constraints.OutLinkOf
-
+import graphs.core._
+import graphs.schemes.constraints._
+import graphs.schemes._
+import graphs.schemes.LinkType
+import graphs.schemes.OutLinkOf
 
 
 object Created extends LinkType("Created")
@@ -18,10 +16,21 @@ object Created extends LinkType("Created")
 
 object User extends NodeType(GP.USER)
 {
-  must have StringOf("username") have HashOf("password")  have StringOf("email","""\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,8}\b""")
-  should have OutLinkOf("LiveIn",City.name)
-  should have OutLinkOf(Role.name)
+  val username: StringOf =  must be StringOf("username")
+  val password: HashOf = must be HashOf("password")
+  val email: StringOf = must be StringOf("email","""\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,8}\b""")
+
+  val liveIn: Link = should be OutLinkOf("LiveIn",City.name)
+  val role: Link = should be OutLinkOf(Role.name)
+
+//  must have StringOf("username") have HashOf("password")  have StringOf("email")
+//  should have OutLinkOf("LiveIn",City.name)
+//  should have OutLinkOf(Role.name)
 }
+
+
+
+
 
 
 
@@ -43,3 +52,4 @@ object Country extends NodeType("Country")
 {
   must have StringOf("name")
 }
+

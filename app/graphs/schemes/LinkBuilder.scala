@@ -1,9 +1,9 @@
-package models.graphs
+package graphs.schemes
 
 import com.tinkerpop.blueprints.Vertex
 import com.tinkerpop.blueprints.Direction
 import scala.collection.JavaConversions._
-import SG._
+import graphs.SG._
 
 /* need to constract the Link */
 abstract class LinkBuilder(v:Vertex,d:Direction,label:String) {

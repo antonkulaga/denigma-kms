@@ -1,11 +1,9 @@
-import models.graphs.views.NodeViewModel
-import models.graphs.{SG, SemanticGraph}
-import org.specs2.mutable._
+import graphs.{SemanticGraph, SG}
+import graphs.viewmodels.NodeViewModel
 import org.specs2.runner._
 import org.junit.runner._
 
 import play.api.test._
-import play.Play
 import com.tinkerpop.blueprints._
 import scala.collection.JavaConversions._
 import SG._
@@ -84,7 +82,7 @@ class ViewModelSpec extends SemanticSpec {
       import SG._
 
       val wonderer = sg.nodeByName(wonder).get
-      wonderer.toStr(NAME).get shouldEqual(wonder)
+      wonderer.toStr(NAME).get shouldEqual wonder
       wonderer.toStr("age").get shouldEqual "5000"
       wonderer.toStr("capital").get shouldEqual "12345.12345"
       wonderer.toStr("immortal").get shouldEqual (true.toString)
@@ -98,9 +96,9 @@ class ViewModelSpec extends SemanticSpec {
       wonderer.id shouldEqual ew.id
 
       ew.properties(NAME) shouldEqual wonder
-      ew.properties("age") shouldEqual  (5000.toString)
-      ew.properties("capital") shouldEqual (12345.12345.toString)
-      ew.properties("immortal") shouldEqual (true.toString)
+      ew.properties("age") shouldEqual  5000
+      ew.properties("capital") shouldEqual 12345.12345
+      ew.properties("immortal") shouldEqual true
 
       sg.g.shutdown()
     }

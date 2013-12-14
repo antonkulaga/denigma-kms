@@ -1,16 +1,10 @@
-import models.City
-import models.graphs.{SG, SemanticGraph}
-import org.denigma.macroses.Model
-import org.specs2.mutable._
+import graphs.{SemanticGraph, SG}
 import org.specs2.runner._
 import org.junit.runner._
 
 import play.api.test._
 import play.Play
 import com.tinkerpop.blueprints._
-import scala.collection.JavaConversions._
-import org.specs2.matcher.ThrownMessages
-import models.graphs.constraints._
 import models._
 import org.denigma.macroses.Model.Mappable
 /**
@@ -48,7 +42,6 @@ class UserSpec extends SemanticSpec {
     Play.application().isTest must beTrue
     val sg: SemanticGraph = prepareGraph
     val g = sg.g
-    import SG._
     sg.nodeTypeVertex(User.name).mustEqual(None)
     sg.nodeType(User.name).mustEqual(None)
     sg.addType(User,true)
@@ -58,6 +51,9 @@ class UserSpec extends SemanticSpec {
     case class WrongUser2(username:String,email:String,password:String) extends Model
     case class RightUser(username:String,email:String,password:String) extends Model
     case class WrongUser3(usernamew:String,emailw:String,password:String) extends Model
+
+
+    val items = User.must.items
 
     //must have StringOf("username") have HashOf("password")  have StringOf("email")
 
@@ -123,9 +119,8 @@ class UserSpec extends SemanticSpec {
     val res = rut.get.id
     val au  = AddUser(res,"username2","email2",password = "passwordNEW")
 
-//    val aut = User.write(au.asMap)
-//    aut must beSuccessfulTry[Vertex]
-//    g.commit()
+    val aut = User.write(au.asMap)
+    aut must beSuccessfulTry[Vertex]
 
 
     g.shutdown()

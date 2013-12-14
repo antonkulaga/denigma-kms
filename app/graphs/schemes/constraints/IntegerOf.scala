@@ -1,7 +1,7 @@
-package models.graphs.constraints
+package graphs.schemes.constraints
 
 import com.tinkerpop.blueprints.{Element, Vertex}
-import models.graphs.SG._
+import graphs.SG._
 
 
 object IntegerOf extends PropertyParser[IntegerOf]
@@ -13,20 +13,20 @@ object IntegerOf extends PropertyParser[IntegerOf]
   def parse(v: Vertex): Option[IntegerOf] = withName(v){
 
     (name,n)=>
-      IntegerOf(name,v.int(MIN).getOrElse(Int.MinValue),v.int(MAX).getOrElse(Int.MaxValue))
+      IntegerOf(name,v.int(MIN).getOrElse(Int.MinValue),v.int(MAX).getOrElse(Int.MaxValue),
+        cap = v.p[String](CAPTION).getOrElse(""),prior=v.p[Int](PRIORITY).getOrElse(Int.MaxValue))
 
   }
 }
 
-case class IntegerOf(propertyName:String,min:Int=Int.MinValue, max:Int=Int.MaxValue) extends Property(propertyName)  with Validator[Int]  //with PropertyWriter
+case class IntegerOf(propertyName:String,min:Int=Int.MinValue, max:Int=Int.MaxValue, cap:String="",prior:Int=Int.MaxValue) extends Property(propertyName,cap,priority = prior)  with Validator[Int]  //with PropertyWriter
 {
   def validate(value:Int) = value>min && value < max
 
 
 
-  def write(v: Element): Element = {
-
-    v.setProperty(NAME,name)
+  override def write(v: Element): Element = {
+    super.write(v)
     v.setProperty(IntegerOf.MAX,max)
     v.setProperty(IntegerOf.MIN,min)
     v.setProperty(CONSTRAINT,IntegerOf.constraint)

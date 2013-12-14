@@ -1,21 +1,23 @@
-package models.graphs.constraints
+package graphs.schemes
 
 import com.tinkerpop.blueprints.Vertex
-import models.graphs.{SG, SemanticGraph}
-import collection.JavaConversions._
-import org.denigma.macroses.ModelLike
+import graphs.schemes.constraints._
+import scala.Some
+import graphs.SG._
+import scala.collection.immutable
+import scala.collection.JavaConversions._
 
 trait Properties extends PropertyCollector
 {
   var strings = new PropertyHolder[StringOf,Properties](this)
   var texts = new PropertyHolder[TextOf,Properties](this)
-
   var hashes= new PropertyHolder[HashOf,Properties](this)
   var ints= new PropertyHolder[IntegerOf,Properties](this)
   var doubles= new PropertyHolder[DoubleOf,Properties](this)
   var dts= new PropertyHolder[DateTimeOf,Properties](this)
   var bools= new PropertyHolder[BooleanOf,Properties](this)
 
+  def have(value:TextOf): Properties  = this.texts.add(value)
   def have(value:StringOf): Properties  = this.strings.add(value)
   def have(value:HashOf): Properties  = this.hashes.add(value)
   def have(value:IntegerOf): Properties   = this.ints.add(value)
@@ -23,7 +25,14 @@ trait Properties extends PropertyCollector
   def have(value:DateTimeOf): Properties   = this.dts.add(value)
   def have(value:BooleanOf): Properties  = this.bools.add(value)
 
-  import models.graphs.SG._
+  def be(value:TextOf): TextOf  = this.texts.push(value)
+  def be(value:StringOf): StringOf  = this.strings.push(value)
+  def be(value:HashOf): HashOf  = this.hashes.push(value)
+  def be(value:IntegerOf): IntegerOf   = this.ints.push(value)
+  def be(value:DoubleOf): DoubleOf  = this.doubles.push(value)
+  def be(value:DateTimeOf): DateTimeOf   = this.dts.push(value)
+  def be(value:BooleanOf): BooleanOf  = this.bools.push(value)
+
   /*
   Writes property as connected constraint vertex
    */

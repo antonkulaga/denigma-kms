@@ -1,11 +1,12 @@
-package models.graphs
-
+package graphs
 
 import com.tinkerpop.blueprints._
 import scala.{collection, Some}
 
 import scala.collection.JavaConversions._
 import play.Logger
+import graphs.schemes.{LinkInCreator, LinkOutCreator}
+import graphs.core.{GraphParams, EasyNode}
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 

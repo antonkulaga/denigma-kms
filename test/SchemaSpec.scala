@@ -1,12 +1,10 @@
-import models.graphs.{SG, SemanticGraph}
-import org.specs2.mutable._
+import graphs.{SemanticGraph, SG}
 import org.specs2.runner._
 import org.junit.runner._
 
 import play.api.test._
 import play.Play
 import com.tinkerpop.blueprints._
-import scala.collection.JavaConversions._
 
 /*
 A test to test how types work

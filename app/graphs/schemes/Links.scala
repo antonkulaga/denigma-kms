@@ -1,21 +1,19 @@
-package models.graphs.constraints
+package graphs.schemes
 
 import scala.collection.JavaConversions._
-import play.Logger
 import com.tinkerpop.blueprints._
-import  scala.util.matching.Regex
 import com.tinkerpop.blueprints.Vertex
 import scala.collection.immutable._
-import com.github.t3hnar.bcrypt._
-import com.github.t3hnar.bcrypt
-import models.graphs.SG._
-import models.graphs.SG
+import graphs.SG._
+import graphs.SG
 
 
 trait Links
 {
   var links = Map.empty[String,Link]
   def have(link:Link): Links = {links+=(link.name->link); this }
+  def be(link:Link): Link = {links+=(link.name->link);link}
+
 
   def writeLinks(v:Vertex): Vertex =  {this.links.foreach
   {
@@ -33,7 +31,7 @@ trait Links
 
 object Link
 {
-  import SG._
+
   val DIR = "direction"
   val BOTH = "both"->Direction.BOTH
   val IN = "in"->Direction.IN
@@ -58,26 +56,33 @@ object Link
     case Some(name)=>
       Some(new Link(
         name,
-        dir(v),
-        v.str(LINK_TYPE).getOrElse(""),
-        v.str(NODE_TYPE).getOrElse(""),
-        v.str(NODE_ID).getOrElse(""),
-        v.int(MIN_Q).getOrElse(1),
-        v.int(MAX_Q).getOrElse(Int.MaxValue)
+        dir = dir(v),
+        linkType = v.str(LINK_TYPE).getOrElse(""),
+        nodeType = v.str(NODE_TYPE).getOrElse(""),
+        nodeId = v.str(NODE_ID).getOrElse(""),
+        minQ = v.int(MIN_Q).getOrElse(1),
+        maxQ = v.int(MAX_Q).getOrElse(Int.MaxValue),
+        caption = v.str(CAPTION).getOrElse("")
+
       ))
   }
 
   def write(l:Link,v:Vertex) ={
-    v.props(DIR->l.dir.toString,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.name,MIN_Q->l.minQ,MAX_Q->l.maxQ)
+    v.props(DIR->l.dir.toString,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.name,MIN_Q->l.minQ,MAX_Q->l.maxQ,CAPTION->l.caption)
   }
 }
 
-class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", val minQ:Int=1, val maxQ:Int = Int.MaxValue)
+/*
+This is class of a link constraint
+ */
+class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", var minQ:Int=1, var maxQ:Int = Int.MaxValue, val caption:String="")
 {
 
   def hasLink(v:Vertex) = this.edges(v).iterator().hasNext
   def edges(v:Vertex) = v.getEdges(dir,name)
   def vertices(v:Vertex) = v.getVertices(dir,name)
+
+  def title = if(caption=="") name else caption
 
 
   def linkVertices(v:Vertex) = {
@@ -92,8 +97,8 @@ class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:St
 
 }
 
-case class OutLinkOf(lname:String,lType:String="",nType:String="") extends Link(lname, Direction.OUT,lType,nType)
-case class InLinkOf(lname:String,lType:String="",nType:String="") extends Link(lname, Direction.IN,lType,nType)
+case class OutLinkOf(lname:String,lType:String="",nType:String="", cap:String="") extends Link(lname, Direction.OUT,lType,nType,cap)
+case class InLinkOf(lname:String,lType:String="",nType:String="", cap:String="") extends Link(lname, Direction.IN,lType,nType,cap)
 
 //case class LinkToNodeOf(linkName:String,lDir:Direction,nType:String) extends Link(linkName,lDir) {
 //  val  nodeId:String   = ""
