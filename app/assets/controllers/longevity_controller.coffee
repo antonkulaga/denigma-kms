@@ -26,24 +26,24 @@ class Denigma.LongevityController extends Batman.Controller
       shadowed   : true                                     # puts the interface into a shadow dom when it's available
       maskable   : false                                     # uses a mask over the document for toolbar dialogs
       style      : false                                     # interface style - 'small', 'flat' or 'small flat'
-      floating   : true                                     # floats to the focused region
+      floating   : true                                    # floats to the focused region
       floatWidth : false                                     # fixed width for floating interface (pixel value - eg. 520)
       floatDrag  : true
+      visible    : false
+
     Mercury.init()
 
   content: ->
     @initMercury()
 
-  #Mercury.hide()
-  #@render(false)
-  #@init()
-  #@test()
-
   showEditor:->
-    #Mercury.show()
+    Mercury.trigger('reinitialize')
+    Mercury.show()
 
   hideEditor:->
-    #Mercury.hide()
+    alert "hide"
+    Mercury.hide()
+
 
   test: (one,two)->
     alert "test click"

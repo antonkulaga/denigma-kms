@@ -54,6 +54,7 @@ class Denigma.GraphController extends Batman.Controller
     #@test()
 
   showEditor:->
+    alert "werfg"
     #Mercury.show()
 
   hideEditor:->

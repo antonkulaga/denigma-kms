@@ -22,8 +22,8 @@ class UserSpec extends SemanticSpec {
     val g = sg.g
     import SG._
     sg.nodeTypeVertex(User.name).mustEqual(None)
-    sg.nodeType(User.name).mustEqual(None)
-    sg.addType(User,true)
+    sg.typeByName(User.name).mustEqual(None)
+    sg.registerType(User,true)
     val uv: Option[Vertex] = sg.nodeTypeVertex(User.name)
     uv match {
       case None=>failure("User class has not been added to the graph")
@@ -43,8 +43,8 @@ class UserSpec extends SemanticSpec {
     val sg: SemanticGraph = prepareGraph
     val g = sg.g
     sg.nodeTypeVertex(User.name).mustEqual(None)
-    sg.nodeType(User.name).mustEqual(None)
-    sg.addType(User,true)
+    sg.typeByName(User.name).mustEqual(None)
+    sg.registerType(User,true)
 
 
     case class WrongUser1(wrongName:String,email:Int,password:Int) extends Model
@@ -64,30 +64,30 @@ class UserSpec extends SemanticSpec {
     val wu3 = WrongUser3("name","some@meail.com","pass").asMap
 
 
-    val wrong1 = User.must.validate(wu1)
-    val wrong2 = User.must.validate(wu2)
-    val r = User.must.validate(ru)
-    val wrong3 = User.must.validate(wu3)
+    val wrong1 = User.must.validateProperties(wu1)
+    val wrong2 = User.must.validateProperties(wu2)
+    val r = User.must.validateProperties(ru)
+    val wrong3 = User.must.validateProperties(wu3)
 
-    User.must.isValid(wu1) should beFalse
+    User.must.propsAreValid(wu1) should beFalse
 
     wrong1.get("username").get shouldEqual None
     wrong1.get("email").get shouldEqual Some(false)
     wrong1.get("password").get shouldEqual Some(false)
 
-    User.must.isValid(wu2) should beFalse
+    User.must.propsAreValid(wu2) should beFalse
 
     wrong2.get("username").get shouldEqual Some(true)
     wrong2.get("email").get shouldEqual Some(false)
     wrong2.get("password").get shouldEqual Some(true)
 
-    User.must.isValid(ru) should beTrue
+    User.must.propsAreValid(ru) should beTrue
 
     r.get("username").get shouldEqual Some(true)
     r.get("email").get shouldEqual Some(true)
     r.get("password").get shouldEqual Some(true)
 
-    User.must.isValid(wu3) should beFalse
+    User.must.propsAreValid(wu3) should beFalse
 
     wrong3.get("username").get shouldEqual None
     wrong3.get("email").get shouldEqual None
@@ -103,7 +103,7 @@ class UserSpec extends SemanticSpec {
     val sg: SemanticGraph = prepareGraph
     val g = sg.g
     import SG._
-    sg.addType(User,true)
+    sg.registerType(User,true)
     case class RightUser(username:String,email:String,password:String) extends Model
     case class WrongUser2(username:String,email:String,password:String) extends Model
     case class AddUser(id:String,username2:String,email2:String,password:String) extends Model
@@ -112,14 +112,14 @@ class UserSpec extends SemanticSpec {
     val wu = WrongUser2("name","some#email.com","pass")
 
 
-    val wut = User.write(wu.asMap)
+    val wut = User.save(wu.asMap)
     wut must beFailedTry[Vertex]
-    val rut = User.write(user.asMap)
+    val rut = User.save(user.asMap)
     rut must beSuccessfulTry[Vertex]
     val res = rut.get.id
     val au  = AddUser(res,"username2","email2",password = "passwordNEW")
 
-    val aut = User.write(au.asMap)
+    val aut = User.save(au.asMap)
     aut must beSuccessfulTry[Vertex]
 
 

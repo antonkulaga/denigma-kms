@@ -7,12 +7,33 @@ import scala.collection.JavaConversions._
 import play.Logger
 import graphs.schemes.{LinkInCreator, LinkOutCreator}
 import graphs.core.{GraphParams, EasyNode}
+import scala.collection.immutable.Map
+import scala.tools.nsc.doc.base.comment.Link
+import scala.util.Try
+
 
 //import com.tinkerpop.blueprints.impls.orient.{OrientVertex, OrientGraph}
 
 /**
  * class for semantic Graph features
+
+Trait to serialize links to
+*/
+trait LinkLike{
+  val label:String
+  val from:String
+  val to:String
+  val props:Map[String,Any]
+  val id:String
+  val types:Seq[String]
+  def hasVertex = id!=""
+}
+/*
+LinkIn and LinkOut are used to serialize Links to, i.e. not for the schema
  */
+
+case class Link(label:String,from:String,to:String,props:Map[String,Any]=Map.empty[String,Any],types:Seq[String]=List.empty[String], id:String="") extends LinkLike
+
 
 
 object SG extends GraphParams
@@ -25,6 +46,9 @@ object SG extends GraphParams
     _sg
   }
   def sg_= (value:SemanticGraph) = _sg = value
+
+
+
 
 
   trait IndexedNode{
@@ -51,9 +75,9 @@ object SG extends GraphParams
 
     def nodeTypes = v.getVertices(Direction.OUT, TYPE)
 
-    def nodeType(name: String) = nodeTypes.find(_.getProperty[String](TYPE) == name)
+    def nodeType(name: String): Option[Vertex] = nodeTypes.find(_.getProperty[String](TYPE) == name)
 
-    def isOfType(name: String) = nodeType(name) == None
+    def typeExists(name: String): Boolean = nodeType(name) == None
 
     def isProperty: Boolean = v.getProperty(PROPERTY) != null
 
@@ -95,6 +119,8 @@ object SG extends GraphParams
     def addLink(label:String, params:(String,String)*): Vertex = addConnected(label,params:_*).toLink(label)
 
 
+
+
     def addGetLink(label:String, params:(String,String)*): Vertex =  addGetConnected(label,params:_*).toLink(label)
 
     def addGetLinkTo(label:String, to:Vertex,params:(String,String)*): Vertex=  {
@@ -129,6 +155,15 @@ object SG extends GraphParams
       case None => false
     }
 
+      /*
+      checks if Vertex is one of the type
+       */
+    def isOfType(types:String*) = nodeTypes.exists{
+      case tp:Vertex=>tp.str(TYPE) match {
+        case Some(tpn)=>types.contains(tpn)
+        case None=>false
+        }
+    }
 
     def toLink(label:String): Vertex = {
       //labels.foreach(v.setProperty(LINK,_))
@@ -148,6 +183,8 @@ object SG extends GraphParams
     def ~>(label:String,params:(String,String)*):LinkOutCreator = new LinkOutCreator(v,label,params:_*)
 
     def <~(label:String,params:(String,String)*):LinkInCreator = new LinkInCreator(v,label,params:_*)
+
+
 
 
   }

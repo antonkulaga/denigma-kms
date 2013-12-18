@@ -21,8 +21,8 @@ object User extends NodeType(GP.USER)
   val password: HashOf = must be HashOf("password")
   val email: StringOf = must be StringOf("email","""\b[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,8}\b""")
 
-  val liveIn: Link = should be OutLinkOf("LiveIn",City.name)
-  val role: Link = should be OutLinkOf(Role.name)
+  val liveIn: LinkOf = should be OutLinkOf("LiveIn",City.name)
+  val role: LinkOf = should be OutLinkOf(Role.name)
 
 //  must have StringOf("username") have HashOf("password")  have StringOf("email")
 //  should have OutLinkOf("LiveIn",City.name)
@@ -35,7 +35,7 @@ trait CreatedByUser extends NodeType{
   val created = must be OutLinkOf(Created.name,Created.name,GP.USER)
 }
 
-case class UserLinkOf(lname:String,lType:String="") extends Link(lname, Direction.OUT,lType,User.name)
+case class UserLinkOf(lname:String,lType:String="") extends LinkOf(lname, Direction.OUT,lType,User.name)
 
 
 object City extends NodeType("City")

@@ -1,15 +1,20 @@
 package graphs
 
 import com.tinkerpop.blueprints.impls.neo4j.Neo4jGraph
-import com.tinkerpop.blueprints.Vertex
+import com.tinkerpop.blueprints.{Direction, Vertex}
 import scala.collection.JavaConversions._
 import graphs.schemes.NodeType
 import graphs.SG
 import graphs.core.IndexedDB
+import scala.collection.immutable.Map
+import play.api.Play
+import scala.util.Try
 
 //import scalax.collection.Graph // or
 
 class SemanticGraph extends IndexedDB[Neo4jGraph]  {
+
+  var allTypes = Map.empty[String,NodeType]
 
   def init() = {
     val graph = new Neo4jGraph(url)
@@ -18,6 +23,16 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
     graph
 
   }
+
+  def commit(str:String=""): Try[Unit] = {
+    Try{
+      g.commit()
+    }.recoverWith{case e=>
+      play.Logger.error("FAILED COMMIT "+ str+": "+e.toString)
+       Try(g.rollback())
+       }
+  }
+
 
   def root: Vertex  =  this.root(ROOT)
 
@@ -28,7 +43,7 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
     case Some(v) =>setParams(v, params: _*)
   }
 
-  def nodeType(str:String): Option[NodeType] = nodeTypeVertex(str) match {
+  def typeByName(str:String): Option[NodeType] = nodeTypeVertex(str) match {
     case None=>None
     case Some(v)=>NodeType.parse(v)
   }
@@ -38,13 +53,19 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
    */
   def nodeTypeVertex(str:String): Option[Vertex] = this.types.get(TYPE,str).headOption
 
-  def addType(tp:NodeType,commit:Boolean = false) =   this.nodeType(tp.name) match {
+  /*
+  adds type to the database
+   */
+  def registerType(tp:NodeType,commit:Boolean = false) =   this.typeByName(tp.name) match {
       case None=>
+
         val t: Vertex = this.addNode(TYPE -> tp.name)
         t.setProperty(NAME,tp.name)
         tp.must.write(t)
         tp.should.write(t)
-        if(commit)g.commit()
+        if(commit)this.commit()
+        play.Logger.info(s"TYPE '${tp.name}' added")
+        this.allTypes += tp.name->tp
 
       case Some(ntp)=>
         if(tp!=ntp)
@@ -54,20 +75,13 @@ class SemanticGraph extends IndexedDB[Neo4jGraph]  {
           t.setProperty(NAME,tp.name)
           tp.must.write(t)
           tp.should.write(t)
-          if(commit)g.commit()
+          if(commit) this.commit(s"adding ${tp.name}type")
+          play.Logger.info(s"type '${tp.name}' UPDATED")
         }
+        this.allTypes += tp.name->tp
+
     }
 
-//
-//  def graphById(id: String) = {
-//    val v = this.nodeById(id).get
-//    val nv: NodeViewModel = new NodeViewModel(id,v)
-//
-//
-//    val graph = Graph[NodeViewModel,EdgeViewModel]()
-//
-//
-//  }
 
 
 

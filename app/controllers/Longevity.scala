@@ -25,5 +25,9 @@ object Longevity extends Controller{
       Ok(longevity.content()) //Ok(views.html.page("node","menu","0"))
   }
 
+//  def names = Asyn.async {
+//
+//  }
+
 
 }

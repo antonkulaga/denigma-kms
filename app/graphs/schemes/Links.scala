@@ -1,22 +1,34 @@
 package graphs.schemes
 
-import scala.collection.JavaConversions._
+import graphs.{Link, SG}
+import SG._
 import com.tinkerpop.blueprints._
-import com.tinkerpop.blueprints.Vertex
-import scala.collection.immutable._
-import graphs.SG._
-import graphs.SG
+import scala.Predef._
+import scala.collection.JavaConversions._
+import scala.collection.immutable.Map
 
 
 trait Links
 {
-  var links = Map.empty[String,Link]
-  def have(link:Link): Links = {links+=(link.name->link); this }
-  def be(link:OutLinkOf): Link = {links+=(link.name->link);link}
-  def be(link:InLinkOf): Link = {links+=(link.name->link);link}
+  var linkOfs = Map.empty[String,LinkOf]
+  def have(link:LinkOf): Links = {linkOfs+=(link.label->link); this }
+  def be(link:OutLinkOf): LinkOf = {linkOfs+=(link.label->link);link}
+  def be(link:InLinkOf): LinkOf = {linkOfs+=(link.label->link);link}
 
+  def linksValid(links:Seq[Link],v:Vertex):Boolean = linksValid(links,v)
 
-  def writeLinks(v:Vertex): Vertex =  {this.links.foreach
+  /*
+    check if object links are valid
+   */
+  def linksValid(links:Seq[Link],vid:String):Boolean = linkOfs.forall{
+    case (key,lof)=>
+      links.exists(l=>lof.isValid(l,vid))
+  }
+
+  //TODO: add validate!
+
+ 
+  def writeLinkOfs(v:Vertex): Vertex =  {this.linkOfs.foreach
   {
 
     case (name,link)=>
@@ -30,7 +42,10 @@ trait Links
     v}
 }
 
-object Link
+/*
+Companion object for LinkOf constrains with some useful constants and methods
+ */
+object LinkOf
 {
 
   val DIR = "direction"
@@ -44,6 +59,9 @@ object Link
   val MAX_Q = "max_q"
 
 
+  /*
+  extracts direction from linkvertex
+   */
   def dir(v:Vertex) = v.getProperty[String](DIR) match{
     case null=>OUT._2
     case IN._1=>IN._2
@@ -51,58 +69,102 @@ object Link
     case OUT._1=>OUT._2
   }
 
-  def parse(v:Vertex):Option[Link] =  v.str(SG.NAME) match
+  /*
+  Parses the typevertex to find all linkof constrains
+   */
+  def parse(typeVertex:Vertex):Option[LinkOf] =  typeVertex.str(SG.NAME) match
   {
     case None=>None
     case Some(name)=>
-      Some(new Link(
+      Some(new LinkOf(
         name,
-        dir = dir(v),
-        linkType = v.str(LINK_TYPE).getOrElse(""),
-        nodeType = v.str(NODE_TYPE).getOrElse(""),
-        nodeId = v.str(NODE_ID).getOrElse(""),
-        minQ = v.int(MIN_Q).getOrElse(1),
-        maxQ = v.int(MAX_Q).getOrElse(Int.MaxValue),
-        caption = v.str(CAPTION).getOrElse("")
+        dir = dir(typeVertex),
+        linkType = typeVertex.str(LINK_TYPE).getOrElse(""),
+        nodeType = typeVertex.str(NODE_TYPE).getOrElse(""),
+        nodeId = typeVertex.str(NODE_ID).getOrElse(""),
+        minQ = typeVertex.int(MIN_Q).getOrElse(1),
+        maxQ = typeVertex.int(MAX_Q).getOrElse(Int.MaxValue),
+        caption = typeVertex.str(CAPTION).getOrElse("")
 
       ))
   }
 
-  def write(l:Link,v:Vertex) ={
-    v.props(DIR->l.dir.toString,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.name,MIN_Q->l.minQ,MAX_Q->l.maxQ,CAPTION->l.caption)
+  /*
+  writes linkof constrains to the typevertex
+   */
+  def write(l:LinkOf,typeVertex:Vertex): Unit ={
+    typeVertex.props(DIR->l.dir.toString,NODE_TYPE->l.nodeType,NODE_ID->l.nodeId,LINK_TYPE->l.linkType,SG.NAME->l.label,MIN_Q->l.minQ,MAX_Q->l.maxQ,CAPTION->l.caption)
   }
 }
 
 /*
 This is class of a link constraint
  */
-class Link(val name:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", var minQ:Int=1, var maxQ:Int = Int.MaxValue, val caption:String="")
+class LinkOf(val label:String,val dir:Direction,val linkType:String,val nodeType:String,val  nodeId:String="", var minQ:Int=1, var maxQ:Int = Int.MaxValue, val caption:String="")
 {
 
   def hasLink(v:Vertex) = this.edges(v).iterator().hasNext
-  def edges(v:Vertex) = v.getEdges(dir,name)
-  def vertices(v:Vertex) = v.getVertices(dir,name)
+  def edges(v:Vertex) = v.getEdges(dir,label)
+  def vertices(v:Vertex) = v.getVertices(dir,label)
 
-  def title = if(caption=="") name else caption
+  def title = if(caption=="") label else caption
 
 
   def linkVertices(v:Vertex) = {
     vertices(v).filter(p=>p.isLink)
   }
+  def isOfType(v:Vertex): Boolean = v.getEdges(dir, TYPE).iterator().hasNext
 
-  def isOfType(v:Vertex) = v.getEdges(dir, TYPE).iterator().hasNext
+
+  def exactNode = nodeId!=""
+  def exactNodeType = nodeType!=""
+  def hasType = linkType!=""
+
+
+
+  def isValid(link:Link,v:Vertex) = link.label==label &&  isDirectedRight(link,v) && fitsLinkType(link) && fitsNodeType(link)
+  def isValid(link:Link,vid:String) =link.label==label &&  isDirectedRight(link,vid) && fitsLinkType(link) && fitsNodeType(link)
 
   def write(v:Vertex) ={
-    Link.write(this,v)
+    LinkOf.write(this,v)
+  }
+  /*
+  this vertex
+   */
+  protected def vId(link:Link): String = if(dir==Direction.OUT) link.from else link.to
+  /*
+  not this vertex
+   */
+  protected def nvId(link:Link): String = if(dir==Direction.OUT) link.to else link.from
+
+  /*
+  Checks of link is directed right
+   */
+  def isDirectedRight(link:Link,vid:String): Boolean =  vId(link) == vid
+  def isDirectedRight(link:Link,v:Vertex): Boolean =  isDirectedRight(link,v.id)
+
+  protected def linkV(link:Link,v:Vertex): Option[Vertex] = v.getVertices(dir,link.label).find(p=>link.hasVertex || v.id==vId(link))
+
+
+
+  /*
+  Checks if a link fits type
+   */
+  def fitsLinkType(link:Link): Boolean = (linkType=="") || (link.types.contains(linkType)
+    && sg.typeByName(linkType).exists(nd=>nd.must.propsAreValid(link.props)))
+
+  /*
+  Checks if a link fits type
+   */
+  def fitsNodeType(link:Link) =  !exactNodeType || {
+    sg.nodeById(nvId(link)) match {
+      case None=>false
+      case Some(nv)=>nv.isOfType(nodeType)
+    }
+
   }
 
 }
 
-case class OutLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends Link(linkName, Direction.OUT,typeOfLink,typeOfNode,cap)
-case class InLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends Link(linkName, Direction.IN,typeOfLink,typeOfNode,cap)
-
-//case class LinkToNodeOf(linkName:String,lDir:Direction,nType:String) extends Link(linkName,lDir) {
-//  val  nodeId:String   = ""
-//  val linkType:String
-//  val nodeType = nType
-//}
+case class OutLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends LinkOf(linkName, Direction.OUT,typeOfLink,typeOfNode,cap)
+case class InLinkOf(linkName:String,typeOfLink:String="",typeOfNode:String="", cap:String="") extends LinkOf(linkName, Direction.IN,typeOfLink,typeOfNode,cap)

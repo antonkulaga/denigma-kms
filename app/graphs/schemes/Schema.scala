@@ -3,7 +3,7 @@ package graphs.schemes
 import com.tinkerpop.blueprints.Vertex
 import com.tinkerpop.blueprints.Direction
 import scala.collection.JavaConversions._
-import graphs.SG
+import graphs.{Link, SG}
 import SG._
 import scala.collection.IterableView
 import graphs.schemes.constraints._
@@ -19,7 +19,12 @@ class Schema extends Properties with Links {
     v.getVertices(Direction.OUT, label).view.map(this.parseProp)
   }
 
-  def write(v:Vertex) = this.writeLinks(this.writeProperties(v))
+  def write(v:Vertex) = this.writeLinkOfs(this.writeProperties(v))
+
+  /*
+  validates both object and links
+   */
+  def isValid(id:String,props:Map[String,Any],links:Seq[Link] = List.empty[Link]) = propsAreValid(props) && linksValid(links,id)
 
 
   def parseProp(v:Vertex): Option[Property] = v.getProperty[String](CONSTRAINT) match

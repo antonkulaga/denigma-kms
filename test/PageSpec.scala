@@ -1,15 +1,15 @@
-import graphs.schemes.constraints.{DateTimeOf, TextOf, StringOf}
-import graphs.schemes.NodeType
-import graphs.{SemanticGraph, SG}
-import org.joda.time.DateTime
-import org.specs2.runner._
-import org.junit.runner._
-
-import play.api.test._
-import play.Play
 import com.tinkerpop.blueprints._
+import graphs.{SemanticGraph, SG}
 import models._
 import org.denigma.macroses.Model.Mappable
+import org.joda.time.DateTime
+import org.junit.runner._
+import org.specs2.runner._
+import play.Play
+import play.api.test._
+import scala.Some
+
+
 /**
  * Add your spec here.
  * You can mock out a whole application including requests, plugins etc.
@@ -23,10 +23,12 @@ class PageSpec extends SemanticSpec {
     Play.application().isTest must beTrue
     val sg: SemanticGraph = prepareGraph
     val g = sg.g
+
     import SG._
+
     sg.nodeTypeVertex(Page.name).mustEqual(None)
-    sg.nodeType(Page.name).mustEqual(None)
-    sg.addType(Page,true)
+    sg.typeByName(Page.name).mustEqual(None)
+    sg.registerType(Page,true)
     val uv: Option[Vertex] = sg.nodeTypeVertex(Page.name)
     uv match {
       case None=>failure("Page class has not been added to the graph")
@@ -45,12 +47,32 @@ class PageSpec extends SemanticSpec {
     Play.application().isTest must beTrue
     val sg: SemanticGraph = prepareGraph
     val g = sg.g
-    import SG._
-    sg.addType(Page,true)
-    case class UnknownPage(title:String,text:String,published:DateTime)
+    sg.registerType(Page,true)
+    case class UnknownPage(title:String,text:String,published:DateTime) extends Model
     val dt = new DateTime(1000000)
     val wr = UnknownPage("some","text",dt)
-//    SG
+
+    Page.save(wr.asMap) must beFailedTry[Vertex]
+
+    case class NicePage(title:String,text:String,published:DateTime) extends Model
+
+
+//    val user = RightUser("name","some@meail.com","pass")
+//    val wu = WrongUser2("name","some#email.com","pass")
+//
+//
+//    val wut = User.write(wu.asMap)
+//    wut must beFailedTry[Vertex]
+//    val rut = User.write(user.asMap)
+//    rut must beSuccessfulTry[Vertex]
+//    val res = rut.get.id
+//    val au  = AddUser(res,"username2","email2",password = "passwordNEW")
+//
+//    val aut = User.write(au.asMap)
+//    aut must beSuccessfulTry[Vertex]
+
+
+    //    SG
 //
 //    object Page extends NodeType("Page") with CreatedByUser
 //    {

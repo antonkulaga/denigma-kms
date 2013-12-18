@@ -52,13 +52,13 @@ trait Properties extends PropertyCollector
 
   //def missing[T<: ModelLike](model:T): Set[String] = this.items.keySet.diff(model.toMap[T].keySet)
 
-  def validate(mp:Map[String,Any]):Map[String,Option[Boolean]] =  items.foldLeft(Map.empty[String,Option[Boolean]]){
+  def validateProperties(mp:Map[String,Any]):Map[String,Option[Boolean]] =  items.foldLeft(Map.empty[String,Option[Boolean]]){
     case (acc: Map[String, Option[Boolean]],(key: String,prop: Property))=>
       acc + (key->mp.get(key).map(v=>
         prop.checkValidity(v)))
   }
 
-  def isValid(mp:Map[String,Any]): Boolean = items.forall{
+  def propsAreValid(mp:Map[String,Any]): Boolean = items.forall{
     case (key,prop)=>
       mp.get(key) match {
         case None=>false

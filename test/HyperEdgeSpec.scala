@@ -1,13 +1,9 @@
+import com.tinkerpop.blueprints._
 import graphs._
 import org.joda.time.DateTime
-import org.specs2.mutable._
-import org.specs2.runner._
 import org.junit.runner._
-
-
+import org.specs2.runner._
 import play.api.test._
-import play.Play
-import com.tinkerpop.blueprints._
 import scala.collection.JavaConversions._
 
 
@@ -45,7 +41,9 @@ class HyperEdgeSpec extends SemanticSpec {
 
     "add LinkNodes & in, out tests" in new WithApplication{
       val sg = prepareTest
+
       import SG._
+
       val rr = sg.root
       rr.getProperty[String]("other") must beEqualTo("otherval")
       rr.getProperty[String]("when") must beEqualTo(dtStr)
@@ -75,7 +73,9 @@ class HyperEdgeSpec extends SemanticSpec {
 
     "add hyperedges to nodes" in new WithApplication{
       val sg = prepareTest
+
       import SG._
+
       val rr = sg.root
       val pT = sg.names.get(sg.NAME,peopleStr).headOption.get
       pT.getProperty[String](sg.NAME) must beEqualTo(peopleStr)
@@ -98,10 +98,8 @@ class HyperEdgeSpec extends SemanticSpec {
     }
 
 
-    "have valid test root" in new WithApplication{
 
 
-    }
 
 
 

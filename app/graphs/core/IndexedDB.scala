@@ -85,6 +85,12 @@ abstract class IndexedDB[T<: IndexableGraph] extends GraphDB[T] with DefIndexes[
         ids.put(SG.ID,value,v)
         v
 
+      case (key,value:DateTime) if !skip.contains(SG.ID)=>
+        val str: String = value.toDateTimeISO.toString()
+        v.setProperty(key,str)
+        v
+
+
       case (key,value) if !skip.contains(key)=>
         v.setProperty(key,value)
         indexes.get(key)  match
