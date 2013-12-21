@@ -12,6 +12,9 @@ case class Items(menu:List[String],flags:List[String])
  * Created by antonkulaga on 12/11/13.
  */
 object Longevity extends Controller{
+
+
+
   def index = Action {
     implicit request =>
       val flags = List("United Kingdom","Russia","Ukraine","Israel","Germany","France","Italy","United States","China","Turkey","Spain","Austria").sorted

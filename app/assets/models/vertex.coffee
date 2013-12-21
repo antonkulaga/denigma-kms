@@ -7,6 +7,9 @@ class Denigma.Vertex extends Batman.Model
 
   @hasMany "properties", {encoderKey: 'properties',saveInline:true,autoload:false}
 
+  @hasMany("edges", {as:"incoming", encoderKey:"incoming", inverseOf:"edge"})
+  @hasMany("edges", {as: "outgoing", encoderKey: "outgoing", inverseOf: "edge"})
+
   @encode 'id','name','description'
 
   #@hasMany "edges", inverseOf: "edge"

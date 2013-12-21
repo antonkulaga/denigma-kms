@@ -40,10 +40,7 @@ trait GenGraph extends Controller {
   }
 
 
-  def test = Action {
-    implicit request =>
-      Ok(views.html.test()) //Ok(views.html.page("node","menu","0"))
-  }
+
 
   def hallo = Action {
     implicit request =>

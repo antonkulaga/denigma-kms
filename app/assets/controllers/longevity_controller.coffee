@@ -6,6 +6,12 @@ class Denigma.LongevityController extends Batman.Controller
   constructor: ->
     super
 
+  @accessor 'context',
+    get: -> Denigma.Vertex
+    set: (_, value) -> @_v = value
+    unset: -> delete @_v
+
+
   genId : ->
     ###
     ##Generates GUI as id for a record

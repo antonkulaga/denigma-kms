@@ -4,9 +4,10 @@
         <a class="active item">
             <h3 class="ui teal header"><i class="home icon"></i> Home</h3>
         </a>
-        @for(item <- content.menu) {
-            <a class="item" href="@item"><h4 class="ui inverted header">@item</h4></a>
-        }
+        @*@for(item <- content.menu) {*@
+            @*<a class="item" href="@item"><h4 class="ui inverted header">@item</h4></a>*@
+        @*}*@
+        <a class="item" data-foreach-item="controllers.longevity.inE" data-bind="item"><h4 class="ui inverted header"></h4></a>
 
         <div class="right menu">
             <div class="green item">

@@ -3,20 +3,22 @@
 # ~~~~
 
 # Longevity
-GET        /                    controllers.Longevity.index
+#GET        /                    controllers.Longevity.index
 GET        /longevity                     controllers.Longevity.index
 GET        /longevity/content.html        controllers.Longevity.content
 
-
-
+GET        /test                          controllers.Tests.sigma
+GET        /test/editor                   controllers.Tests.editor
+GET        /test/sigma                    controllers.Tests.sigma
 
 # Graphs
 
 GET        /graph                         controllers.Graphs.index
-GET        /graphs                    controllers.Graphs.index
+GET        /graphs                        controllers.Graphs.index
 GET        /                              controllers.Graphs.index
 GET        /graph/*id                     controllers.Graphs.node(id)
-GET        /test                          controllers.Graphs.test
+
+
 GET        /vertices                      controllers.Graphs.vertices(id:String ="")
 GET        /vertices/:id                  controllers.Graphs.vertices(id:String)
 GET        /incoming/                     controllers.Graphs.incoming(id:String ="")
