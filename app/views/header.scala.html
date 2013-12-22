@@ -1,23 +1,31 @@
-@(content:List[String])(implicit request: RequestHeader)
+@(implicit content:Items, request: RequestHeader)
+<header class="ui green menu">
+    <nav class="ui inverted menu">
+        <a class="active item">
+            <h3 class="ui teal header"><i class="home icon"></i> Home</h3>
+        </a>
 
-<header class="ui tabular inverted menu">
-    <nav class="menu">
-        @for(item <- content) {
-            <a class="item" href="@item">@item</a>
-        }
+        <a class="item" data-foreach-item="controllers.longevity.inE" data-bind="item"><h4 class="ui inverted header"></h4></a>
 
         <div class="right menu">
-            <div class="item">
+            <div class="green item">
                 <div class="ui icon input">
                     <input type="text" placeholder="Search...">
                     <i class="search icon"></i>
                 </div>
             </div>
             <div class="item">
-                <div class="ui teal button">Sign Up</div>
+                <div class="ui positive button">Sign Up</div>
             </div>
         </div>
     </nav>
 
-
 </header>
+
+<section id="flags" class="ui bottom green segment menu">
+    <div class="right menu">
+    @for(flag <- content.flags) {
+     <img class="item" src="@routes.Assets.at("images/flags/small/" +flag+".png")">
+    }
+    </div>
+</section>

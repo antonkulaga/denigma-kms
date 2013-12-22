@@ -6,14 +6,14 @@
     <head>
         <title>International longevity Alliance</title>
         @libs()
-        @longevity.app()
+        @app(longevity.setup())
         </head>
     <body>
 
-        @longevity.header(menu,request)
+        @header(menu,request)
         <section class="main" data-yield="main">
         </section>
 
-        @longevity.sidebar()
+        @sidebar()
     </body>
 </html>

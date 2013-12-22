@@ -3,39 +3,38 @@ This example is a copy of "basic.html", but with event bindings after.
 Open your browser's console to see the "click", "overNode" and
 "outNode" events logged.
 ###
-i = undefined
-s = undefined
-N = 25
-E = 100
-g =
-  nodes: []
-  edges: []
+
+
 
 l = 12
 lb = 16
-i = 0
-while i < N
-  g.nodes.push
-    id: "n" + i
-    label: "Node " + i
-    x: Math.random()
-    y: Math.random()
-    size: l
-    color: "#666"
 
-  i++
-i = 0
-while i < E
-  g.edges.push
-    id: "e" + i
-    source: "n" + (Math.random() * N | 0)
-    target: "n" + (Math.random() * N | 0)
-    size: Math.random()
-    color: "#ccc"
+generateGraph = (n,e)->
+  g =
+    nodes: []
+    edges: []
+  N = n
+  E = e
+  for num in [0..N-1]
+    g.nodes.push
+      id: "n" + num
+      label: "Node " + num
+      x: Math.random()
+      y: Math.random()
+      size: l
+      color: "#666"
 
-  i++
+  for num in [0..E-1]
+    g.edges.push
+      id: "e" + num
+      source: "n" + (Math.random() * N | 0)
+      target: "n" + (Math.random() * N | 0)
+      size: Math.random()
+      color: "#ccc"
+  g
+
 s = new sigma(
-  graph: g
+  graph: generateGraph(25,100)
   container: "graph-container"
   defaultEdgeType: "curve"
 )

@@ -1,4 +1,4 @@
-@(menu:List[String])(implicit request: RequestHeader)
+@( content:Items)(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 
@@ -6,11 +6,11 @@
     <head>
         <title>Denigma Knowledge Management System</title>
         @libs()
-        @graphs.app()
+        @app(graphs.setup())
     </head>
     <body>
 
-        @header(menu)
+        @header
     <section class="graph" data-yield="main">
     </section>
 

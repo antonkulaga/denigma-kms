@@ -3,6 +3,8 @@ class Denigma.LongevityController extends Batman.Controller
     This controller contains basic grid events
   ###
 
+  s: null
+
   constructor: ->
     super
 
@@ -39,8 +41,57 @@ class Denigma.LongevityController extends Batman.Controller
 
     Mercury.init()
 
+  labelSize:  12
+  labelSizeOver : 16
+
+  generateGraph: (n,e)->
+    g =
+      nodes: []
+      edges: []
+    N = n
+    E = e
+    for num in [0..N-1]
+      g.nodes.push
+        id: "n" + num
+        label: "Node " + num
+        x: Math.random()
+        y: Math.random()
+        size: @labelSize
+        color: "#666"
+
+    for num in [0..E-1]
+      g.edges.push
+        id: "e" + num
+        source: "n" + (Math.random() * N | 0)
+        target: "n" + (Math.random() * N | 0)
+        size: Math.random()
+        color: "#ccc"
+    g
+
+  @afterAction only: "content", ->@initGraph()
+
+
+  initGraph: ->
+    @s = new sigma(
+      graph: @generateGraph(25,100)
+      container: "graph-container"
+      defaultEdgeType: "curve"
+    )
+
+    # Bind the events:
+    @s.bind "overNode", (e) ->
+      #e.data.node.size = @labelSizeOver
+      console.log e.type, e.data.node.label
+
+    @s.bind "outNode", (e) ->
+      #e.data.node.size = @labelSize
+      console.log e.type, e.data.node.label
+    @s.startForceAtlas2()
+    #alert "!"
+
   content: ->
-    @initMercury()
+    #@initMercury()
+
 
   showEditor:->
     Mercury.trigger('reinitialize')

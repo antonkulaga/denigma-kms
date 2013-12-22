@@ -21,7 +21,7 @@
         </h2><h5 class="sub header">International Longevity Alliance</h5>
         <img src="@routes.Assets.at("images/ILA.svg")">
         <p data-mercury="html" data-event-onfocus="controller.showEditor" data-event-onblur="controller.hideEditor">The International Longevity Alliance promotes the social struggle against the deteriorative aging process and for healthy and productive longevity for all, through scientific research, technological development, medical treatment, public health and education measures, and social activism. [...]</p>
-
+        @graphs.incoming()
     </section>
 
     <section data-mercury="html" data-event-onfocus="controller.showEditor" data-event-onblur="controller.hideEditor" class="ui outgoing green raised segment">
@@ -38,7 +38,7 @@
         3. If there is no related social network in your area, start one!
         4. Organize live local meetings of supporters. [...]</p>
 
-         @longevity.outgoing()
+         @graphs.outgoing()
     </section>
 
 

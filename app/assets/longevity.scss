@@ -78,6 +78,12 @@ body {
 
   }
 
+  #graph-container {
+    @include float-span(12, "first");
+    height: 20em;
+    background-color: $denigma_violet_opac;
+  }
+
 }
 
 

@@ -20,7 +20,12 @@ object Graphs extends Controller with GenGraph{
 
   def index = Action {
     implicit request =>
-      Ok(views.html.main(List("Graph","Grid","LifeSpan"))) //Ok(views.html.page("node","menu","0"))
+
+      val flags = List("United Kingdom","Russia","Ukraine","Israel","Germany","France","Italy","United States","China","Turkey","Spain","Austria").sorted
+      val items = List("About","Blog","ILA Manifesto","Take Action","Projects")
+      val res = Items(items,flags)
+
+      Ok(views.html.graphs.index(res)) //Ok(views.html.page("node","menu","0"))
   }
 
 
@@ -43,6 +48,7 @@ object Graphs extends Controller with GenGraph{
   def node2js(nv:NodeViewModel): JsObject = Json.obj("id" -> nv.id,
     "name" -> ("node_id_" + nv.id),
     "properties" -> nv.jsProps
+
   )
 
 
