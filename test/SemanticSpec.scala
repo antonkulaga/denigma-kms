@@ -1,4 +1,4 @@
-import graphs.SemanticGraph
+import org.denigma.graphs.SemanticGraph
 import org.specs2.specification.SpecificationName
 import play.Play
 import io.github.nremond.PBKDF2

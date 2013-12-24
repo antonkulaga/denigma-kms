@@ -1,11 +1,8 @@
 package models
 
-/*
-There I store all types connected to work with content
- */
+import org.denigma.graphs.schemes._
+import org.denigma.graphs.schemes.constraints.{DateTimeOf, TextOf, StringOf}
 
-import graphs.schemes.constraints._
-import graphs.schemes._
 
 object Page extends NodeType("Page") with CreatedByUser
 {

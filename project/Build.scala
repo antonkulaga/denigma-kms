@@ -10,8 +10,10 @@ import LibVersions._
  * this files is intended to build the main project
  * it contains links to all dependencies that are needed
  * */
-object ApplicationBuild extends Build with Macro
+object ApplicationBuild extends Build with Macro with GraphORM
 {
+
+  override def graphORMPath  = "./graph-orm"
 
   val testOptions = "-Dconfig.file=conf/" + Option(System.getProperty("test.config")).getOrElse("application") + ".conf"
 
@@ -21,34 +23,8 @@ object ApplicationBuild extends Build with Macro
   val appDependencies = Seq(
     ///Add your project dependencies here,
 
-    "com.github.nscala-time" % "nscala-time_2.10" % scalaTimeVersion,
 
-    "com.tinkerpop.blueprints" % "blueprints-core" % blueprintsVersion,
-
-    //"com.tinkerpop.blueprints" % "blueprints-orient-graph" % blueprintsVersion,
-
-    "com.tinkerpop.blueprints" % "blueprints-neo4j-graph" % blueprintsVersion ,
-
-    "io.github.nremond" %% "pbkdf2-scala" % pbkdf2Version,
-
-    "com.github.t3hnar" % "scala-bcrypt_2.10" % bcryptVersion,
-
-    "org.apache.commons" % "commons-io" % apacheCommonsVersion,
-
-     "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion,
-
-    "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion,
-
-    "org.jscala" %% "jscala-macros" % jScalaVersion
-
-   //   "org.scala-lang" %% "scala-pickling" % picklingVersion,
-
-
-    //    "com.thinkaurelius.titan" % "titan-core" % titanVersion,
-    //    "com.thinkaurelius.titan" % "titan-cassandra" % titanVersion,
-    //    "com.thinkaurelius.titan" % "titan-berkeleyje" % titanVersion,
-    //    "com.thinkaurelius.titan" % "titan-es" % titanVersion,
-    //    "com.thinkaurelius.titan" % "titan-lucene" % titanVersion,
+     "com.assembla.scala-incubator" % "graph-core_2.10" % scalaGraphVersion
   )
 
   //play.Project.playScalaSettings ++ SassPlugin.sassSettings
@@ -73,9 +49,65 @@ object ApplicationBuild extends Build with Macro
   ).settings( play.Project.playScalaSettings ++
     SassPlugin.sassSettings ++
     Seq(SassPlugin.sassOptions := Seq("--compass", "-r", "compass","-r", "semantic-ui-sass", "-r","singularitygs")):_* )
-    .dependsOn(macroses)
+    .dependsOn(macroses).dependsOn(graphORM)
 
 
+
+
+}
+
+trait GraphORM {
+  def src = /*geneActorsPath + */"src"
+
+  val graphORMName         = "graph-orm"
+  val graphORMVersion      = "0.01"
+
+  def graphORMPath = "."
+
+  val graphORMDependencies = Seq(
+
+
+    "com.github.nscala-time" % "nscala-time_2.10" % scalaTimeVersion,
+
+    "com.tinkerpop.blueprints" % "blueprints-core" % blueprintsVersion,
+
+    //"com.tinkerpop.blueprints" % "blueprints-orient-graph" % blueprintsVersion,
+
+    "com.tinkerpop.blueprints" % "blueprints-neo4j-graph" % blueprintsVersion ,
+
+    "io.github.nremond" %% "pbkdf2-scala" % pbkdf2Version,
+
+    "com.github.t3hnar" % "scala-bcrypt_2.10" % bcryptVersion,
+
+    "org.apache.commons" % "commons-io" % apacheCommonsVersion,
+
+    "org.scalacheck" % "scalacheck_2.10" % scalaCheckVersion
+  )
+
+  lazy val graphORM = play.Project(graphORMName, graphORMVersion, graphORMDependencies, path = file(this.graphORMPath)).settings(
+    // Add your own project settings here
+
+    scalaVersion := scalaVer,
+
+
+    //compiler options
+    scalacOptions ++= Seq("-feature", "-language:_" ),
+
+    sourceDirectory in Compile <<= baseDirectory / (src+"/main/scala"),
+    sourceDirectory in Test <<= baseDirectory / (src+"/test/scala"),
+
+    scalaSource in Compile <<= baseDirectory / (src+"/main/scala"),
+    scalaSource in Test <<= baseDirectory / (src+"/test/scala"),
+
+    javaSource in Compile <<= baseDirectory / (src+"/main/java"),
+    javaSource in Test <<= baseDirectory / (src+"/test/java"),
+
+
+    parallelExecution in Test := false,
+
+    organization := "org.denigma"
+
+  )
 }
 
 trait Macro{

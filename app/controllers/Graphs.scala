@@ -8,8 +8,9 @@ import com.tinkerpop.blueprints.Vertex
 import org.joda.time.DateTimeZone
 import scala._
 import scala.Some
-import graphs.viewmodels._
-import graphs.SG._
+import org.denigma.graphs.viewmodels._
+import org.denigma.graphs.SG
+import SG._
 import scala.collection.JavaConversions._
 
 

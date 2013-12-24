@@ -2,12 +2,11 @@ package models
 
 
 import com.tinkerpop.blueprints.Direction
-import graphs.core._
-import graphs.schemes.constraints._
-import graphs.schemes._
-import graphs.schemes.LinkType
-import graphs.schemes.OutLinkOf
 
+import org.denigma.graphs.schemes._
+import org.denigma.graphs.schemes.constraints.{HashOf, DateTimeOf, TextOf, StringOf}
+import org.denigma.graphs.SG._
+import org.denigma.graphs.core.GP
 
 object Created extends LinkType("Created")
 {

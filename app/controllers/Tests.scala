@@ -1,19 +1,8 @@
 package controllers
 
-import play.api.mvc._
-import models._
-
-import play.api.libs.json._
-import com.tinkerpop.blueprints.Vertex
-import org.joda.time.DateTimeZone
-import scala._
-import scala.Some
-import graphs.viewmodels._
-import graphs.SG._
-import scala.collection.JavaConversions._
-
-
 import play.api.mvc.Controller
+import play.api.mvc._
+
 
 /**
  * Created by antonkulaga on 12/21/13.

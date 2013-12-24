@@ -1,13 +1,12 @@
-import com.tinkerpop.blueprints.Edge
-import graphs.core.{GP}
-import graphs.{SemanticGraph, SG}
+
 import models.TestGraph
+import org.denigma.graphs.core.GP
+import org.denigma.graphs.{SG, SemanticGraph}
 import org.junit.runner.RunWith
 import org.specs2.runner.JUnitRunner
-import SG._
-import scala.collection.JavaConversions._
-
 import play.api.test._
+import scala.collection.JavaConversions._
+import SG._
 
 @RunWith(classOf[JUnitRunner])
 class TestGraphSpec extends SemanticSpec
@@ -86,13 +85,15 @@ class TestGraphSpec extends SemanticSpec
 
       val sg = prepareTest
       val r = sg.root(tg.testNodeId)
+
+      import SG._
       import tg._
+
       val tm = sg.names.get(GP.NAME, "Test Master").toList.headOption
       tm must not beNone
       val user = tm.get
-      import SG._
 
-//      val all = user.allV
+      //      val all = user.allV
       val incoming = user.allInV
       val outgoing = user.allOutV
   //    all.size shouldEqual 3

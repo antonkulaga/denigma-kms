@@ -1,6 +1,8 @@
-import graphs.schemes.constraints.IntegerOf
-import graphs.schemes._
-import graphs.{Link, SemanticGraph, SG}
+
+import org.denigma.graphs.schemes._
+import org.denigma.graphs.schemes.constraints.{IntegerOf, DateTimeOf, TextOf, StringOf}
+
+import org.denigma.graphs.{SemanticGraph, SG, Link}
 import org.specs2.runner._
 import org.junit.runner._
 import scala.collection.JavaConversions._

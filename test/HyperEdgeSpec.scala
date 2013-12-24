@@ -1,5 +1,5 @@
 import com.tinkerpop.blueprints._
-import graphs._
+import org.denigma.graphs.{SG, SemanticGraph}
 import org.joda.time.DateTime
 import org.junit.runner._
 import org.specs2.runner._

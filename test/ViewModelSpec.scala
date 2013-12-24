@@ -1,14 +1,12 @@
-import graphs.{SemanticGraph, SG}
-import graphs.viewmodels.NodeViewModel
-import org.specs2.runner._
-import org.junit.runner._
-
-import play.api.test._
-import com.tinkerpop.blueprints._
-import scala.collection.JavaConversions._
+import org.denigma.graphs.viewmodels.NodeViewModel
+import org.denigma.graphs.{SG, SemanticGraph}
 import SG._
-
-
+import com.tinkerpop.blueprints._
+import org.denigma.graphs.{SemanticGraph, SG}
+import org.junit.runner._
+import org.specs2.runner._
+import play.api.test._
+import scala.collection.JavaConversions._
 
 
 @RunWith(classOf[JUnitRunner])

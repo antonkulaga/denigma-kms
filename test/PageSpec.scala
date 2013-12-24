@@ -1,6 +1,6 @@
 import com.tinkerpop.blueprints._
-import graphs.{SemanticGraph, SG}
 import models._
+import org.denigma.graphs.{SG, SemanticGraph}
 import org.denigma.macroses.Model.Mappable
 import org.joda.time.DateTime
 import org.junit.runner._
@@ -8,6 +8,7 @@ import org.specs2.runner._
 import play.Play
 import play.api.test._
 import scala.Some
+
 
 
 /**

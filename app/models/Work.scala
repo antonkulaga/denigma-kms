@@ -1,7 +1,8 @@
 package models
 
-import graphs.schemes._
-import graphs.schemes.constraints._
+import org.denigma.graphs.schemes._
+import org.denigma.graphs.schemes.constraints.{DateTimeOf, TextOf, StringOf}
+
 
 
 

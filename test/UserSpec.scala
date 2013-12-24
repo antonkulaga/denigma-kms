@@ -1,4 +1,4 @@
-import graphs.{SemanticGraph, SG}
+import org.denigma.graphs.{SG, SemanticGraph}
 import org.specs2.runner._
 import org.junit.runner._
 

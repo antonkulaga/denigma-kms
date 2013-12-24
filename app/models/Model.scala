@@ -4,7 +4,6 @@ import org.denigma.macroses._
 
 import org.denigma.macroses.Macros
 import com.tinkerpop.blueprints.Direction
-import graphs.{LinkLike, Link}
 import scala.collection.immutable.Map
 import java.util.UUID
 
