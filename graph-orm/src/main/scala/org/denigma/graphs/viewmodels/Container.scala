@@ -2,20 +2,22 @@ package org.denigma.graphs.viewmodels
 
 import com.tinkerpop.blueprints.Vertex
 import collection.JavaConversions._
-import play.api.libs.json.{JsString, Json}
-
+import play.api.libs.json.{JsObject, JsString, Json}
+import org.denigma.graphs.SG
 
 
 class Container(val id:String,v:Vertex)
 {
   lazy val properties: Map[String, Any] = v.getPropertyKeys.map(k=>k->v.getProperty[Any](k)).toMap
-  lazy val props = properties.toList.map{
+  lazy val props: List[JsObject] = properties.toList.map{
     case (key,value:Int) =>jsInt(key,"number",value)
     case (key,value:Double) =>jsDouble(key,"number",value.toDouble)
     case (key,value:String) if value.length>100 =>js(key,"string",value)
     case (key,value:String)  =>js(key,"text",value)
 
   }
+
+  lazy val name:String = properties.get(SG.NAME).getOrElse(SG.ID).toString
 
   lazy val jsProps = Json.toJson(props)
 

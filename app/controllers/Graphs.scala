@@ -19,21 +19,27 @@ object Graphs extends Controller with GenGraph{
 
   DateTimeZone.setDefault(DateTimeZone.UTC)
 
-  def index = Action {
+  def index(id:String) = Action {
     implicit request =>
 
-      val flags = List("United Kingdom","Russia","Ukraine","Israel","Germany","France","Italy","United States","China","Turkey","Spain","Austria").sorted
+
+      val flags = List()//List("United Kingdom","Russia","Ukraine","Israel","Germany","France","Italy","United States","China","Turkey","Spain","Austria").sorted
       val items = List("About","Blog","ILA Manifesto","Take Action","Projects")
       val res = Items(items,flags)
 
-      Ok(views.html.graphs.index(res)) //Ok(views.html.page("node","menu","0"))
+      Ok(views.html.graphs.index(res,if(id=="")"TestRoot" else id)) //Ok(views.html.page("node","menu","0"))
   }
 
-
-  def node(id:String) = Action {
+  def content = Action {
     implicit request =>
-      Ok(views.html.graphs.vertex(id)) //Ok(views.html.page("node","menu","0"))
+      Ok(views.html.graphs.content()) //Ok(views.html.page("node","menu","0"))
   }
+
+
+//  def node(id:String) = Action {
+//    implicit request =>
+//      Ok(views.html.graphs.vertex(id)) //Ok(views.html.page("node","menu","0"))
+//  }
 
   def vertices(id:String) = Action {
     implicit request =>
@@ -47,18 +53,19 @@ object Graphs extends Controller with GenGraph{
 
 
   def node2js(nv:NodeViewModel): JsObject = Json.obj("id" -> nv.id,
-    "name" -> ("node_id_" + nv.id),
+    "name" -> nv.name,
     "properties" -> nv.jsProps
 
   )
 
 
-  def node2js(v:Vertex): JsObject  = this.node2js(new NodeViewModel(v.id,v))
+  def node2js(v:Vertex): JsObject  = this.node2js(new NodeViewModel(v))
 
 
 
   def edge2js(e:EdgeViewModel) = Json.obj("id" -> e.id,
-    "name" -> ("node_id_" + e.id),
+    "label" -> e.label,
+    "name" -> e.name,
     "properties" -> e.jsProps,
     "incoming" -> Json.toJson(e.v.inV().map(node2js)),
     "outgoing" -> Json.toJson(e.v.outV().map(node2js))
@@ -77,7 +84,7 @@ object Graphs extends Controller with GenGraph{
       {
         case None =>Ok(Json.obj("edges" ->  JsNull)).as("application/json")
         case Some(vert) =>
-          val edges = vert.allInV.map{case (label:String,v:Vertex)=>new EdgeViewModel(v.id, label, v)}
+          val edges = vert.allInV.map{case (label:String,v:Vertex)=>new EdgeViewModel(label, v)}
           Ok(Json.obj("edges" -> Json.toJson(edges.map(edge2js)))).as("application/json") //Ok(views.html.page("node","menu","0"))
       }
   }
@@ -91,7 +98,7 @@ object Graphs extends Controller with GenGraph{
       {
         case None =>Ok(Json.obj("edges" ->  JsNull)).as("application/json")
         case Some(vert) =>
-          val edges = vert.allOutV.map{case (label:String,v:Vertex)=>new EdgeViewModel(v.id, label, v)}
+          val edges = vert.allOutV.map{case (label:String,v:Vertex)=>new EdgeViewModel(label, v)}
           Ok(Json.obj("edges" -> Json.toJson(edges.map(edge2js)))).as("application/json") //Ok(views.html.page("node","menu","0"))
       }
   }

@@ -63,26 +63,51 @@ body {
 
   }
 
-  .incoming {
-    @include grid-span(3, 1);
+//  .incoming {
+//    @include grid-span(3, 1);
+//
+//
+//  }
+//
+//  .vertices{
+//    @include grid-span(6, 4);
+//  }
+//
+//  .outgoing {
+//    @include grid-span(3, 10);
+//
+//  }
 
 
-  }
 
   .vertices{
-    @include grid-span(6, 4);
+    @include grid-span(6, 1);
   }
 
-  .outgoing {
-    @include grid-span(3, 10);
+  .details {
+    @include grid-span(6, 7);
+    #graph-container {
+      @include float-span(12, "first");
+      height: 20em;
+      background-color: $denigma_violet_opac;
+    }
+
+    .links {
+      @include float-span(12, "first");
+
+      .incoming {
+        @include grid-span(6, 1);
+
+
+      }
+      .outgoing {
+        @include grid-span(6, 7);
+
+      }
+    }
 
   }
 
-  #graph-container {
-    @include float-span(12, "first");
-    height: 20em;
-    background-color: $denigma_violet_opac;
-  }
 
 }
 

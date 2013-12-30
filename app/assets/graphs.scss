@@ -27,6 +27,12 @@ $grids: add-grid(12 at $normal);
 
 $gutters: 1/3;
 
+.chosen {
+  background-color: $denigma_orange_opac;
+  border: 4px double $denigma_orange;
+  font-weight: bold;
+}
+
 .graph{
   //@include background-grid;
 
@@ -43,6 +49,16 @@ $gutters: 1/3;
     .ui.accordion
     {
       @include grid-span(6, 1,6);
+    }
+
+    .graph{
+      @include float-span(6, "first");
+      padding: 5px;
+    }
+
+    #graph-container {
+      @include float-span(6, "first");
+      height: 20em;
     }
 
 
@@ -118,6 +134,8 @@ $gutters: 1/3;
 
 
   }
+
+
 
 
 

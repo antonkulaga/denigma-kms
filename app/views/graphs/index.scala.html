@@ -1,4 +1,4 @@
-@( content:Items)(implicit request: RequestHeader)
+@(content:Items, id:String="TestRoot")(implicit request: RequestHeader)
 
 <!DOCTYPE html>
 
@@ -10,9 +10,10 @@
     </head>
     <body>
 
-        @header
+        @header(content,request)
     <section class="graph" data-yield="main">
     </section>
 
     </body>
+
 </html>

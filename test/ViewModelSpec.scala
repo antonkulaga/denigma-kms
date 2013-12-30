@@ -66,8 +66,8 @@ class ViewModelSpec extends SemanticSpec {
       wonderer1.id shouldEqual wonderer2.id
       //wonderer1 shouldNotEqual wonderer2
 
-      val ew1 = new NodeViewModel(wonderer1.id,wonderer1)
-      val ew2 = new NodeViewModel(wonderer1.id,wonderer2)
+      val ew1 = new NodeViewModel(wonderer1)
+      val ew2 = new NodeViewModel(wonderer2)
       ew1 shouldEqual ew2
 
 
@@ -87,7 +87,7 @@ class ViewModelSpec extends SemanticSpec {
 
 
 
-      val ew = new NodeViewModel(wonderer.id, wonderer)
+      val ew = new NodeViewModel(wonderer)
       ew.properties.size shouldEqual 5
       ew.properties(ID) shouldEqual wonderer.id
 

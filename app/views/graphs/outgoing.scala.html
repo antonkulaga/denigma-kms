@@ -3,8 +3,8 @@
     <h4 class="ui top attached inverted green header">Outgoing</h4>
     <p style="ui segment attached">some outgoing nodes</p>
     <div class="ui accordion">
-        <section class="e" data-foreach-edge="controllers.graph.outE" data-view="EdgeView">
-            <div class="name green active title" data-bind="edge.name"></div>
+        <section class="e" data-foreach-edge="controllers.graph.outE" data-view="EdgeView" data-addclass-chosen="edge.selected"  data-removeclass-chosen="edge.unselected">
+            <div class="name green active title" data-bind="edge.label"></div>
 
             <div class="active content">
 
@@ -16,7 +16,7 @@
                         Outgoing vertices:
                     </header>
                     <div class="active content">
-                        <div class="props" data-foreach-vertex="edge.outgoing">
+                        <div class="props" data-foreach-vertex="edge.outgoing" data-addclass-chosen="vertex.selected"  data-removeclass-chosen="vertex.unselected">
                             <div class="name" data-bind="vertex.name"></div>
                             <div class="description" data-bind="vertex.description"></div>
                         </div>

@@ -1,7 +1,7 @@
 @(menu:Menu)(implicit request: RequestHeader)
 
 
-<nav class="ui  styled top sidebar menu">
+<nav class="ui styled top active sidebar menu">
     @for(item<-menu.items){
        <a class="item" href="@item">@item</a>
     }

@@ -8,6 +8,7 @@ import play.api.mvc.{Controller, Action}
  * Created by antonkulaga on 11/30/13.
  */
 trait GenGraph extends Controller {
+
   def genNodes(ns:Int=5, prs:Int=5): JsValue = {
     def props = Json.toJson((0 until prs).map(r => ("property_" + r, "value+" + r)).toMap)
 

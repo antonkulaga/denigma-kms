@@ -1,6 +1,5 @@
-class Denigma.Vertex extends Batman.Model
+class Denigma.Vertex extends Denigma.Item
 
-  serializeAsForm: false
   @serializeAsForm: false #do not remember if it is static or normal property
   @primaryKey: 'id'
   #@hasMany "members", {saveInline:false,autoload:true,inverseOf: 'organization', foreignKey:'organization'}

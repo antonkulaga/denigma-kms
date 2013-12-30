@@ -5,7 +5,7 @@
     <div class="ui accordion">
         <section class="e" data-foreach-edge="controllers.graph.inE" data-view="EdgeView">
 
-            <div class="name active title" data-bind="edge.name"></div>
+            <div class="name active title" data-bind="edge.label"></div>
 
             <div class="active content">
                 <section class="ui accordion">
@@ -18,7 +18,7 @@
                     </header>
                     <div class="active content">
 
-                        <div class="props" data-foreach-vertex="edge.incoming">
+                        <div class="props" data-foreach-vertex="edge.incoming" data-addclass-chosen="vertex.selected"  data-removeclass-chosen="vertex.unselected">
                             <div class="name" data-bind="vertex.name"></div>
                             <div class="description" data-bind="vertex.description"></div>
                         </div>
