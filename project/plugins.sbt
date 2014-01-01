@@ -15,15 +15,15 @@ resolvers += "The New Motion Repository" at "http://nexus.thenewmotion.com/conte
 
 resolvers += "jBCrypt Repository" at "http://repo1.maven.org/maven2/org/"
 
+resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+
 resolvers += "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases"
 
 addSbtPlugin("net.litola" % "play-sass" % "0.3.0")
 
 addSbtPlugin("com.typesafe.sbt" % "sbt-atmos-play" % "0.3.2")
 
-resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
-
-
+resolvers += "Typesafe Snapshots" at "http://repo.typesafe.com/typesafe/snapshots/"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 

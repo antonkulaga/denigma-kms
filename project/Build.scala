@@ -172,16 +172,33 @@ trait GraphORM {
 
 trait SemanticData {
 
+  //lazy val banana =  RootProject(uri("git://github.com/antonkulaga/banana-rdf.git#master"))
+
   val semanticDataAppName         = "semantic-data"
   val semanticDataAppVersion      = "0.01"
 
   def semanticDataAppPath = "."
 
   val semanticDataAppDependencies = Seq(
-    //"com.bigdata" % "bigdata" % "1.3.0"
+    //"com.bigdata" % "bigdata" % "1.3.0",
 
 
-    "org.openrdf.sesame" % "sesame" % bigDataSesame
+    "org.openrdf.sesame" % "sesame" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-query" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-rio-api" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-rio-turtle" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-repository-api" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-repository" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-queryalgebra-model" % sesameVersion,
+    "org.openrdf.sesame" % "sesame-queryalgebra-evaluation" % sesameVersion,
+
+    "org.apache.jena" % "apache-jena-libs" % "2.11.0" ,//excludeAll(ExclusionRule(organization = "org.slf4j")),
+    "ch.qos.logback" % "logback-classic" % "1.0.7" % "provided",
+    "log4j" % "log4j" % "1.2.16" % "provided",
+    "com.fasterxml" % "aalto-xml" % "0.9.7",
+    "org.scalaz" %% "scalaz-core" % "7.0.4"
+
+
   )
 
 
@@ -189,6 +206,10 @@ trait SemanticData {
     // Add your own project settings here
 
     scalaVersion := scalaVer,
+    resolvers += "Sonatype snapshots" at "http://oss.sonatype.org/content/repositories/snapshots/",
+
+    resolvers += "Sonatype OSS Releases" at "https://oss.sonatype.org/content/repositories/releases",
+    resolvers += "apache-repo-releases" at "http://repository.apache.org/content/repositories/releases/",
 
 
     //compiler options
@@ -267,10 +288,12 @@ object LibVersions {
 
   //val bigDataVersion = "1.3.0" //BIGDATA doesnot support latest Sesame version
 
-
-  val bigDataSesame = "2.6.10" //BIGDATA doesnot support latest Sesame version
+  val sesameVersion = "2.7.6"
+  //val sesameVersion = "2.6.10" //BIGDATA doesnot support latest Sesame version
 
   val scalaTestVersion ="2.0"
+
+  val bananaVersion ="0.5-SNAPSHOT"
 
 }
 
